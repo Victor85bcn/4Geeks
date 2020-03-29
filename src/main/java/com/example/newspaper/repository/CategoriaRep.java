@@ -1,6 +1,9 @@
 package com.example.newspaper.repository;
 
 
-public interface CategoriaRep {
+import com.example.newspaper.model.Categoria;
+
+
+public interface CategoriaRep extends BaseRep<Categoria> {
 
 }

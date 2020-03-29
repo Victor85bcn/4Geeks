@@ -1,4 +1,7 @@
 package com.example.newspaper.repository;
 
-public interface ComentarioRep {
+import com.example.newspaper.model.Categoria;
+import com.example.newspaper.model.Comentario;
+
+public interface ComentarioRep extends BaseRep<Comentario> {
 }

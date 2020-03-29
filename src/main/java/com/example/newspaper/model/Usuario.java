@@ -36,17 +36,17 @@ public class Usuario {
         Apellido = apellido;
     }
 
-    public String getContrasena() {
+    public String getPassword() {
         return Password;
     }
-    public void setContrasena(String contrasena) {
+    public void setPassword(String contrasena) {
         Password = contrasena;
     }
 
-    public String getCorreo() {
+    public String getEmail() {
         return Email;
     }
-    public void setCorreo(String correo) {
+    public void setEmail(String correo) {
         Email = correo;
     }
 

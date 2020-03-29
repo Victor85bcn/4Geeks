@@ -1,4 +1,7 @@
 package com.example.newspaper.repository;
 
-public interface PostMetadataRep {
+import com.example.newspaper.model.Categoria;
+import com.example.newspaper.model.PostMetadata;
+
+public interface PostMetadataRep extends BaseRep<PostMetadata> {
 }

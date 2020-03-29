@@ -1,4 +1,6 @@
 package com.example.newspaper.repository;
 
-public interface PostRep {
+import com.example.newspaper.model.Post;
+
+public interface PostRep extends BaseRep<Post> {
 }

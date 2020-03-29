@@ -1,4 +1,6 @@
 package com.example.newspaper.repository;
 
-public interface UsuarioMetadataRep {
+import com.example.newspaper.model.UsuarioMetadata;
+
+public interface UsuarioMetadataRep extends BaseRep<UsuarioMetadata> {
 }

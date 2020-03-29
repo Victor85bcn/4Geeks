@@ -1,4 +1,6 @@
 package com.example.newspaper.repository;
 
-public interface PermisoRep {
+import com.example.newspaper.model.Permiso;
+
+public interface PermisoRep extends BaseRep<Permiso> {
 }
