@@ -3,19 +3,30 @@ package com.example.newspaper.repository;
 import com.example.newspaper.mapper.ContenidoMapper;
 import com.example.newspaper.model.Contenido;
 import com.example.newspaper.repository.ContenidoRep;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
 import java.awt.print.Pageable;
 import java.util.List;
 
 @Repository
 public class ContenidoRepository implements ContenidoRep {
 
+    private Log logger = LogFactory.getLog(getClass());
     @Autowired
+    private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
+
+    @PostConstruct
+    public void postConstruct(){
+        jdbcTemplate = new JdbcTemplate(dataSource);
+    }
 
     @Override
     public boolean save(Contenido object) {
@@ -54,4 +65,13 @@ public class ContenidoRepository implements ContenidoRep {
         return jdbcTemplate.queryForObject("select * from contenido where IdContenido = ?",
                 params, new ContenidoMapper());
     }
+
+    public JdbcTemplate getJdbcTemplate() {
+        return jdbcTemplate;
+    }
+
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
 }

@@ -3,19 +3,30 @@ package com.example.newspaper.repository;
 import com.example.newspaper.mapper.UsuarioMetadataMapper;
 import com.example.newspaper.model.UsuarioMetadata;
 import com.example.newspaper.repository.UsuarioMetadataRep;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
 import java.awt.print.Pageable;
 import java.util.List;
 
 @Repository
 public class UsuarioMetadataRepository implements UsuarioMetadataRep {
 
+    private Log logger = LogFactory.getLog(getClass());
     @Autowired
+    private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
+
+    @PostConstruct
+    public void postConstruct(){
+        jdbcTemplate = new JdbcTemplate(dataSource);
+    }
 
     @Override
     public boolean save(UsuarioMetadata object) {
@@ -51,4 +62,13 @@ public class UsuarioMetadataRepository implements UsuarioMetadataRep {
         return jdbcTemplate.queryForObject("select * from usuario_metadata where IdUsuarioMetadata = ?",
                 params, new UsuarioMetadataMapper());
     }
+
+    public JdbcTemplate getJdbcTemplate() {
+        return jdbcTemplate;
+    }
+
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
 }

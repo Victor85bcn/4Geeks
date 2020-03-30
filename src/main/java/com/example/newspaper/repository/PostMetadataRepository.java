@@ -3,19 +3,30 @@ package com.example.newspaper.repository;
 import com.example.newspaper.mapper.PostMetadataMapper;
 import com.example.newspaper.model.PostMetadata;
 import com.example.newspaper.repository.PostMetadataRep;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
 import java.awt.print.Pageable;
 import java.util.List;
 
 @Repository
 public class PostMetadataRepository implements PostMetadataRep {
 
+    private Log logger = LogFactory.getLog(getClass());
     @Autowired
+    private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
+
+    @PostConstruct
+    public void postConstruct(){
+        jdbcTemplate = new JdbcTemplate(dataSource);
+    }
 
     @Override
     public boolean save(PostMetadata object) {
@@ -50,4 +61,13 @@ public class PostMetadataRepository implements PostMetadataRep {
         return jdbcTemplate.queryForObject("select * from post_metadata where IdPostMetadata = ?",
                 params, new PostMetadataMapper());
     }
+
+    public JdbcTemplate getJdbcTemplate() {
+        return jdbcTemplate;
+    }
+
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
 }

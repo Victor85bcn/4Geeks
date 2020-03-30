@@ -3,19 +3,30 @@ package com.example.newspaper.repository;
 import com.example.newspaper.mapper.ComentarioMapper;
 import com.example.newspaper.model.Comentario;
 import com.example.newspaper.repository.ComentarioRep;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
 import java.awt.print.Pageable;
 import java.util.List;
 
 @Repository
 public class ComentarioRepository implements ComentarioRep {
 
+    private Log logger = LogFactory.getLog(getClass());
     @Autowired
+    private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
+
+    @PostConstruct
+    public void postConstruct(){
+        jdbcTemplate = new JdbcTemplate(dataSource);
+    }
 
     @Override
     public boolean save(Comentario comentario) {
@@ -53,4 +64,13 @@ public class ComentarioRepository implements ComentarioRep {
         return jdbcTemplate.queryForObject("select * from comentario where IdComentario = ?",
                 params, new ComentarioMapper());
     }
+
+    public JdbcTemplate getJdbcTemplate() {
+        return jdbcTemplate;
+    }
+
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
 }

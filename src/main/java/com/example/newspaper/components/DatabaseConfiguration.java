@@ -9,6 +9,7 @@ import javax.sql.DataSource;
 @Component
 public class DatabaseConfiguration {
 
+    /*
     @Bean
     public DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -18,4 +19,6 @@ public class DatabaseConfiguration {
         dataSource.setPassword("root1234");
         return dataSource;
     }
+     */
+
 }
