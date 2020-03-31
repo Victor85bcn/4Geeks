@@ -17,8 +17,6 @@ public class Categoria {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private Date Fecha;
 
-    private long CategoriaSuperior;
-
 
     //Getters & Setters
 
@@ -54,11 +52,4 @@ public class Categoria {
         Fecha = fecha;
     }
 
-    public long getCategoriaSuperior() {
-        return CategoriaSuperior;
-    }
-
-    public void setCategoriaSuperior(long categoriaSuperior) {
-        CategoriaSuperior = categoriaSuperior;
-    }
 }

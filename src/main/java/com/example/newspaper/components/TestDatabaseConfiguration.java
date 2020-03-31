@@ -34,16 +34,6 @@ public class TestDatabaseConfiguration {
     public PostRepository postRepository(){return new PostRepository();}
 
     @Bean
-    public UsuarioMetadataRepository usuarioMetadataRepository(){
-        return new UsuarioMetadataRepository();
-    }
-
-    @Bean
-    public PostMetadataRepository postMetadataRepository(){
-        return new PostMetadataRepository();
-    }
-
-    @Bean
     public PermisoRepository permisoRepository(){
         return new PermisoRepository();
     }

@@ -1,15 +1,20 @@
 package com.example.newspaper.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+
 public class Post {
 
     //Atributes
     private long IdPost;
     private String Titulo;
-    private String Slug;
     private String Extracto;
+    private String Contenido;
     private long  IdUsuario;
+    private String Imagen;
     private long IdCategoria;
-    private String ImagenDestacada;
+    private Date Fecha;
     private String Tipo = "POST";
 
 
@@ -26,13 +31,6 @@ public class Post {
     }
     public void setTitulo(String titulo) {
         Titulo = titulo;
-    }
-
-    public String getSlug() {
-        return Slug;
-    }
-    public void setSlug(String slug) {
-        Slug = slug;
     }
 
     public String getExtracto() {
@@ -52,11 +50,11 @@ public class Post {
     public long getIdCategoria() {return IdCategoria;}
     public void setIdCategoria(long idCategoria) {IdCategoria = idCategoria;}
 
-    public String getImagenDestacada() {
-        return ImagenDestacada;
+    public String getImagen() {
+        return Imagen;
     }
-    public void setImagenDestacada(String imagenDestacada) {
-        ImagenDestacada = imagenDestacada;
+    public void setImagen(String imagen) {
+        Imagen = imagen;
     }
 
     public String getTipo() {
@@ -65,4 +63,10 @@ public class Post {
     public void setTipo(String tipo) {
         Tipo = tipo;
     }
+
+    public String getContenido() {return Contenido;}
+    public void setContenido(String contenido) {Contenido = contenido;}
+
+    public Date getFecha() {return Fecha;}
+    public void setFecha(Date fecha) {Fecha = fecha;}
 }

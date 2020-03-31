@@ -23,10 +23,10 @@ public class PostRepositoryTest {
     public void insert() throws IOException {
         Post post = new Post();
         post.setIdPost(1);
-        post.setImagenDestacada("image.jpg");
+        post.setImagen("image.jpg");
         post.setIdCategoria(1);
         post.setExtracto("Extracto de ejemplo");
-        post.setSlug("nuevo-post");
+        post.setContenido("nuevo-post");
         post.setTitulo("Nuevo Post");
         post.setIdUsuario(1);
 
@@ -39,10 +39,10 @@ public class PostRepositoryTest {
     public void update() throws IOException {
         Post post = new Post();
         post.setIdPost(1);
-        post.setImagenDestacada("image.jpg");
+        post.setImagen("image.jpg");
         post.setIdCategoria(1);
         post.setExtracto("Extracto de ejemplo");
-        post.setSlug("nuevo-post-xd");
+        post.setContenido("nuevo-post-xd");
         post.setTitulo("Nuevo Post XD");
         post.setIdUsuario(1);
 

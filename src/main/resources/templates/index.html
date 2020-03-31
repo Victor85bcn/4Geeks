@@ -71,20 +71,22 @@
 				<div class="row align-items-center justify-content-between">
 					<nav id="nav-menu-container">
 						<ul class="nav-menu">
-							<li class="menu-active"><a href="index.html">Inicio</a></li>
-							<li><a href="archive.html">Archivo</a></li>
-							<li><a href="category.html">Categorias</a></li>
-							<li class="menu-has-children"><a href="">Post Types</a>
-							<ul>
-								<li><a href="standard-post.html">Standard Post</a></li>
-								<li><a href="image-post.html">Image Post</a></li>
-								<li><a href="gallery-post.html">Gallery Post</a></li>
-								<li><a href="video-post.html">Video Post</a></li>
-								<li><a href="audio-post.html">Audio Post</a></li>
-							</ul>
-						</li>
-						<li><a href="about.html">Nuevo artículo</a></li>
-						<li><a href="contact.html">Usuarios</a></li>
+							<li class="menu-active"><a href="index.html">GEEKPORTAL</a></li>
+							<li><a href="archive.html">Tecnología</a></li>
+							<li><a href="category.html">Videojuegos</a></li>
+
+						<li><a href="about.html">Anime</a></li>
+							<li><a href="about.html">Cultura</a></li>
+							<li><a href="contact.html">Usuarios</a></li>
+							<li class="menu-has-children"><a href="">Admin</a>
+								<ul>
+									<li><a href="standard-post.html">Standard Post</a></li>
+									<li><a href="image-post.html">Image Post</a></li>
+									<li><a href="gallery-post.html">Gallery Post</a></li>
+									<li><a href="video-post.html">Video Post</a></li>
+									<li><a href="audio-post.html">Audio Post</a></li>
+								</ul>
+							</li>
 					</ul>
 					</nav><!-- #nav-menu-container -->
 					<div class="navbar-right">
@@ -107,17 +109,17 @@
 			<section class="top-post-area pt-10">
 				<div class="container no-padding">
 					<div class="row small-gutters">
-						<div class="col-lg-8 top-post-left">
+						<div th:each="post : ${portadaPrincipal}"  class="col-lg-8 top-post-left">
 							<div class="feature-image-thumb relative">
 								<div class="overlay overlay-bg"></div>
-								<img th:src="@{/img/top-post1.jpg}" class="img-fluid" src="../static/img/top-post1.jpg" alt="">
+								<img th:src="${post.imagen}" class="img-fluid" src="../static/img/top-post1.jpg" alt="">
 							</div>
 							<div class="top-post-details">
 								<ul class="tags">
 									<li><a href="#">Food Habit</a></li>
 								</ul>
 								<a href="image-post.html">
-									<h3>A Discount Toner Cartridge Is Better Than Ever.</h3>
+									<h3> A Discount Toner Cartridge Is Better Than Ever.</h3>
 								</a>
 								<ul class="meta">
 									<li><a href="#"><span class="lnr lnr-user"></span>Mark wiens</a></li>
@@ -130,7 +132,7 @@
 							<div class="single-top-post">
 								<div class="feature-image-thumb relative">
 									<div class="overlay overlay-bg"></div>
-									<img th:src="@{/img/top-post1.jpg}" class="img-fluid" src="../static/img/top-post2.jpg" alt="">
+									<img class="img-fluid" src="../static/img/top-post2.jpg" alt="">
 								</div>
 								<div class="top-post-details">
 									<ul class="tags">
@@ -187,7 +189,7 @@
 									<div class="col-lg-5 post-left">
 										<div class="feature-img relative">
 											<div class="overlay overlay-bg"></div>
-											<img th:src="${post.imagenDestacada}" class="img-fluid" src="../static/img/l1.jpg" alt="">
+											<img th:src="${post.imagen}" class="img-fluid" src="../static/img/l1.jpg" alt="">
 										</div>
 										<ul class="tags">
 											<li><a href="#">Lifestyle</a></li>

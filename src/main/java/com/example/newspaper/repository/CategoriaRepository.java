@@ -29,8 +29,8 @@ public class CategoriaRepository implements CategoriaRep {
     @Override
     public boolean save(Categoria categoria) {
         try {
-            String sql = String.format("insert into Categoria (Nombre, Descripcion, CategoriaSuperior) " +
-                    "values ('%s', '%s', '%d')", categoria.getNombre(), categoria.getDescripcion(), categoria.getCategoriaSuperior());
+            String sql = String.format("insert into Categoria (Nombre, Descripcion) " +
+                    "values ('%s', '%s')", categoria.getNombre(), categoria.getDescripcion());
             jdbcTemplate.execute(sql);
             return true;
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class CategoriaRepository implements CategoriaRep {
     @Override
     public boolean update(Categoria categoria) {
         if (categoria.getIdCategoria() != 0) {
-            String sql = String.format("update Categoria set Nombre = '%s', Descripcion = '%s', CategoriaSuperior = '%d' "
+            String sql = String.format("update Categoria set Nombre = '%s', Descripcion = '%s' "
                     + "where IdCategoria = '%d'",
-            categoria.getNombre(), categoria.getDescripcion(), categoria.getCategoriaSuperior(), categoria.getIdCategoria());
+            categoria.getNombre(), categoria.getDescripcion(), categoria.getIdCategoria());
             jdbcTemplate.execute(sql);
             return true;
         }

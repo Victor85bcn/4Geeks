@@ -29,8 +29,8 @@ public class PostRepository implements PostRep {
     @Override
     public boolean save(Post object) {
         try {
-            String sql = String.format("insert into Post (Titulo, Slug, Extracto, IdUsuario, IdCategoria, ImagenDestacada, Tipo) values ('%s','%s', '%s', %d, %d, '%s', '%s')",
-                    object.getTitulo(), object.getSlug(), object.getExtracto(), object.getIdUsuario(), object.getIdCategoria(), object.getImagenDestacada(), object.getTipo());
+            String sql = String.format("insert into Post (Titulo, Extracto, Contenido, IdUsuario, IdCategoria, Imagen, Tipo) values ('%s', '%s', '%s', %d, %d, '%s', '%s')",
+                    object.getTitulo(), object.getExtracto(), object.getContenido(), object.getIdUsuario(), object.getIdCategoria(), object.getImagen(), object.getTipo());
             jdbcTemplate.execute(sql);
             return true;
         }catch(Exception e) {
@@ -43,9 +43,8 @@ public class PostRepository implements PostRep {
     @Override
     public boolean update(Post object) {
         if(object.getIdPost()>0) {
-            String sql = String.format("update Post set Titulo='%s', Slug='%s', Extracto='%s', IdUsuario='%d', IdCategoria='%d', ImagenDestacada='%s', Tipo='%s' where IdPost=%d",
-                    object.getTitulo(), object.getSlug(), object.getExtracto(), object.getIdUsuario(), object.getIdCategoria(), object.getImagenDestacada(), object.getTipo(), object.getIdPost());
-
+            String sql = String.format("update Post set Titulo='%s', Contenido='%s', Extracto='%s', IdUsuario=%d, IdCategoria=%d, Imagen='%s', Tipo='%s' where IdPost=%d",
+                    object.getTitulo(), object.getContenido(), object.getExtracto(), object.getIdUsuario(), object.getIdCategoria(), object.getImagen(), object.getTipo(), object.getIdPost());
             jdbcTemplate.execute(sql);
             return true;
         }
@@ -62,6 +61,16 @@ public class PostRepository implements PostRep {
         Object[] params = new Object[] {Id};
         return jdbcTemplate.queryForObject("select * from post where IdPost = ?",
                 params, new PostMapper());
+    }
+
+    @Override
+    public List<Post> getUltimasNoticias() {
+        return jdbcTemplate.query("select * from post order by IdPost desc limit 4", new PostMapper());
+    }
+
+    @Override
+    public Post getPortadaPrincipal() {
+        return jdbcTemplate.queryForObject("select * from post order by 1 desc limit 1", new PostMapper());
     }
 
     public JdbcTemplate getJdbcTemplate() {

@@ -28,10 +28,7 @@ public class CategoriaRepositoryTest {
 
         categoria.setNombre("Test1");
         categoria.setDescripcion("Este es un ejemplo de categoria superior");
-        categoria.setCategoriaSuperior(1);
-
         boolean result = categoriaRepository.save(categoria);
-
         Assert.assertTrue(result);
     }
 
@@ -43,10 +40,7 @@ public class CategoriaRepositoryTest {
         categoria.setIdCategoria(1);
         categoria.setNombre("Test2");
         categoria.setDescripcion("Este es un ejemplo de categoria superior");
-        categoria.setCategoriaSuperior(1);
-
         boolean result = categoriaRepository.update(categoria);
-
         Assert.assertTrue(result);
     }
 
