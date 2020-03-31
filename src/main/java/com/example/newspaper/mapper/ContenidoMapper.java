@@ -1,6 +1,5 @@
 package com.example.newspaper.mapper;
 
-import com.example.newspaper.model.Categoria;
 import com.example.newspaper.model.Contenido;
 import org.springframework.jdbc.core.RowMapper;
 

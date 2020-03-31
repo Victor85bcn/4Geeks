@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
-import java.awt.print.Pageable;
 import java.util.List;
 
 @Repository
@@ -49,7 +48,7 @@ public class GrupoRepository implements GrupoRep {
     }
 
     @Override
-    public List<Grupo> findAll(Pageable pageable) {
+    public List<Grupo> findAll(SpringDataWebProperties.Pageable pageable) {
         return jdbcTemplate.query("select * from grupo", new GrupoMapper());
     }
 

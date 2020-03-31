@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
-import java.awt.print.Pageable;
 import java.util.List;
 
 @Repository
@@ -52,7 +51,7 @@ public class CategoriaRepository implements CategoriaRep {
     }
 
     @Override
-    public List<Categoria> findAll(Pageable pageable) {
+    public List<Categoria> findAll(SpringDataWebProperties.Pageable pageable) {
         return jdbcTemplate.query("select * from Categoria ", new CategoriaMapper());
     }
 
@@ -60,6 +59,21 @@ public class CategoriaRepository implements CategoriaRep {
     public Categoria findById(int Id) {
         Object[] params = new Object[] {Id};
         return jdbcTemplate.queryForObject("select * from Categoria where IdCategoria = ?", params, new CategoriaMapper());
+    }
+
+    public void deleteAll(){
+        jdbcTemplate.execute("delete from Categoria");
+    }
+
+    public boolean deleteById(int id){
+        try{
+            String sql = String.format("delete from Categoria where IdCategoria='%d'", id);
+            jdbcTemplate.execute(sql);
+            return true;
+        }catch (Exception e){
+            logger.error(e);
+            return false;
+        }
     }
 
     public JdbcTemplate getJdbcTemplate() {

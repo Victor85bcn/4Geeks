@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
-import java.awt.print.Pageable;
 import java.util.List;
 
 @Repository
@@ -51,7 +50,7 @@ public class PermisoRepository implements PermisoRep {
     }
 
     @Override
-    public List<Permiso> findAll(Pageable pageable) {
+    public List<Permiso> findAll(SpringDataWebProperties.Pageable pageable) {
         return jdbcTemplate.query("select * from permiso", new PermisoMapper());
     }
 

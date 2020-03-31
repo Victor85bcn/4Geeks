@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
-import java.awt.print.Pageable;
 import java.util.List;
 
 @Repository
@@ -51,7 +50,7 @@ public class UsuarioRepository implements UsuarioRep {
     }
 
     @Override
-    public List<Usuario> findAll(Pageable pageable) {
+    public List<Usuario> findAll(SpringDataWebProperties.Pageable pageable) {
         return jdbcTemplate.query("select * from Usuario", new UsuarioMapper());
     }
 

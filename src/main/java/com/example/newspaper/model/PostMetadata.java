@@ -1,7 +1,5 @@
 package com.example.newspaper.model;
 
-import java.util.Date;
-
 public class PostMetadata {
 
     //Atributes

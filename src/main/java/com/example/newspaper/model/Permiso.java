@@ -7,16 +7,12 @@ public class Permiso {
     //Atributes
     private long IdPermiso;
     private String Nombre;
-    private Date Fecha;
+    //private Date Fecha;
 
 
     //Getters & Setters
-    public Date getFecha() {
-        return Fecha;
-    }
-    public void setFecha(Date fecha) {
-        Fecha = fecha;
-    }
+    //public Date getFecha() { return Fecha;}
+    //public void setFecha(Date fecha) {Fecha = fecha;}
 
     public long getIdPermiso() {
         return IdPermiso;

@@ -6,10 +6,12 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.annotation.Order;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -55,6 +57,13 @@ public class CategoriaRepositoryTest {
 
         Assert.assertTrue(categoria!=null);
         Assert.assertTrue("Test2".equals(categoria.getNombre()));
+    }
+
+    @Test
+    @Order(4)
+    public void testFindAll(){
+        SpringDataWebProperties.Pageable pageable = new SpringDataWebProperties.Pageable();
+        Assert.assertFalse(categoriaRepository.findAll(pageable).isEmpty());
     }
 
 }

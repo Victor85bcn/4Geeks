@@ -2,7 +2,6 @@ package com.example.newspaper.repository;
 
 import com.example.newspaper.mapper.GrupoPermisoMapper;
 import com.example.newspaper.model.GrupoPermiso;
-import com.example.newspaper.repository.GrupoPermisoRep;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
-import java.awt.print.Pageable;
 import java.util.List;
 
 @Repository
@@ -51,7 +49,7 @@ public class GrupoPermisoRepository implements GrupoPermisoRep {
     }
 
     @Override
-    public List<GrupoPermiso> findAll(Pageable pageable) {
+    public List<GrupoPermiso> findAll(SpringDataWebProperties.Pageable pageable) {
         return jdbcTemplate.query("select * from grupo_permiso", new GrupoPermisoMapper());
     }
 

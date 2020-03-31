@@ -2,7 +2,6 @@ package com.example.newspaper.repository;
 
 import com.example.newspaper.mapper.UsuarioMetadataMapper;
 import com.example.newspaper.model.UsuarioMetadata;
-import com.example.newspaper.repository.UsuarioMetadataRep;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
-import java.awt.print.Pageable;
 import java.util.List;
 
 @Repository
@@ -52,7 +50,7 @@ public class UsuarioMetadataRepository implements UsuarioMetadataRep {
     }
 
     @Override
-    public List<UsuarioMetadata> findAll(Pageable pageable) {
+    public List<UsuarioMetadata> findAll(SpringDataWebProperties.Pageable pageable) {
         return jdbcTemplate.query("select * from usuario_metadata", new UsuarioMetadataMapper());
     }
 

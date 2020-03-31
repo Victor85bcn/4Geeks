@@ -1,7 +1,5 @@
 package com.example.newspaper.model;
 
-import java.util.Date;
-
 public class Post {
 
     //Atributes
@@ -9,8 +7,8 @@ public class Post {
     private String Titulo;
     private String Slug;
     private String Extracto;
-    private long  IdUsuario = 1;
-    private long Categoria;
+    private long  IdUsuario;
+    private long IdCategoria;
     private String ImagenDestacada;
     private String Tipo = "POST";
 
@@ -51,12 +49,8 @@ public class Post {
         IdUsuario = idUsuario;
     }
 
-    public long getCategoria() {
-        return Categoria;
-    }
-    public void setCategoria(long categoria) {
-        Categoria = categoria;
-    }
+    public long getIdCategoria() {return IdCategoria;}
+    public void setIdCategoria(long idCategoria) {IdCategoria = idCategoria;}
 
     public String getImagenDestacada() {
         return ImagenDestacada;

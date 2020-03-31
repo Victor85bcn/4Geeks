@@ -2,7 +2,6 @@ package com.example.newspaper.repository;
 
 import com.example.newspaper.mapper.PostMetadataMapper;
 import com.example.newspaper.model.PostMetadata;
-import com.example.newspaper.repository.PostMetadataRep;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
-import java.awt.print.Pageable;
 import java.util.List;
 
 @Repository
@@ -51,7 +49,7 @@ public class PostMetadataRepository implements PostMetadataRep {
     }
 
     @Override
-    public List<PostMetadata> findAll(Pageable pageable) {
+    public List<PostMetadata> findAll(SpringDataWebProperties.Pageable pageable) {
         return jdbcTemplate.query("select * from post_metadata", new PostMetadataMapper());
     }
 
