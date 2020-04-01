@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx" class="no-js">
+<html lang="zxx" class="no-js" xmlns:th="http://www.w3.org/1999/xhtml">
 	<head>
 		<!-- Mobile Specific Meta -->
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -19,15 +19,15 @@
 		<!--
 		CSS
 		============================================= -->
-		<link rel="stylesheet" href="../static/css/linearicons.css">
-		<link rel="stylesheet" href="../static/css/font-awesome.min.css">
-		<link rel="stylesheet" href="../static/css/bootstrap.css">
-		<link rel="stylesheet" href="../static/css/magnific-popup.css">
-		<link rel="stylesheet" href="../static/css/nice-select.css">
-		<link rel="stylesheet" href="../static/css/animate.min.css">
-		<link rel="stylesheet" href="../static/css/owl.carousel.css">
-		<link rel="stylesheet" href="../static/css/jquery-ui.css">
-		<link rel="stylesheet" href="../static/css/main.css">
+		<link th:href="@{/css/linearicons.css}" 	 rel="stylesheet" href="../static/css/linearicons.css">
+		<link th:href="@{/css/font-awesome.min.css}" rel="stylesheet" href="../static/css/font-awesome.min.css">
+		<link th:href="@{/css/bootstrap.css}" 		 rel="stylesheet" href="../static/css/bootstrap.css">
+		<link th:href="@{/css/magnific-popup.css}" 	 rel="stylesheet" href="../static/css/magnific-popup.css">
+		<link th:href="@{/css/nice-select.css}"	     rel="stylesheet" href="../static/css/nice-select.css">
+		<link th:href="@{/css/animate.min.css}" 	 rel="stylesheet" href="../static/css/animate.min.css">
+		<link th:href="@{/css/owl.carousel.css}" 	 rel="stylesheet" href="../static/css/owl.carousel.css">
+		<link th:href="@{/css/jquery-ui.css}" 	 	 rel="stylesheet" href="../static/css/jquery-ui.css">
+		<link th:href="@{/css/main.css}" 			 rel="stylesheet" href="../static/css/main.css">
 	</head>
 	<body>
 		<header>
@@ -108,7 +108,7 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="hero-nav-area">
-								<h1 class="text-white">Image Post</h1>
+								<h1 th:text="${post.titulo}" class="text-white">Image Post</h1>
 								<p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span><a href="#">Post Types </a><span class="lnr lnr-arrow-right"></span><a href="image-post.html">Image Post </a></p>
 							</div>
 						</div>
@@ -130,31 +130,25 @@
 							<div class="single-post-wrap">
 								<div class="feature-img-thumb relative">
 									<div class="overlay overlay-bg"></div>
-									<img class="img-fluid" src="../static/img/f1.jpg" alt="">
+									<img th:src="${post.imagen}" class="img-fluid" src="../static/img/f1.jpg" alt="">
 								</div>
 								<div class="content-wrap">
 									<ul class="tags mt-10">
-										<li><a href="#">Food Habit</a></li>
+										<li><a th:text="${post.IdCategoria}" href="#">Food Habit</a></li>
 									</ul>
 									<a href="#">
-										<h3>A Discount Toner Cartridge Is Better Than Ever.</h3>
+										<h3 th:text="${post.extracto}">A Discount Toner Cartridge Is Better Than Ever.</h3>
 									</a>
 									<ul class="meta pb-20">
 										<li><a href="#"><span class="lnr lnr-user"></span>Mark wiens</a></li>
 										<li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
 										<li><a href="#"><span class="lnr lnr-bubble"></span>06 </a></li>
 									</ul>
-									<p>
-										Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-									</p>
-									<p>
-										Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus.
-									</p>
-								<blockquote>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</blockquote>
-								
+									<p th:text="${post.contenido}"></p>
+
 								<div class="navigation-wrap justify-content-between d-flex">
-									<a class="prev" href="#"><span class="lnr lnr-arrow-left"></span>Prev Post</a>
-									<a class="next" href="#">Next Post<span class="lnr lnr-arrow-right"></span></a>
+									<a class="prev" href="#"><span class="lnr lnr-arrow-left"></span>Anterior</a>
+									<a class="next" href="#">Siguiente<span class="lnr lnr-arrow-right"></span></a>
 								</div>
 								
 								<div class="comment-sec-area">

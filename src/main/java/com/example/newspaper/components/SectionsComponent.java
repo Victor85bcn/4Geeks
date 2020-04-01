@@ -30,6 +30,24 @@ public class SectionsComponent {
         return postPortadaPrincipal;
     }
 
+    public List<Post> getSubPortadaTop() {
+        ArrayList<Post> postsSubPortada = new ArrayList<>();
+        SpringDataWebProperties.Pageable pageable = new SpringDataWebProperties.Pageable();
+        for(Post post : postRepository.getSubPortadaTop()) {
+            postsSubPortada.add(post);
+        }
+        return postsSubPortada;
+    }
+
+    public List<Post> getSubPortadaBottom() {
+        ArrayList<Post> postsSubPortada = new ArrayList<>();
+        SpringDataWebProperties.Pageable pageable = new SpringDataWebProperties.Pageable();
+        for(Post post : postRepository.getSubPortadaBottom()) {
+            postsSubPortada.add(post);
+        }
+        return postsSubPortada;
+    }
+
 
 
 }

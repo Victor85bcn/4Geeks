@@ -3,6 +3,7 @@ package com.example.newspaper.controller;
 import com.example.newspaper.components.PostComponent;
 import com.example.newspaper.configuration.Pages;
 import com.example.newspaper.model.Post;
+import com.example.newspaper.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +24,7 @@ public class ControllerBasic {
     @Autowired
     private PostComponent _postComponent;
 
-
+/*
     @GetMapping(path = {"/posts","/"})
     public String saludar(Model model){
         model.addAttribute("ultimasNoticias", this._postComponent.getPosts());
@@ -64,4 +65,5 @@ public class ControllerBasic {
         return "index";
     }
 
+ */
 }

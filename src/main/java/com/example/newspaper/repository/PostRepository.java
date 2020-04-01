@@ -73,6 +73,16 @@ public class PostRepository implements PostRep {
         return jdbcTemplate.queryForObject("select * from post order by 1 desc limit 1", new PostMapper());
     }
 
+    @Override
+    public List<Post> getSubPortadaTop() {
+        return jdbcTemplate.query("select * from post order by 1 desc limit 1", new PostMapper());
+    }
+
+    @Override
+    public List<Post> getSubPortadaBottom() {
+        return jdbcTemplate.query("select * from post order by 1 desc limit 1", new PostMapper());
+    }
+
     public JdbcTemplate getJdbcTemplate() {
         return jdbcTemplate;
     }

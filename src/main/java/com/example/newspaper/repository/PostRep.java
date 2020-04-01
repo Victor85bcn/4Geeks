@@ -8,4 +8,6 @@ public interface PostRep extends BaseRep<Post> {
 
     public List<Post> getUltimasNoticias();
     public Post getPortadaPrincipal();
+    public List<Post> getSubPortadaTop();
+    public List<Post> getSubPortadaBottom();
 }
