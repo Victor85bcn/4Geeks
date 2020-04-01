@@ -51,7 +51,7 @@ public class CategoriaRepository implements CategoriaRep {
     }
 
     @Override
-    public List<Categoria> findAll(SpringDataWebProperties.Pageable pageable) {
+    public List<Categoria> findAll() {
         return jdbcTemplate.query("select * from Categoria ", new CategoriaMapper());
     }
 

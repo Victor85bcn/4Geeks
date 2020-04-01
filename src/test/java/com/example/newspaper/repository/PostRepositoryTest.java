@@ -59,7 +59,6 @@ public class PostRepositoryTest {
 
     @Test
     public void findAll(){
-        SpringDataWebProperties.Pageable pageable = new SpringDataWebProperties.Pageable();
-        Assert.assertFalse(postRepository.findAll(pageable).isEmpty());
+        Assert.assertFalse(postRepository.findAll().isEmpty());
     }
 }

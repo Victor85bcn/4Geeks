@@ -50,7 +50,7 @@ public class UsuarioRepository implements UsuarioRep {
     }
 
     @Override
-    public List<Usuario> findAll(SpringDataWebProperties.Pageable pageable) {
+    public List<Usuario> findAll() {
         return jdbcTemplate.query("select * from Usuario", new UsuarioMapper());
     }
 

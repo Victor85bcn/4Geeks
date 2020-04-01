@@ -40,7 +40,7 @@ public class GrupoRepositoryTest {
 
     @Test
     public void testC(){
-        Assert.assertFalse(grupoRepository.findAll(new SpringDataWebProperties.Pageable()).isEmpty());
+        Assert.assertFalse(grupoRepository.findAll().isEmpty());
     }
 
     @Test

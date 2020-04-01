@@ -27,8 +27,8 @@ public class ComentarioRestController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Comentario>> findAll(SpringDataWebProperties.Pageable pageable){
-        return ResponseEntity.ok(repository.findAll(pageable));
+    public ResponseEntity<List<Comentario>> findAll(){
+        return ResponseEntity.ok(repository.findAll());
     }
 
     @GetMapping("/{id}")

@@ -49,7 +49,7 @@ public class GrupoPermisoRepository implements GrupoPermisoRep {
     }
 
     @Override
-    public List<GrupoPermiso> findAll(SpringDataWebProperties.Pageable pageable) {
+    public List<GrupoPermiso> findAll() {
         return jdbcTemplate.query("select * from grupo_permiso", new GrupoPermisoMapper());
     }
 

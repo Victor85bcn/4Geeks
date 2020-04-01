@@ -50,7 +50,7 @@ public class PermisoRepository implements PermisoRep {
     }
 
     @Override
-    public List<Permiso> findAll(SpringDataWebProperties.Pageable pageable) {
+    public List<Permiso> findAll() {
         return jdbcTemplate.query("select * from permiso", new PermisoMapper());
     }
 

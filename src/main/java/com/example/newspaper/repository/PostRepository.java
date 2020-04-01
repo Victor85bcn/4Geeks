@@ -52,7 +52,7 @@ public class PostRepository implements PostRep {
     }
 
     @Override
-    public List<Post> findAll(SpringDataWebProperties.Pageable pageable) {
+    public List<Post> findAll() {
         return jdbcTemplate.query("select * from post", new PostMapper());
     }
 

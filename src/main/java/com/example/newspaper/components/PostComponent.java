@@ -23,8 +23,7 @@ public class PostComponent {
     }
 
     public List<Post> getAllPosts() {
-        SpringDataWebProperties.Pageable pageable = new SpringDataWebProperties.Pageable();
-        List<Post> posts = postRepository.findAll(pageable);
+        List<Post> posts = postRepository.findAll();
         return posts;
     }
 

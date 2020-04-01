@@ -46,7 +46,7 @@ public class UsuarioRepositoryTest {
 
     @Test
     public void testC(){
-        Assert.assertFalse(usuarioRepository.findAll(new SpringDataWebProperties.Pageable()).isEmpty());
+        Assert.assertFalse(usuarioRepository.findAll().isEmpty());
     }
 
     @Test

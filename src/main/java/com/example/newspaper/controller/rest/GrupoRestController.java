@@ -27,8 +27,8 @@ public class GrupoRestController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Grupo>> findAll(SpringDataWebProperties.Pageable pageable){
-        return ResponseEntity.ok(repository.findAll(pageable));
+    public ResponseEntity<List<Grupo>> findAll(){
+        return ResponseEntity.ok(repository.findAll());
     }
 
     @GetMapping("/{id}")

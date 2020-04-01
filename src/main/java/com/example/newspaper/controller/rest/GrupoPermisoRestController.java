@@ -27,8 +27,8 @@ public class GrupoPermisoRestController {
     }
 
     @GetMapping
-    public ResponseEntity<List<GrupoPermiso>> findAll(SpringDataWebProperties.Pageable pageable){
-        return ResponseEntity.ok(repository.findAll(pageable));
+    public ResponseEntity<List<GrupoPermiso>> findAll(){
+        return ResponseEntity.ok(repository.findAll());
     }
 
     @GetMapping("/{id}")

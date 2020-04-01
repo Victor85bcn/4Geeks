@@ -56,8 +56,7 @@ public class CategoriaRepositoryTest {
     @Test
     @Order(4)
     public void testFindAll(){
-        SpringDataWebProperties.Pageable pageable = new SpringDataWebProperties.Pageable();
-        Assert.assertFalse(categoriaRepository.findAll(pageable).isEmpty());
+        Assert.assertFalse(categoriaRepository.findAll().isEmpty());
     }
 
 }

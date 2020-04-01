@@ -48,7 +48,7 @@ public class GrupoRepository implements GrupoRep {
     }
 
     @Override
-    public List<Grupo> findAll(SpringDataWebProperties.Pageable pageable) {
+    public List<Grupo> findAll() {
         return jdbcTemplate.query("select * from grupo", new GrupoMapper());
     }
 

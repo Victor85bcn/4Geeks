@@ -34,8 +34,8 @@ public class CategoriaRestController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Categoria>> findAll(SpringDataWebProperties.Pageable pageable){
-        return ResponseEntity.ok(categoriaRepository.findAll(pageable));
+    public ResponseEntity<List<Categoria>> findAll(){
+        return ResponseEntity.ok(categoriaRepository.findAll());
     }
 
     @GetMapping("/{id}")

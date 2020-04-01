@@ -53,7 +53,7 @@ public class ContenidoRepository implements ContenidoRep {
     }
 
     @Override
-    public List<Contenido> findAll(SpringDataWebProperties.Pageable pageable) {
+    public List<Contenido> findAll() {
         return jdbcTemplate.query("select * from contenido", new ContenidoMapper());
     }
 

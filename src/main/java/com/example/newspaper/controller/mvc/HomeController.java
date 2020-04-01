@@ -4,6 +4,8 @@ import com.example.newspaper.components.PostComponent;
 import com.example.newspaper.components.SectionsComponent;
 import com.example.newspaper.configuration.Pages;
 import com.example.newspaper.model.Post;
+import com.example.newspaper.repository.CategoriaRep;
+import com.example.newspaper.repository.UsuarioRep;
 import com.example.newspaper.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,12 +32,21 @@ public class HomeController {
     @Autowired
     private PostService postService;
 
+    @Autowired
+    private CategoriaRep categoriaRep;
+
+    @Autowired
+    private UsuarioRep usuarioRep;
+
+
     @GetMapping(path = {"/"})
     public String saludar(Model model){
         model.addAttribute("ultimasNoticias", this.sectionsComponent.getUltimasNoticias());
         model.addAttribute("portadaPrincipal", this.sectionsComponent.getPortadaPrincipal());
         model.addAttribute("subPortadaTop", this.sectionsComponent.getSubPortadaTop());
         model.addAttribute("subPortadaBottom", this.sectionsComponent.getSubPortadaBottom());
+        model.addAttribute("categorias", this.categoriaRep.findAll());
+        model.addAttribute("usuarios", this.usuarioRep.findAll());
         return "index.html";
     }
 

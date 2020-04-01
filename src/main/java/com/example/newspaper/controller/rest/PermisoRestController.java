@@ -28,8 +28,8 @@ public class PermisoRestController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Permiso>> findAll(SpringDataWebProperties.Pageable pageable){
-        return ResponseEntity.ok(repository.findAll(pageable));
+    public ResponseEntity<List<Permiso>> findAll(){
+        return ResponseEntity.ok(repository.findAll());
     }
 
     @GetMapping("/{id}")

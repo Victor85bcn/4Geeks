@@ -27,8 +27,8 @@ public class ContenidorRestController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Contenido>> findAll(SpringDataWebProperties.Pageable pageable){
-        return ResponseEntity.ok(repository.findAll(pageable));
+    public ResponseEntity<List<Contenido>> findAll(){
+        return ResponseEntity.ok(repository.findAll());
     }
 
     @GetMapping("/{id}")

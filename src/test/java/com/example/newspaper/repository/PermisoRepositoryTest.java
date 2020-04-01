@@ -39,7 +39,7 @@ public class PermisoRepositoryTest {
 
     @Test
     public void testC(){
-        Assert.assertFalse(repository.findAll(new SpringDataWebProperties.Pageable()).isEmpty());
+        Assert.assertFalse(repository.findAll().isEmpty());
     }
 
     @Test

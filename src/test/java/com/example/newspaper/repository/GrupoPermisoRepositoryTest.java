@@ -37,7 +37,7 @@ public class GrupoPermisoRepositoryTest {
 
     @Test
     public void testC(){
-        Assert.assertFalse(grupoPermisoRepository.findAll(new SpringDataWebProperties.Pageable()).isEmpty());
+        Assert.assertFalse(grupoPermisoRepository.findAll().isEmpty());
     }
 
     @Test

@@ -8,6 +8,6 @@ public interface BaseRep<T> {
 
     public boolean save(T object);
     public boolean update(T object);
-    public List<T> findAll(SpringDataWebProperties.Pageable pageable);
+    public List<T> findAll();
     public T findById(int id);
 }

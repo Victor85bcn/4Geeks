@@ -28,8 +28,8 @@ public class PostRestRepository {
     }
 
     @GetMapping
-    public ResponseEntity<List<Post>> findAll(SpringDataWebProperties.Pageable pageable){
-        return ResponseEntity.ok(repository.findAll(pageable));
+    public ResponseEntity<List<Post>> findAll(){
+        return ResponseEntity.ok(repository.findAll());
     }
 
     @GetMapping("/{id}")

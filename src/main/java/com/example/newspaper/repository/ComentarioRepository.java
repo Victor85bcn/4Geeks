@@ -52,7 +52,7 @@ public class ComentarioRepository implements ComentarioRep {
     }
 
     @Override
-    public List<Comentario> findAll(SpringDataWebProperties.Pageable pageable) {
+    public List<Comentario> findAll() {
         return jdbcTemplate.query("select * from comentario", new ComentarioMapper());
     }
 
