@@ -66,6 +66,7 @@ public class HomeController {
         modelAndView.addObject("comentario", new Comentario());
         modelAndView.addObject("comentariosList", comentariosList);
         modelAndView.addObject("usuarios", usuarios);
+        modelAndView.addObject("loMasPopular", this.sectionsComponent.getLoMasPopular());
         return modelAndView;
     }
 

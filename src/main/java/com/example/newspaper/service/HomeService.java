@@ -28,6 +28,7 @@ public class HomeService {
         model.addAttribute("portadaPrincipal", this.sectionsComponent.getPortadaPrincipal());
         model.addAttribute("subPortadaTop", this.sectionsComponent.getSubPortadaTop());
         model.addAttribute("subPortadaBottom", this.sectionsComponent.getSubPortadaBottom());
+        model.addAttribute("loMasPopular", this.sectionsComponent.getLoMasPopular());
         model.addAttribute("categorias", this.categoriaRep.findAll());
         model.addAttribute("usuarios", this.usuarioRep.findAll());
         return model;

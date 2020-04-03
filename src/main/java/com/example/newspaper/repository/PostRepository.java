@@ -86,6 +86,12 @@ public class PostRepository implements PostRep {
                 "order by p.IdPost desc limit 1", new PostMapper());
     }
 
+    @Override
+    public List<Post> getLoMasPopular() {
+        return jdbcTemplate.query("select * from post p inner join post_seccion ps on p.IdPost = ps.IdPost where ps.IdSeccion = 8 order by p.IdPost desc limit 4",
+                new PostMapper());
+    }
+
     public JdbcTemplate getJdbcTemplate() {
         return jdbcTemplate;
     }

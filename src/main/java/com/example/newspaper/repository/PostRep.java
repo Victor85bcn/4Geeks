@@ -10,4 +10,5 @@ public interface PostRep extends BaseRep<Post> {
     public Post getPortadaPrincipal();
     public List<Post> getSubPortadaTop();
     public List<Post> getSubPortadaBottom();
+    public List<Post> getLoMasPopular();
 }

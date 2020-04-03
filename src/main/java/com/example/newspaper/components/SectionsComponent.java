@@ -17,7 +17,6 @@ public class SectionsComponent {
 
     public List<Post> getUltimasNoticias() {
         ArrayList<Post> postsUltimasNoticias = new ArrayList<>();
-        SpringDataWebProperties.Pageable pageable = new SpringDataWebProperties.Pageable();
         for(Post post : postRepository.getUltimasNoticias()) {
             postsUltimasNoticias.add(post);
         }
@@ -31,7 +30,6 @@ public class SectionsComponent {
 
     public List<Post> getSubPortadaTop() {
         ArrayList<Post> postsSubPortada = new ArrayList<>();
-        SpringDataWebProperties.Pageable pageable = new SpringDataWebProperties.Pageable();
         for(Post post : postRepository.getSubPortadaTop()) {
             postsSubPortada.add(post);
         }
@@ -40,11 +38,18 @@ public class SectionsComponent {
 
     public List<Post> getSubPortadaBottom() {
         ArrayList<Post> postsSubPortada = new ArrayList<>();
-        SpringDataWebProperties.Pageable pageable = new SpringDataWebProperties.Pageable();
         for(Post post : postRepository.getSubPortadaBottom()) {
             postsSubPortada.add(post);
         }
         return postsSubPortada;
+    }
+
+    public List<Post> getLoMasPopular() {
+        ArrayList<Post> postsLoMasPopular = new ArrayList<>();
+        for(Post post : postRepository.getLoMasPopular()) {
+            postsLoMasPopular.add(post);
+        }
+        return postsLoMasPopular;
     }
 
 
