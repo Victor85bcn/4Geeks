@@ -5,12 +5,12 @@ import com.example.newspaper.model.Comentario;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -30,12 +30,13 @@ public class ComentarioRepository implements ComentarioRep {
     public boolean save(Comentario comentario) {
         try {
             String sql = String.format(
-                    "insert into Comentario (Comentario,IdPost,IdUsuario,Respuesta) "
-                            + "values('%s', '%d', '%d', '%d')",
+                    "insert into Comentario (Comentario,IdPost,IdUsuario) "
+                            + "values('%s', '%d', '%d')",
                     comentario.getComentario(), comentario.getIdPost(), comentario.getIdUsuario(), comentario.getRespuesta());
             jdbcTemplate.execute(sql);
             return true;
         }catch(Exception e) {
+            System.out.println("ERROR!!!!!" + e.getMessage());
             return false;
         }
     }
@@ -61,6 +62,11 @@ public class ComentarioRepository implements ComentarioRep {
         Object[] params = new Object[] {Id};
         return jdbcTemplate.queryForObject("select * from comentario where IdComentario = ?",
                 params, new ComentarioMapper());
+    }
+    @Override
+    public List<Comentario> findByPostId(int Id) {
+        List<Comentario> comentarios = jdbcTemplate.query("select * from comentario where IdPost = " + Id, new ComentarioMapper());
+        return comentarios;
     }
 
     public JdbcTemplate getJdbcTemplate() {

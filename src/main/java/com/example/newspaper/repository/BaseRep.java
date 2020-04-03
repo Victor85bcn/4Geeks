@@ -1,7 +1,5 @@
 package com.example.newspaper.repository;
 
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
-
 import java.util.List;
 
 public interface BaseRep<T> {

@@ -3,10 +3,8 @@ package com.example.newspaper.components;
 import com.example.newspaper.model.Post;
 import com.example.newspaper.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component("postComponent")

@@ -79,59 +79,16 @@
 										<div class="row flex-column">
 											<h6>05 Comments</h6>
 											<div class="comment-list">
-												<div class="single-comment justify-content-between d-flex">
+												<div th:each="comentario : ${comentariosList}" class="single-comment justify-content-between d-flex">
 													<div class="user justify-content-between d-flex">
 														<div class="thumb">
 															<img src="../static/img/blog/c1.jpg" alt="">
 														</div>
 														<div class="desc">
-															<h5><a href="#">Emilly Blunt</a></h5>
+															<h5><a th:each="usuario : ${usuarios}" th:if="${usuario.IdUsuario == comentario.IdUsuario}" th:text="${usuario.Nombre} + ' ' +${usuario.Apellido}" href="#">Emilly Blunt</a></h5>
 															<p class="date">December 4, 2017 at 3:12 pm </p>
-															<p class="comment">
-																Never say goodbye till the end comes!
-															</p>
+															<p th:text="${comentario.comentario}" class="comment"></p>
 														</div>
-													</div>
-													<div class="reply-btn">
-														<a href="" class="btn-reply text-uppercase">reply</a>
-													</div>
-												</div>
-											</div>
-											<div class="comment-list left-padding">
-												<div class="single-comment justify-content-between d-flex">
-													<div class="user justify-content-between d-flex">
-														<div class="thumb">
-															<img src="../static/img/blog/c2.jpg" alt="">
-														</div>
-														<div class="desc">
-															<h5><a href="#">Emilly Blunt</a></h5>
-															<p class="date">December 4, 2017 at 3:12 pm </p>
-															<p class="comment">
-																Never say goodbye till the end comes!
-															</p>
-														</div>
-													</div>
-													<div class="reply-btn">
-														<a href="" class="btn-reply text-uppercase">reply</a>
-													</div>
-												</div>
-											</div>
-											<div class="comment-list">
-												<div class="single-comment justify-content-between d-flex">
-													<div class="user justify-content-between d-flex">
-														<div class="thumb">
-															<img src="../static/img/blog/c3.jpg" alt="">
-														</div>
-														<div class="desc">
-															<h5><a href="#">Emilly Blunt</a></h5>
-															<p class="date">December 4, 2017 at 3:12 pm </p>
-															<p class="comment">
-																Never say goodbye till the end comes!
-															</p>
-														</div>
-													</div>
-													<div class="reply-btn">
-														<a href="" class="btn-reply text-uppercase">reply</a>
 													</div>
 												</div>
 											</div>
@@ -140,23 +97,15 @@
 								</div>
 							</div>
 							<div class="comment-form">
-								<h4>Post Comment</h4>
-								<form>
-									<div class="form-group form-inline">
-										<div class="form-group col-lg-6 col-md-12 name">
-											<input type="text" class="form-control" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
-										</div>
-										<div class="form-group col-lg-6 col-md-12 email">
-											<input type="email" class="form-control" id="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
-										</div>
-									</div>
+								<h4>Añadir comentario</h4>
+								<form th:action="@{/addNuevoComentario}" method="post" th:object="${comentario}">
+									<input type="hidden" name="idPost" th:value="${post.IdPost}"/>
+									<label>idUsuario </label>
+									<input th:field="*{idUsuario}" th:value="*{idUsuario}" name="name" placeholder="idUsuario" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Título'" class="common-input mb-20 form-control" required="" type="number">
 									<div class="form-group">
-										<input type="text" class="form-control" id="subject" placeholder="Subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Subject'">
+										<textarea th:field="*{comentario}" th:value="*{comentario}" class="form-control mb-10" rows="5" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
 									</div>
-									<div class="form-group">
-										<textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
-									</div>
-									<a href="#" class="primary-btn text-uppercase">Post Comment</a>
+									<button class="primary-btn text-uppercase">Publicar</button>
 								</form>
 							</div>
 						</div>
@@ -358,89 +307,11 @@
 		</section>
 		<!-- End latest-post Area -->
 	</div>
-	
-	<!-- start footer Area -->
-	<footer class="footer-area section-gap">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3 col-md-6 single-footer-widget">
-					<h4>Top Products</h4>
-					<ul>
-						<li><a href="#">Managed Website</a></li>
-						<li><a href="#">Manage Reputation</a></li>
-						<li><a href="#">Power Tools</a></li>
-						<li><a href="#">Marketing Service</a></li>
-					</ul>
-				</div>
-				<div class="col-lg-2 col-md-6 single-footer-widget">
-					<h4>Quick Links</h4>
-					<ul>
-						<li><a href="#">Jobs</a></li>
-						<li><a href="#">Brand Assets</a></li>
-						<li><a href="#">Investor Relations</a></li>
-						<li><a href="#">Terms of Service</a></li>
-					</ul>
-				</div>
-				<div class="col-lg-2 col-md-6 single-footer-widget">
-					<h4>Features</h4>
-					<ul>
-						<li><a href="#">Jobs</a></li>
-						<li><a href="#">Brand Assets</a></li>
-						<li><a href="#">Investor Relations</a></li>
-						<li><a href="#">Terms of Service</a></li>
-					</ul>
-				</div>
-				<div class="col-lg-2 col-md-6 single-footer-widget">
-					<h4>Resources</h4>
-					<ul>
-						<li><a href="#">Guides</a></li>
-						<li><a href="#">Research</a></li>
-						<li><a href="#">Experts</a></li>
-						<li><a href="#">Agencies</a></li>
-					</ul>
-				</div>
-				<div class="col-lg-3 col-md-6 single-footer-widget">
-					<h4>Instragram Feed</h4>
-					<ul class="instafeed d-flex flex-wrap">
-						<li><img src="../static/img/i1.jpg" alt=""></li>
-						<li><img src="../static/img/i2.jpg" alt=""></li>
-						<li><img src="../static/img/i3.jpg" alt=""></li>
-						<li><img src="../static/img/i4.jpg" alt=""></li>
-						<li><img src="../static/img/i5.jpg" alt=""></li>
-						<li><img src="../static/img/i6.jpg" alt=""></li>
-						<li><img src="../static/img/i7.jpg" alt=""></li>
-						<li><img src="../static/img/i8.jpg" alt=""></li>
-					</ul>
-				</div>
-			</div>
-			<div class="footer-bottom row align-items-center">
-				<p class="footer-text m-0 col-lg-8 col-md-12"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-				<div class="col-lg-4 col-md-12 footer-social">
-					<a href="#"><i class="fa fa-facebook"></i></a>
-					<a href="#"><i class="fa fa-twitter"></i></a>
-					<a href="#"><i class="fa fa-dribbble"></i></a>
-					<a href="#"><i class="fa fa-behance"></i></a>
-				</div>
-			</div>
-		</div>
-	</footer>
-	<!-- End footer Area -->
-	<script src="../static/js/vendor/jquery-2.2.4.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="../static/js/vendor/bootstrap.min.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
-	<script src="../static/js/easing.min.js"></script>
-	<script src="../static/js/hoverIntent.js"></script>
-	<script src="../static/js/superfish.min.js"></script>
-	<script src="../static/js/jquery.ajaxchimp.min.js"></script>
-	<script src="../static/js/jquery.magnific-popup.min.js"></script>
-	<script src="../static/js/mn-accordion.js"></script>
-	<script src="../static/js/jquery-ui.js"></script>
-	<script src="../static/js/jquery.nice-select.min.js"></script>
-	<script src="../static/js/owl.carousel.min.js"></script>
-	<script src="../static/js/mail-script.js"></script>
-	<script src="../static/js/main.js"></script>
+		<!-- start footer Area -->
+		<footer class="footer-area section-gap">
+			<div th:replace="components/footer.html"></div>
+		</footer>
+		<!-- End footer Area -->
+		<div th:replace="components/scripts.html"></div>
 </body>
 </html>

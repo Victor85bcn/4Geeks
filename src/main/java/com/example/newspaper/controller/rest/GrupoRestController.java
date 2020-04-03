@@ -4,7 +4,6 @@ import com.example.newspaper.model.Grupo;
 import com.example.newspaper.model.common.RepBase;
 import com.example.newspaper.repository.GrupoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

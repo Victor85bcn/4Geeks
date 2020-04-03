@@ -8,10 +8,8 @@ import com.example.newspaper.model.Comentario;
 import com.example.newspaper.model.Post;
 import com.example.newspaper.model.Usuario;
 import com.example.newspaper.repository.CategoriaRep;
-import com.example.newspaper.repository.CategoriaRepository;
 import com.example.newspaper.repository.ComentarioRep;
 import com.example.newspaper.repository.UsuarioRep;
-import com.example.newspaper.service.HomeService;
 import com.example.newspaper.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,12 +20,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/")
-public class HomeController {
+@RequestMapping("/articulo/{post}")
+public class PostController {
 
     @Autowired
     private SectionsComponent sectionsComponent;
@@ -47,25 +44,24 @@ public class HomeController {
     @Autowired
     private ComentarioRep comentarioRep;
 
-    @Autowired
-    private HomeService homeService;
 
     @GetMapping(path = {"/"})
-    public String home(Model model){
-        homeService.modelHome(model);
-        return "index.html";
+    public String saludar(Model model){
+        model.addAttribute("ultimasNoticias", this.sectionsComponent.getUltimasNoticias());
+        model.addAttribute("portadaPrincipal", this.sectionsComponent.getPortadaPrincipal());
+        model.addAttribute("subPortadaTop", this.sectionsComponent.getSubPortadaTop());
+        model.addAttribute("subPortadaBottom", this.sectionsComponent.getSubPortadaBottom());
+        model.addAttribute("categorias", this.categoriaRep.findAll());
+        model.addAttribute("usuarios", this.usuarioRep.findAll());
+        return "gallery-post.html";
     }
 
     @GetMapping(path = {"/articulo/{post}"})
     public ModelAndView getPostIndividual(@PathVariable(required = true, name ="post") int id) {
         ModelAndView modelAndView = new ModelAndView(Pages.IMAGE_POST);
         Post post = this.postComponent.getPostById(id);
-        List<Comentario> comentariosList = comentarioRep.findByPostId(id);
-        List<Usuario> usuarios = usuarioRep.findAll();
         modelAndView.addObject("post", post);
         modelAndView.addObject("comentario", new Comentario());
-        modelAndView.addObject("comentariosList", comentariosList);
-        modelAndView.addObject("usuarios", usuarios);
         return modelAndView;
     }
 
@@ -81,16 +77,13 @@ public class HomeController {
     @PostMapping("/addNuevoArticulo")
     public String addNewPost(Post post, Model model) {
         postService.saveNewPost(post);
-        homeService.modelHome(model);
-        return "index.html";
+        return "gallery-post.html";
     }
 
-
     @PostMapping("/addNuevoComentario")
-    public String addNewComentario(Comentario comentario, Model model) {
+    public String addNewComentario(Comentario comentario) {
         comentarioRep.save(comentario);
-        homeService.modelHome(model);
-        return "index.html";
+        return "gallery-post.html";
     }
 
 }

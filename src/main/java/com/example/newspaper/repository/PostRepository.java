@@ -5,7 +5,6 @@ import com.example.newspaper.model.Post;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -65,22 +64,26 @@ public class PostRepository implements PostRep {
 
     @Override
     public List<Post> getUltimasNoticias() {
-        return jdbcTemplate.query("select * from post order by IdPost desc limit 4", new PostMapper());
+        return jdbcTemplate.query("select * from post p inner join post_seccion ps on p.IdPost = ps.IdPost where ps.IdSeccion = 4 " +
+                "order by p.IdPost desc limit 4", new PostMapper());
     }
 
     @Override
     public Post getPortadaPrincipal() {
-        return jdbcTemplate.queryForObject("select * from post order by 1 desc limit 1", new PostMapper());
+        return jdbcTemplate.queryForObject("select * from post p inner join post_seccion ps on p.IdPost = ps.IdPost where ps.IdSeccion = 1 " +
+                "order by p.IdPost desc limit 1", new PostMapper());
     }
 
     @Override
     public List<Post> getSubPortadaTop() {
-        return jdbcTemplate.query("select * from post order by 1 desc limit 1", new PostMapper());
+        return jdbcTemplate.query("select * from post p inner join post_seccion ps on p.IdPost = ps.IdPost where ps.IdSeccion = 2 " +
+                "order by p.IdPost desc limit 1", new PostMapper());
     }
 
     @Override
     public List<Post> getSubPortadaBottom() {
-        return jdbcTemplate.query("select * from post order by 1 desc limit 1", new PostMapper());
+        return jdbcTemplate.query("select * from post p inner join post_seccion ps on p.IdPost = ps.IdPost where ps.IdSeccion = 3 " +
+                "order by p.IdPost desc limit 1", new PostMapper());
     }
 
     public JdbcTemplate getJdbcTemplate() {

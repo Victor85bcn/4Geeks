@@ -4,7 +4,6 @@ import com.example.newspaper.model.GrupoPermiso;
 import com.example.newspaper.model.common.RepBase;
 import com.example.newspaper.repository.GrupoPermisoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

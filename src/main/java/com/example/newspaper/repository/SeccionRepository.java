@@ -1,7 +1,7 @@
 package com.example.newspaper.repository;
 
-import com.example.newspaper.mapper.CategoriaMapper;
-import com.example.newspaper.model.Categoria;
+import com.example.newspaper.mapper.SeccionMapper;
+import com.example.newspaper.model.Seccion;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,8 @@ import javax.sql.DataSource;
 import java.util.List;
 
 @Repository
-public class CategoriaRepository implements CategoriaRep {
+public class SeccionRepository implements SeccionRep {
+
 
     private Log logger = LogFactory.getLog(getClass());
     @Autowired
@@ -26,10 +27,9 @@ public class CategoriaRepository implements CategoriaRep {
     }
 
     @Override
-    public boolean save(Categoria categoria) {
+    public boolean save(Seccion seccion) {
         try {
-            String sql = String.format("insert into Categoria (Nombre, Descripcion) " +
-                    "values ('%s', '%s')", categoria.getNombre(), categoria.getDescripcion());
+            String sql = String.format("insert into Seccion (Nombre) values ('%s')", seccion.getNombre());
             jdbcTemplate.execute(sql);
             return true;
         } catch (Exception e) {
@@ -38,11 +38,9 @@ public class CategoriaRepository implements CategoriaRep {
     }
 
     @Override
-    public boolean update(Categoria categoria) {
-        if (categoria.getIdCategoria() != 0) {
-            String sql = String.format("update Categoria set Nombre = '%s', Descripcion = '%s' "
-                    + "where IdCategoria = '%d'",
-            categoria.getNombre(), categoria.getDescripcion(), categoria.getIdCategoria());
+    public boolean update(Seccion seccion) {
+        if (seccion.getIdSeccion() != 0) {
+            String sql = String.format("update Seccion set Nombre = '%s' where IdSeccion = '%d'", seccion.getNombre(), seccion.getIdSeccion());
             jdbcTemplate.execute(sql);
             return true;
         }
@@ -50,23 +48,23 @@ public class CategoriaRepository implements CategoriaRep {
     }
 
     @Override
-    public List<Categoria> findAll() {
-        return jdbcTemplate.query("select * from Categoria ", new CategoriaMapper());
+    public List<Seccion> findAll() {
+        return jdbcTemplate.query("select * from Seccion ", new SeccionMapper());
     }
 
     @Override
-    public Categoria findById(int Id) {
+    public Seccion findById(int Id) {
         Object[] params = new Object[] {Id};
-        return jdbcTemplate.queryForObject("select * from Categoria where IdCategoria = ?", params, new CategoriaMapper());
+        return jdbcTemplate.queryForObject("select * from Seccion where IdSeccion = ?", params, new SeccionMapper());
     }
 
     public void deleteAll(){
-        jdbcTemplate.execute("delete from Categoria");
+        jdbcTemplate.execute("delete from Seccion");
     }
 
     public boolean deleteById(int id){
         try{
-            String sql = String.format("delete from Categoria where IdCategoria='%d'", id);
+            String sql = String.format("delete from Seccion where IdSeccion='%d'", id);
             jdbcTemplate.execute(sql);
             return true;
         }catch (Exception e){
@@ -78,9 +76,7 @@ public class CategoriaRepository implements CategoriaRep {
     public JdbcTemplate getJdbcTemplate() {
         return jdbcTemplate;
     }
-
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-
 }
