@@ -18,11 +18,35 @@
 		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
 		<!-- Styles -->
 		<div th:replace="components/style.html"></div>
+
+
+
+		<script th:src="@{/js/bootstrap-wysiwyg.js}"></script>
+		<script th:src="@{/js/jquery.hotkeys.js}"></script>
+
+		<script src="https://cdn.jsdelivr.net/npm/jquery.hotkeys@0.1.0/jquery.hotkeys.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/jquery.hotkeys@0.1.0/jquery.hotkeys.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/wysihtml5/0.3.0/wysihtml5.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap-wysiwyg@2.0.1/js/bootstrap-wysiwyg.min.js"></script>
+
+		<link rel="apple-touch-icon" href="//mindmup.s3.amazonaws.com/lib/img/apple-touch-icon.png" />
+		<link rel="shortcut icon" href="http://mindmup.s3.amazonaws.com/lib/img/favicon.ico" >
+		<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+		<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
+		<link href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+		<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+		<script th:src="@{/js/google-code-prettify/prettify.js}"></script>
+		<link th:href="@{/js/google-code-prettify/prettify.css}" rel="stylesheet" href="../static/js/google-code-prettify/prettify.css" >
+
+
+
+
 	</head>
 	<body>
-		<header>
-			<div th:replace="components/header.html"></div>
-		</header>
+	<header>
+		<div th:replace="components/header.html"></div>
+	</header>
 		<div class="site-main-container">
 			<!-- Start top-post Area -->
 			<section class="top-post-area pt-10">
@@ -44,7 +68,7 @@
 					<div class="row contact-wrap">
 
 						<div class="col-lg-12">
-							<form th:action="@{/addNuevoArticulo}" method="post" th:object="${post}" class="form-area contact-form text-left" id="myForm">
+							<form th:action="@{/addNuevoArticulo}" method="post" th:object="${post}" class="form-area contact-form text-left" id="myPost">
 								<div class="row">
 									<div class="col-lg-12">
 										<label for="IdPost">Título </label>
@@ -64,16 +88,85 @@
 										<input th:field="*{imagen}" th:value="*{imagen}" name="subject" placeholder="Url de la imagen destacada" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter subject'" class="common-input mb-20 form-control" required="" type="text">
 									</div>
 								</div>
-								<div class="col-lg-12">
-									<label for="IdPost">Contenido</label>
-									<textarea th:field="*{contenido}" th:value="*{contenido}" class="common-textarea form-control" name="message" placeholder="Contenido del artículo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Messege'" required=""></textarea>
-								</div>
+<!--								<div class="col-lg-12">-->
+<!--									<label for="IdPost">Contenido</label>-->
+<!--									<textarea th:field="*{contenido}" th:value="*{contenido}" class="common-textarea form-control" name="message" placeholder="Contenido del artículo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Messege'" required=""></textarea>-->
+<!--								</div>-->
+
+
+								<div class="content">
+									<div id="alerts"></div>
+									<div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
+										<div class="btn-group">
+											<a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="icon-font"></i><b class="caret"></b></a>
+											<ul class="dropdown-menu">
+											</ul>
+										</div>
+										<div class="btn-group">
+											<a class="btn dropdown-toggle" data-toggle="dropdown" title="Font Size"><i class="icon-text-height"></i>&nbsp;<b class="caret"></b></a>
+											<ul class="dropdown-menu">
+												<li><a data-edit="fontSize 5"><font size="5">Huge</font></a></li>
+												<li><a data-edit="fontSize 3"><font size="3">Normal</font></a></li>
+												<li><a data-edit="fontSize 1"><font size="1">Small</font></a></li>
+											</ul>
+										</div>
+										<div class="btn-group">
+											<a class="btn" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="icon-bold"></i></a>
+											<a class="btn" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="icon-italic"></i></a>
+											<a class="btn" data-edit="strikethrough" title="Strikethrough"><i class="icon-strikethrough"></i></a>
+											<a class="btn" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="icon-underline"></i></a>
+										</div>
+										<div class="btn-group">
+											<a class="btn" data-edit="insertunorderedlist" title="Bullet list"><i class="icon-list-ul"></i></a>
+											<a class="btn" data-edit="insertorderedlist" title="Number list"><i class="icon-list-ol"></i></a>
+											<a class="btn" data-edit="outdent" title="Reduce indent (Shift+Tab)"><i class="icon-indent-left"></i></a>
+											<a class="btn" data-edit="indent" title="Indent (Tab)"><i class="icon-indent-right"></i></a>
+										</div>
+										<div class="btn-group">
+											<a class="btn" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i class="icon-align-left"></i></a>
+											<a class="btn" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i class="icon-align-center"></i></a>
+											<a class="btn" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i class="icon-align-right"></i></a>
+											<a class="btn" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i class="icon-align-justify"></i></a>
+										</div>
+										<div class="btn-group">
+											<a class="btn dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="icon-link"></i></a>
+											<div class="dropdown-menu input-append">
+												<input class="span2" placeholder="URL" type="text" data-edit="createLink"/>
+												<button class="btn" type="button">Add</button>
+											</div>
+											<a class="btn" data-edit="unlink" title="Remove Hyperlink"><i class="icon-cut"></i></a>
+
+										</div>
+
+										<div class="btn-group">
+											<a class="btn" title="Insert picture (or just drag & drop)" id="pictureBtn"><i class="icon-picture"></i></a>
+											<input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
+										</div>
+										<div class="btn-group">
+											<a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="icon-undo"></i></a>
+											<a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="icon-repeat"></i></a>
+										</div>
+										<input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
+									</div>
+
+<!--									<input type="hidden" th:value="${post.idPost}" name="meta_id">-->
+
+									<div th:text="${post.contenido}" id="editor"></div>
+
+									<textarea th:field="*{contenido}" th:value="*{contenido}" name="meta_descripcion_text_html" id="meta_descripcion_text_html" rows="2" cols="20" style="display:none; "></textarea>
+
+									<br/>
+									<input id="enviar" type="submit" value="Guardar" name="B1" class="btn btn-primary btn-large"></div>
+
 								<br>
 								<div class="col-lg-12">
 									<div class="alert-msg" style="text-align: left;"></div>
 									<button class="primary-btn primary" style="float: left;">Publicar</button>
 								</div>
+
+
 							</form>
+
 						</div>
 					</div>
 				</div>
@@ -86,5 +179,13 @@
 		</footer>
 		<!-- End footer Area -->
 		<div th:replace="components/scripts.html"></div>
+
+		<script th:src="@{/js/jquery.hotkeys.js}"></script>
+		<script th:src="@{/js/bootstrap-wysiwyg.js}"></script>
+		<script th:src="@{/js/google-code-prettify/prettify.js}"></script>
+		<script th:src="@{/js/publicacion.js}"></script>
+
+
+
 	</body>
 </html>

@@ -20,14 +20,14 @@
 </div>
 <div class="logo-wrap">
     <div class="container">
-        <div class="row justify-content-between align-items-center">
+        <div style="display:none; " class="row justify-content-between align-items-center">
             <div class="col-lg-4 col-md-4 col-sm-12 logo-left no-padding">
                 <a href="index.html">
-                    <img th:src="@{/img/logo.png}" class="img-fluid" src="../static/img/logo.png" alt="">
+                    <img th:src="@{/img/4Geeks.jpg}" height=50px width="40%" class="img-fluid" src="../static/img/4Geeks.jpg" alt="">
                 </a>
             </div>
             <div class="col-lg-8 col-md-8 col-sm-12 logo-right no-padding ads-banner">
-                <img class="img-fluid" src="../static/img/banner-ad.jpg" alt="">
+                <img class="img-fluid" src="" alt="">
             </div>
         </div>
     </div>
@@ -37,12 +37,12 @@
         <nav id="nav-menu-container">
             <ul class="nav-menu">
                 <li class="menu-active"><a href="/">4GEEKS</a></li>
-                <li><a href="archive.html">Tecnología</a></li>
-                <li><a href="category.html">Videojuegos</a></li>
+                <li><a th:href="@{/categoria/tecnologia}">Tecnología</a></li>
+                <li><a th:href="@{/categoria/videojuegos}">Videojuegos</a></li>
 
-                <li><a href="about.html">Cine y Series</a></li>
-                <li><a href="about.html">Cultura</a></li>
-                <li><a href="contact.html">Comunidad</a></li>
+                <li><a th:href="@{/categoria/cine%20y%20series}">Cine y Series</a></li>
+                <li><a th:href="@{/categoria/cultura}">Cultura</a></li>
+                <li><a th:href="@{/categoria/comunidad}">Comunidad</a></li>
                 <li class="menu-has-children"><a th:href="@{/nuevoArticulo}">Admin</a>
                     <ul>
                         <li><a href="standard-post.html">Standard Post</a></li>

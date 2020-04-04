@@ -18,6 +18,8 @@
 		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
 		<!-- Styles -->
 		<div th:replace="components/style.html"></div>
+
+
 	</head>
 	<body>
 		<header>
@@ -55,21 +57,26 @@
 									<div class="overlay overlay-bg"></div>
 									<img th:src="${post.imagen}" class="img-fluid" src="../static/img/f1.jpg" alt="">
 								</div>
+
 								<div class="content-wrap">
 									<ul class="tags mt-10">
-										<li><a th:text="${post.IdCategoria}" href="#">Food Habit</a></li>
+										<li><a th:each="categoria : ${categorias}" th:if="${categoria.IdCategoria == post.IdCategoria}" th:text="${categoria.Nombre}" href="#">Food Habit</a></li>
 									</ul>
 									<a href="#">
 										<h3 th:text="${post.extracto}">A Discount Toner Cartridge Is Better Than Ever.</h3>
 									</a>
 									<ul class="meta pb-20">
-										<li><a href="#"><span class="lnr lnr-user"></span>Mark wiens</a></li>
+										<li><span class="lnr lnr-user"></span><a th:each="usuario : ${usuarios}" th:if="${usuario.IdUsuario == post.IdUsuario}" th:text="${usuario.Nombre} + ' ' +${usuario.Apellido}" href="#">Nombre de usuario</a></li>
 										<li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
 										<li><a href="#"><span class="lnr lnr-bubble"></span>06 </a></li>
 									</ul>
-									<p th:text="${post.contenido}"></p>
 
-								<div class="navigation-wrap justify-content-between d-flex">
+
+									<div th:utext="${post.contenido}"> </div>
+
+
+
+									<div class="navigation-wrap justify-content-between d-flex">
 									<a class="prev" href="#"><span class="lnr lnr-arrow-left"></span>Anterior</a>
 									<a class="next" href="#">Siguiente<span class="lnr lnr-arrow-right"></span></a>
 								</div>

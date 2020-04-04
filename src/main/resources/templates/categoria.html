@@ -1,6 +1,3 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-
 <!DOCTYPE html>
 <html lang="zxx" class="no-js" xmlns:th="http://www.w3.org/1999/xhtml">
 	<head>
@@ -27,12 +24,12 @@
 	</head>
 
 	<body>
-	<header>
-		<div th:replace="components/header.html"></div>
-	</header>
+		<header>
+			<div th:replace="components/header.html"></div>
+		</header>
 		
 		<div class="site-main-container">
-			<!-- Portada -->
+			<!-- Start top-post Area -->
 			<section class="top-post-area pt-10">
 				<div class="container no-padding">
 					<div class="row small-gutters">
@@ -103,24 +100,24 @@
 					</div>
 				</div>
 			</section>
-			<!-- End Portada -->
-			<!-- Start Últimas noticias -->
+			<!-- End top-post Area -->
+			<!-- Start latest-post Area -->
 			<section class="latest-post-area pb-120">
 				<div class="container no-padding">
 					<div class="row">
 						<div class="col-lg-8 post-list">
 							<!-- Start latest-post Area -->
 							<div class="latest-post-wrap">
-								<h4 class="cat-title">Últimas noticias</h4>
-								<div th:each="post : ${ultimasNoticias}" class="single-latest-post row align-items-center">
+								<h4 class="cat-title">Todos los posts</h4>
+								<div th:each="post : ${postsByCategoria}" class="single-latest-post row align-items-center">
 									<div class="col-lg-5 post-left">
 										<div class="feature-img relative">
 											<div class="overlay overlay-bg"></div>
 											<img th:src="${post.imagen}" class="img-fluid" src="../static/img/l1.jpg" alt="">
 										</div>
-										<ul class="tags">
-											<li><a th:each="categoria : ${categorias}" th:if="${categoria.IdCategoria == post.IdCategoria}" th:text="${categoria.Nombre}" href="#">Lifestyle</a></li>
-										</ul>
+<!--										<ul class="tags">-->
+<!--											<li><a th:each="categoria : ${categorias}" th:if="${categoria.IdCategoria == post.IdCategoria}" th:text="${categoria.Nombre}" href="#">Lifestyle</a></li>-->
+<!--										</ul>-->
 									</div>
 									<div class="col-lg-7 post-right">
 										<a th:href="@{/articulo/} + ${post.IdPost}" >
@@ -135,90 +132,13 @@
 									</div>
 								</div>
 							</div>
-							<!-- End Últimas noticias -->
+							<!-- End latest-post Area -->
 							
-							<!-- Start Banner -->
+							<!-- Start banner-ads Area -->
 							<div class="col-lg-12 ad-widget-wrap mt-30 mb-30">
 								<img class="img-fluid" src="../static/img/banner-ad.jpg" alt="">
 							</div>
-							<!-- End Banner -->
-							<!-- Start Reportajes -->
-							<div class="popular-post-wrap">
-								<h4 class="title">Reportajes</h4>
-								<div th:each="post : ${portadaPrincipal}" class="feature-post relative">
-									<div class="feature-img relative">
-										<div class="overlay overlay-bg"></div>
-										<img th:src="${post.imagen}" class="img-fluid" src="../static/img/f1.jpg" alt="">
-									</div>
-									<div class="details">
-										<ul class="tags">
-											<li><a th:each="categoria : ${categorias}" th:if="${categoria.IdCategoria == post.IdCategoria}" th:text="${categoria.Nombre}" href="#">Lifestyle</a></li>
-										</ul>
-										<a th:href="@{/articulo/} + ${post.IdPost}" href="image-post.html">
-											<h3 th:text="${post.titulo}" >A Discount Toner Cartridge Is Better Than Ever.</h3>
-										</a>
-										<ul class="meta">
-											<li><span class="lnr lnr-user"></span><a th:each="usuario : ${usuarios}" th:if="${usuario.IdUsuario == post.IdUsuario}" th:text="${usuario.Nombre} + ' ' +${usuario.Apellido}" href="#">Nombre de usuario</a></li>
-											<li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
-											<li><a href="#"><span class="lnr lnr-bubble"></span>06 Comments</a></li>
-										</ul>
-									</div>
-								</div>
-								<div  class="row mt-20 medium-gutters">
-									<div th:each="post : ${ultimasNoticias}" class="col-lg-6 single-popular-post">
-										<div class="feature-img-wrap relative">
-											<div class="feature-img relative">
-												<div class="overlay overlay-bg"></div>
-												<img th:src="${post.imagen}" class="img-fluid" src="../static/img/f2.jpg" alt="">
-											</div>
-											<ul class="tags">
-												<li><a th:each="categoria : ${categorias}" th:if="${categoria.IdCategoria == post.IdCategoria}" th:text="${categoria.Nombre}" href="#">Categoria</a></li>
-											</ul>
-										</div>
-										<div class="details">
-											<a th:href="@{/articulo/} + ${post.IdPost}" href="image-post.html">
-												<h4 th:text="${post.titulo}">Titulo</h4>
-											</a>
-											<ul class="meta">
-												<li><span class="lnr lnr-user"></span><a th:each="usuario : ${usuarios}" th:if="${usuario.IdUsuario == post.IdUsuario}" th:text="${usuario.Nombre} + ' ' +${usuario.Apellido}" href="#">Nombre de usuario</a></li>
-												<li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
-												<li><a href="#"><span class="lnr lnr-bubble"></span>06 </a></li>
-											</ul>
-											<p th:text="${post.extracto}"class="excert">Extracto</p>
-										</div>
-									</div>
 
-								</div>
-							</div>
-							<!-- End Reportajes -->
-							<!-- Start Opinión -->
-							<div class="relavent-story-post-wrap mt-30">
-								<h4 class="title">Opinión</h4>
-								<div th:each="post : ${ultimasNoticias}" class="relavent-story-list-wrap">
-									<div class="single-relavent-post row align-items-center">
-										<div class="col-lg-5 post-left">
-											<div class="feature-img relative">
-												<div class="overlay overlay-bg"></div>
-												<img th:src="${post.imagen}" class="img-fluid" src="../static/img/r1.jpg" alt="">
-											</div>
-											<ul class="tags">
-												<li><a th:each="categoria : ${categorias}" th:if="${categoria.IdCategoria == post.IdCategoria}" th:text="${categoria.Nombre}" href="#">Categoria</a></li>
-											</ul>
-										</div>
-										<div class="col-lg-7 post-right">
-											<a th:href="@{/articulo/} + ${post.IdPost}" href="image-post.html">
-												<h4 th:text="${post.titulo}">Titulo</h4>
-											</a>
-											<ul class="meta">
-												<li><span class="lnr lnr-user"></span><a th:each="usuario : ${usuarios}" th:if="${usuario.IdUsuario == post.IdUsuario}" th:text="${usuario.Nombre} + ' ' +${usuario.Apellido}" href="#">Nombre de usuario</a></li>
-												<li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
-												<li><a href="#"><span class="lnr lnr-bubble"></span>06 Comments</a></li>
-											</ul>
-											<p th:text="${post.extracto}"class="excert">Extracto</p>
-										</div>
-									</div>
-								</div>
-							</div>
 						</div>
 						<!-- Right bar -->
 						<div th:replace="components/rightbar.html"></div>

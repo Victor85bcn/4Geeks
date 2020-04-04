@@ -11,4 +11,7 @@ public interface PostRep extends BaseRep<Post> {
     public List<Post> getSubPortadaTop();
     public List<Post> getSubPortadaBottom();
     public List<Post> getLoMasPopular();
+    public boolean deleteByPostId(int id);
+    public List<Post> getNoTeLoPierdas();
+    public List<Post> getPostsByCategoria(String categoria);
 }

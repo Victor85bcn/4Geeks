@@ -52,6 +52,14 @@ public class SectionsComponent {
         return postsLoMasPopular;
     }
 
+    public List<Post> getNoTeLoPierdas() {
+        ArrayList<Post> postsNoteLoPierdas = new ArrayList<>();
+        for(Post post : postRepository.getNoTeLoPierdas()) {
+            postsNoteLoPierdas.add(post);
+        }
+        return postsNoteLoPierdas;
+    }
+
 
 
 }

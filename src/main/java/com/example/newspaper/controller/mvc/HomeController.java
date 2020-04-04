@@ -7,10 +7,7 @@ import com.example.newspaper.model.Categoria;
 import com.example.newspaper.model.Comentario;
 import com.example.newspaper.model.Post;
 import com.example.newspaper.model.Usuario;
-import com.example.newspaper.repository.CategoriaRep;
-import com.example.newspaper.repository.CategoriaRepository;
-import com.example.newspaper.repository.ComentarioRep;
-import com.example.newspaper.repository.UsuarioRep;
+import com.example.newspaper.repository.*;
 import com.example.newspaper.service.HomeService;
 import com.example.newspaper.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +45,9 @@ public class HomeController {
     private ComentarioRep comentarioRep;
 
     @Autowired
+    private PostRep postRep;
+
+    @Autowired
     private HomeService homeService;
 
     @GetMapping(path = {"/"})
@@ -66,7 +66,9 @@ public class HomeController {
         modelAndView.addObject("comentario", new Comentario());
         modelAndView.addObject("comentariosList", comentariosList);
         modelAndView.addObject("usuarios", usuarios);
+        modelAndView.addObject("categorias", this.categoriaRep.findAll());
         modelAndView.addObject("loMasPopular", this.sectionsComponent.getLoMasPopular());
+        modelAndView.addObject("noTeLoPierdas", this.sectionsComponent.getNoTeLoPierdas());
         return modelAndView;
     }
 
@@ -93,5 +95,21 @@ public class HomeController {
         homeService.modelHome(model);
         return "index.html";
     }
+
+    @GetMapping(path = {"/categoria/{categoria}"})
+    public ModelAndView getCategoria(@PathVariable(required = true, name ="categoria") String categoria) {
+        ModelAndView modelAndView = new ModelAndView(Pages.CATEGORIA);
+        List<Usuario> usuarios = usuarioRep.findAll();
+        modelAndView.addObject("usuarios", usuarios);
+        modelAndView.addObject("categorias", this.categoriaRep.findAll());
+        modelAndView.addObject("loMasPopular", this.sectionsComponent.getLoMasPopular());
+        modelAndView.addObject("noTeLoPierdas", this.sectionsComponent.getNoTeLoPierdas());
+        modelAndView.addObject("portadaPrincipal", this.sectionsComponent.getPortadaPrincipal());
+        modelAndView.addObject("subPortadaTop", this.sectionsComponent.getSubPortadaTop());
+        modelAndView.addObject("subPortadaBottom", this.sectionsComponent.getSubPortadaBottom());
+        modelAndView.addObject("postsByCategoria", this.postRep.getPostsByCategoria(categoria));
+        return modelAndView;
+    }
+
 
 }

@@ -516,6 +516,16 @@ mark,
   height: auto;
 }
 
+.logo{
+  max-width: 50%;
+  height: 50%;
+}
+
+.img-popular {
+  height: 75px;
+  weight: 75px;
+}
+
 .img-thumbnail {
   padding: 0.25rem;
   background-color: #fff;

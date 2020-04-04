@@ -62,6 +62,21 @@ public class PostRepository implements PostRep {
                 params, new PostMapper());
     }
 
+    public void deleteAll(){
+        jdbcTemplate.execute("delete from post");
+    }
+
+    public boolean deleteByPostId(int id){
+        try{
+            String sql = String.format("delete from post where IdPost='%d'", id);
+            jdbcTemplate.execute(sql);
+            return true;
+        }catch (Exception e){
+            logger.error(e);
+            return false;
+        }
+    }
+
     @Override
     public List<Post> getUltimasNoticias() {
         return jdbcTemplate.query("select * from post p inner join post_seccion ps on p.IdPost = ps.IdPost where ps.IdSeccion = 4 " +
@@ -89,6 +104,18 @@ public class PostRepository implements PostRep {
     @Override
     public List<Post> getLoMasPopular() {
         return jdbcTemplate.query("select * from post p inner join post_seccion ps on p.IdPost = ps.IdPost where ps.IdSeccion = 8 order by p.IdPost desc limit 4",
+                new PostMapper());
+    }
+
+    @Override
+    public List<Post> getNoTeLoPierdas() {
+        return jdbcTemplate.query("select * from post p inner join post_seccion ps on p.IdPost = ps.IdPost where ps.IdSeccion = 7 order by p.IdPost desc limit 4",
+                new PostMapper());
+    }
+
+    @Override
+    public List<Post> getPostsByCategoria(String categoria) {
+        return jdbcTemplate.query("select * from post p inner join categoria c on p.IdCategoria = c.IdCategoria where c.Nombre = '" + categoria + "' order by p.IdPost desc limit 13",
                 new PostMapper());
     }
 

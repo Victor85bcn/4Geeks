@@ -26,6 +26,11 @@ public class PostRestRepository {
         return ResponseEntity.ok(new RepBase(repository.update(post)));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<RepBase> delete(@PathVariable int id){
+        return ResponseEntity.ok(new RepBase(repository.deleteByPostId(id)));
+    }
+
     @GetMapping
     public ResponseEntity<List<Post>> findAll(){
         return ResponseEntity.ok(repository.findAll());
