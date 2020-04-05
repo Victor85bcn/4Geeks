@@ -18,18 +18,22 @@ public class CategoriaRestController {
     private CategoriaRepository categoriaRepository;
 
     @PostMapping//(consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<RepBase> save(@RequestBody @Valid Categoria categoria){
-        return ResponseEntity.ok(new RepBase(categoriaRepository.save(categoria)));
+    public ResponseEntity<Categoria> save(@RequestBody @Valid Categoria categoria){
+        return ResponseEntity.ok(categoriaRepository.save(categoria));
     }
 
     @PutMapping
-    public ResponseEntity<RepBase> update(@RequestBody @Valid Categoria categoria){
-        return ResponseEntity.ok(new RepBase(categoriaRepository.update(categoria)));
+    public ResponseEntity<Categoria> update(@RequestBody @Valid Categoria categoria){
+        return ResponseEntity.ok(categoriaRepository.update(categoria));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<RepBase> delete(@PathVariable int id){
-        return ResponseEntity.ok(new RepBase(categoriaRepository.deleteById(id)));
+    public ResponseEntity<Categoria> delete(@PathVariable int id){
+        if (categoriaRepository.deleteById(id)){
+            return ResponseEntity.ok(null);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping
@@ -39,6 +43,11 @@ public class CategoriaRestController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Categoria> findById(@PathVariable int id){
-        return ResponseEntity.ok(categoriaRepository.findById(id));
+        Categoria categoria = categoriaRepository.findById(id);
+        if ( categoria != null){
+            return ResponseEntity.ok(categoria);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

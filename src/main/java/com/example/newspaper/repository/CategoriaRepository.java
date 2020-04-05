@@ -26,27 +26,31 @@ public class CategoriaRepository implements CategoriaRep {
     }
 
     @Override
-    public boolean save(Categoria categoria) {
+    public Categoria save(Categoria categoria) {
         try {
             String sql = String.format("insert into Categoria (Nombre, Descripcion) " +
                     "values ('%s', '%s')", categoria.getNombre(), categoria.getDescripcion());
             jdbcTemplate.execute(sql);
-            return true;
+            return findByNombre(categoria.getNombre());
         } catch (Exception e) {
-            return false;
+            return null;
         }
     }
 
     @Override
-    public boolean update(Categoria categoria) {
+    public Categoria update(Categoria categoria) {
         if (categoria.getIdCategoria() != 0) {
-            String sql = String.format("update Categoria set Nombre = '%s', Descripcion = '%s' "
-                    + "where IdCategoria = '%d'",
-            categoria.getNombre(), categoria.getDescripcion(), categoria.getIdCategoria());
-            jdbcTemplate.execute(sql);
-            return true;
+            try {
+                String sql = String.format("update Categoria set Nombre = '%s', Descripcion = '%s' "
+                                + "where IdCategoria = '%d'",
+                        categoria.getNombre(), categoria.getDescripcion(), categoria.getIdCategoria());
+                jdbcTemplate.execute(sql);
+                return findByNombre(categoria.getNombre());
+            } catch (Exception e){
+                return null;
+            }
         }
-        return false;
+        return null;
     }
 
     @Override
@@ -56,8 +60,18 @@ public class CategoriaRepository implements CategoriaRep {
 
     @Override
     public Categoria findById(int Id) {
-        Object[] params = new Object[] {Id};
-        return jdbcTemplate.queryForObject("select * from Categoria where IdCategoria = ?", params, new CategoriaMapper());
+        try {
+            Object[] params = new Object[] {Id};
+            return jdbcTemplate.queryForObject("select * from Categoria where IdCategoria = ?", params, new CategoriaMapper());
+        } catch (Exception e){
+            return null;
+        }
+    }
+
+    @Override
+    public Categoria findByNombre(String nombre) {
+        Object[] params = new Object[] {nombre};
+        return jdbcTemplate.queryForObject("select * from Categoria where Nombre = '" + nombre + "'", new CategoriaMapper());
     }
 
     public void deleteAll(){

@@ -28,8 +28,8 @@ public class CategoriaRepositoryTest {
 
         categoria.setNombre("Test1");
         categoria.setDescripcion("Este es un ejemplo de categoria superior");
-        boolean result = categoriaRepository.save(categoria);
-        Assert.assertTrue(result);
+        Categoria categoriaTest = categoriaRepository.save(categoria);
+        Assert.assertNotNull(categoriaTest);
     }
 
     @Test()
@@ -40,8 +40,8 @@ public class CategoriaRepositoryTest {
         categoria.setIdCategoria(1);
         categoria.setNombre("Test2");
         categoria.setDescripcion("Este es un ejemplo de categoria superior");
-        boolean result = categoriaRepository.update(categoria);
-        Assert.assertTrue(result);
+        Categoria categoriaTest = categoriaRepository.update(categoria);
+        Assert.assertNotNull(categoriaTest);
     }
 
     @Test
