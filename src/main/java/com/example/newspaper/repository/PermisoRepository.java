@@ -60,10 +60,18 @@ public class PermisoRepository implements PermisoRep {
                 params, new PermisoMapper());
     }
 
+    @Override
+    public List<Permiso> findByUser(String email) {
+            return jdbcTemplate.query("select p.* from permiso p\n" +
+                    "    inner join grupo_permiso gp on p.IdPermiso = gp.idPermiso\n" +
+                    "    inner join usuario u on gp.IdGrupo = u.IdGrupo\n" +
+                    "where u.Email = '" + email + "';", new PermisoMapper());
+        }
+
+
     public JdbcTemplate getJdbcTemplate() {
         return jdbcTemplate;
     }
-
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }

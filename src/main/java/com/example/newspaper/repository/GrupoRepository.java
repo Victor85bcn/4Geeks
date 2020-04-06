@@ -58,6 +58,12 @@ public class GrupoRepository implements GrupoRep {
                 params, new GrupoMapper());
     }
 
+    @Override
+    public Grupo findByUser(String email) {
+//        Object[] params = new Object[] {email};
+        return jdbcTemplate.queryForObject("select p.* from grupo p inner join usuario u on p.IdGrupo = u.IdGrupo where u.Email = '" + email + "'", new GrupoMapper());
+    }
+
     public JdbcTemplate getJdbcTemplate() {
         return jdbcTemplate;
     }

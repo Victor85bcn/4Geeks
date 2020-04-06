@@ -6,6 +6,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
@@ -16,6 +17,7 @@ import java.util.List;
 public class UsuarioRepository implements UsuarioRep {
 
     private Log logger = LogFactory.getLog(getClass());
+    private PasswordEncoder passwordEncoder;
     @Autowired
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
@@ -29,7 +31,7 @@ public class UsuarioRepository implements UsuarioRep {
     public boolean save(Usuario object) {
         try {
             String sql = String.format("insert into Usuario (Nombre, Apellido, Password, Email, IdGrupo) values ('%s', '%s', '%s', '%s', '%d')",
-                    object.getNombre(), object.getApellido(), object.getPassword(), object.getEmail(), object.getIdGrupo());
+                    object.getNombre(), object.getApellido(), passwordEncoder.encode(object.getPassword()), object.getEmail(), object.getIdGrupo());
             jdbcTemplate.execute(sql);
             return true;
         }catch(Exception e) {
@@ -57,6 +59,13 @@ public class UsuarioRepository implements UsuarioRep {
     public Usuario findById(int Id) {
         Object[] params = new Object[] {Id};
         return jdbcTemplate.queryForObject("select * from Usuario where IdUsuario = ?",
+                params, new UsuarioMapper());
+    }
+
+    @Override
+    public Usuario findByEmail(String email) {
+        Object[] params = new Object[] {email};
+        return jdbcTemplate.queryForObject("select * from Usuario where Email = ?",
                 params, new UsuarioMapper());
     }
 
