@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -54,6 +53,12 @@ public class HomeController {
     public String home(Model model){
         homeService.modelHome(model);
         return "index.html";
+    }
+
+    @GetMapping(path = {"/login"})
+    public String login(Model model){
+//        homeService.modelHome(model);
+        return "login";
     }
 
     @GetMapping(path = {"/articulo/{post}"})

@@ -1,4 +1,4 @@
-package com.example.newspaper.configuration.security;
+package com.example.newspaper.security;
 
 import com.example.newspaper.model.Grupo;
 import com.example.newspaper.model.Permiso;
