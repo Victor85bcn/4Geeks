@@ -15,14 +15,11 @@
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-6 header-top-right no-padding">
                 <ul>
-<!--                    <li><a href="tel:+440 012 3654 896"><span class="lnr lnr-phone-handset"></span><span>+34 650 83 77 44</span></a></li>-->
-<!--                    <li><a href="mailto:support@colorlib.com"><span class="lnr lnr-envelope"></span><span>victor85bcn@gmail.com</span></a></li>-->
                     <li><form form-method="post" th:action="@{/logout}">
                         <button sec:authorize="isAuthenticated()" class="login-btn" type="submit">Logout</button>
                         <button sec:authorize="isAnonymous()" th:href="@{/login}" class="login-btn" type="submit">Login</button>
                     </form></li>
                 <li><a sec:authorize="isAnonymous()" th:href="@{/nuevoUsuario}" class="login-btn" style="font-size: 14px">Registro</a></li></ul>
-
             </div>
         </div>
     </div>
@@ -52,13 +49,13 @@
                 <li><a th:href="@{/categoria/cine%20y%20series}">Cine y Series</a></li>
                 <li><a th:href="@{/categoria/cultura}">Cultura</a></li>
                 <li><a th:href="@{/categoria/comunidad}">Comunidad</a></li>
-                <li class="menu-has-children"><a th:href="@{/nuevoArticulo}">Admin</a>
+                <li class="menu-has-children"><a>Admin</a>
                     <ul>
-                        <li><a href="standard-post.html">Standard Post</a></li>
-                        <li><a href="image-post.html">Image Post</a></li>
-                        <li><a href="gallery-post.html">Gallery Post</a></li>
-                        <li><a href="video-post.html">Video Post</a></li>
-                        <li><a th:href="@{/nuevoArticulo}">Escribir artículo</a></li>
+                        <li><a th:href="@{/nuevoArticulo}">Escribir Artículo</a></li>
+                        <li><a th:href="@{/admin/posts}">Gestión artículos</a></li>
+<!--                        <li><a href="gallery-post.html">Gallery Post</a></li>-->
+<!--                        <li><a href="video-post.html">Video Post</a></li>-->
+<!--                        <li><a th:href="@{/nuevoArticulo}">Escribir artículo</a></li>-->
                     </ul>
                 </li>
             </ul>

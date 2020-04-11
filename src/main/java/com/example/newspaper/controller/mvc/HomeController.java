@@ -16,10 +16,7 @@ import com.example.newspaper.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -133,6 +130,39 @@ public class HomeController {
         modelAndView.addObject("subPortadaBottom", this.sectionsComponent.getSubPortadaBottom());
         modelAndView.addObject("postsByCategoria", this.postRep.getPostsByCategoria(categoria));
         return modelAndView;
+    }
+
+
+    @GetMapping(path = {"/admin/posts"})
+    public ModelAndView getPostList() {
+        ModelAndView modelAndView = new ModelAndView(Pages.POST_LIST);
+        modelAndView.addObject("posts", this.postRep.findAll());
+        modelAndView.addObject("categorias", this.categoriaRep.findAll());
+        return modelAndView;
+    }
+
+    @GetMapping("/eliminarPost")
+    public String deletePost(Post post, Model model) {
+        postRep.deleteByPostId((int) post.getIdPost());
+        homeService.modelHome(model);
+        return "redirect:/admin/posts";
+    }
+
+    @GetMapping("/modificar/{post}")
+    public ModelAndView updatePost(@PathVariable(required = true, name ="post") int id){
+        List<Categoria> categorias = categoriaRep.findAll();
+        List<Usuario> usuarios = usuarioRep.findAll();
+        Post post = this.postComponent.getPostById(id);
+        return new ModelAndView("update-post.html").addObject("post", post)
+                .addObject("categorias", categorias)
+                .addObject("usuarios", usuarios);
+    }
+
+    @PostMapping("/modificarArticulo")
+    public String updatePost(Post post, Model model) {
+        postRep.update(post);
+        homeService.modelHome(model);
+        return "redirect:/admin/posts";
     }
 
 
