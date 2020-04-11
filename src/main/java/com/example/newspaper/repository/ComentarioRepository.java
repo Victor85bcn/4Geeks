@@ -30,9 +30,9 @@ public class ComentarioRepository implements ComentarioRep {
     public boolean save(Comentario comentario) {
         try {
             String sql = String.format(
-                    "insert into Comentario (Comentario,IdPost,IdUsuario) "
-                            + "values('%s', '%d', '%d')",
-                    comentario.getComentario(), comentario.getIdPost(), comentario.getIdUsuario(), comentario.getRespuesta());
+                    "insert into Comentario (Comentario,IdPost,Alias) "
+                            + "values('%s', '%d', '%s')",
+                    comentario.getComentario(), comentario.getIdPost(), comentario.getAlias(), comentario.getRespuesta());
             jdbcTemplate.execute(sql);
             return true;
         }catch(Exception e) {
@@ -44,8 +44,8 @@ public class ComentarioRepository implements ComentarioRep {
     @Override
     public boolean update(Comentario comentario) {
         if(comentario.getIdComentario()>0) {
-            String sql = String.format("update Comentario set Comentario='%s', IdPost='%d', IdUsuario='%d', Respuesta='%s' where IdComentario='%d'",
-                    comentario.getComentario(), comentario.getIdPost(), comentario.getIdUsuario(), comentario.getRespuesta(), comentario.getIdComentario());
+            String sql = String.format("update Comentario set Comentario='%s', IdPost='%d', Alias='%s', Respuesta='%s' where IdComentario='%d'",
+                    comentario.getComentario(), comentario.getIdPost(), comentario.getAlias(), comentario.getRespuesta(), comentario.getIdComentario());
             jdbcTemplate.execute(sql);
             return true;
         }

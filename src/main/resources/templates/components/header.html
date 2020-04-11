@@ -17,17 +17,12 @@
                 <ul>
 <!--                    <li><a href="tel:+440 012 3654 896"><span class="lnr lnr-phone-handset"></span><span>+34 650 83 77 44</span></a></li>-->
 <!--                    <li><a href="mailto:support@colorlib.com"><span class="lnr lnr-envelope"></span><span>victor85bcn@gmail.com</span></a></li>-->
-                    <form form-method="post" th:action="@{/logout}">
+                    <li><form form-method="post" th:action="@{/logout}">
                         <button sec:authorize="isAuthenticated()" class="login-btn" type="submit">Logout</button>
                         <button sec:authorize="isAnonymous()" th:href="@{/login}" class="login-btn" type="submit">Login</button>
-<!--                    <button sec:authorize="isAnonymous()" th:href="@{~/login}" class="btn btn-outline-info my-2 my-sm-0 btn-sm" type="submit">Login</button>-->
-                    </form>
+                    </form></li>
+                <li><a sec:authorize="isAnonymous()" th:href="@{/nuevoUsuario}" class="login-btn" style="font-size: 14px">Registro</a></li></ul>
 
-<!--                    <form form-method="post" th:action="@{/logout}">-->
-<!--                        <button sec:authorize="isAuthenticated()" class="btn btn-outline-danger my-2 my-sm-0 btn-sm" type="submit">Logout</button>-->
-<!--                        <button sec:authorize="isAnonymous()" th:href="@{~/login}" class="btn btn-outline-info my-2 my-sm-0 btn-sm" type="submit">Login</button>-->
-<!--                    </form>-->
-                </ul>
             </div>
         </div>
     </div>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="zxx" class="no-js" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="zxx" class="no-js" xmlns:th="http://www.w3.org/1999/xhtml"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 	<head>
 		<!-- Mobile Specific Meta -->
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -88,11 +89,12 @@
 											<div class="comment-list">
 												<div th:each="comentario : ${comentariosList}" class="single-comment justify-content-between d-flex">
 													<div class="user justify-content-between d-flex">
-														<div class="thumb">
-															<img src="../static/img/blog/c1.jpg" alt="">
-														</div>
+<!--														<div class="thumb">-->
+<!--															<img src="../static/img/blog/c1.jpg" alt="">-->
+<!--														</div>-->
 														<div class="desc">
-															<h5><a th:each="usuario : ${usuarios}" th:if="${usuario.IdUsuario == comentario.IdUsuario}" th:text="${usuario.Nombre} + ' ' +${usuario.Apellido}" href="#">Emilly Blunt</a></h5>
+<!--															<h5><a th:each="usuario : ${usuarios}" th:if="${usuario.IdUsuario == comentario.IdUsuario}" th:text="${usuario.Nombre} + ' ' +${usuario.Apellido}" href="#">Nombre</a></h5>-->
+															<h5><a th:text="${comentario.Alias}" href="#">Alias</a></h5>
 															<p class="date">December 4, 2017 at 3:12 pm </p>
 															<p th:text="${comentario.comentario}" class="comment"></p>
 														</div>
@@ -103,18 +105,25 @@
 									</div>
 								</div>
 							</div>
-							<div class="comment-form">
-								<h4>Añadir comentario</h4>
+							<div sec:authorize="isAuthenticated()" class="comment-form">
+								<h4 style="margin-bottom: 25px">Añadir comentario</h4>
 								<form th:action="@{/addNuevoComentario}" method="post" th:object="${comentario}">
 									<input type="hidden" name="idPost" th:value="${post.IdPost}"/>
-									<label>idUsuario </label>
-									<input th:field="*{idUsuario}" th:value="*{idUsuario}" name="name" placeholder="idUsuario" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Título'" class="common-input mb-20 form-control" required="" type="number">
+									<div class="form-group col-lg-6 col-md-12 name">
+										<input th:field="*{alias}" th:value="*{alias}" class="form-control" placeholder="Alias" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Alias'">
+									</div>
 									<div class="form-group">
-										<textarea th:field="*{comentario}" th:value="*{comentario}" class="form-control mb-10" rows="5" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
+										<textarea th:field="*{comentario}" th:value="*{comentario}" class="form-control mb-10" rows="5" name="message" placeholder="Comentario" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Comentario'" required=""></textarea>
 									</div>
 									<button class="primary-btn text-uppercase">Publicar</button>
 								</form>
 							</div>
+								<div sec:authorize="isAnonymous()" class="comment-form" style="text-align: left">
+									<h4 style="margin-bottom: 25px">Para comentar debes estar logueado</h4>
+									<form form-method="post" th:action="@{/logout}">
+										<button th:href="@{/login}" class="login-btn2" type="submit">Login</button>
+									</form>
+								</div>
 						</div>
 						<!-- End single-post Area -->
 					</div>

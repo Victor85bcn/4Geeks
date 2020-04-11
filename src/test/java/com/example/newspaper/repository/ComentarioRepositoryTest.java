@@ -25,7 +25,7 @@ public class ComentarioRepositoryTest {
         comentario.setComentario("ComentarioA");
         comentario.setIdComentario(1);
         comentario.setIdPost(3);
-        comentario.setIdUsuario(1);
+        comentario.setAlias("Alias1");
         comentario.setRespuesta(null);
 
         Assert.assertTrue(repository.save(comentario));
@@ -37,7 +37,7 @@ public class ComentarioRepositoryTest {
         comentario.setComentario("ComentarioB");
         comentario.setIdComentario(1);
         comentario.setIdPost(3);
-        comentario.setIdUsuario(1);
+        comentario.setAlias("Alias2");
         comentario.setRespuesta(null);
 
         Assert.assertTrue(repository.update(comentario));

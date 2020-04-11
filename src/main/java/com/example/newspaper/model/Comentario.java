@@ -9,7 +9,7 @@ public class Comentario {
     private long IdComentario;
     private String Comentario;
     private long IdPost;
-    private long IdUsuario;
+    private String Alias;
     private Date Fecha;
     private String Respuesta;
 
@@ -37,11 +37,11 @@ public class Comentario {
         IdPost = idPost;
     }
 
-    public long getIdUsuario() {
-        return IdUsuario;
+    public String getAlias() {
+        return Alias;
     }
-    public void setIdUsuario(long idUsuario) {
-        IdUsuario = idUsuario;
+    public void setAlias(String alias) {
+        Alias = alias;
     }
 
     public Date getFecha() {

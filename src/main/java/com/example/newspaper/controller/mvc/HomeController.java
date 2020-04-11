@@ -8,8 +8,11 @@ import com.example.newspaper.model.Comentario;
 import com.example.newspaper.model.Post;
 import com.example.newspaper.model.Usuario;
 import com.example.newspaper.repository.*;
+import com.example.newspaper.security.UserPrincipal;
+import com.example.newspaper.security.UserPrincipalDetailsService;
 import com.example.newspaper.service.HomeService;
 import com.example.newspaper.service.PostService;
+import com.example.newspaper.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +38,9 @@ public class HomeController {
     private PostService postService;
 
     @Autowired
+    private UsuarioService usuarioService;
+
+    @Autowired
     private CategoriaRep categoriaRep;
 
     @Autowired
@@ -48,6 +54,7 @@ public class HomeController {
 
     @Autowired
     private HomeService homeService;
+
 
     @GetMapping(path = {"/"})
     public String home(Model model){
@@ -89,6 +96,18 @@ public class HomeController {
     @PostMapping("/addNuevoArticulo")
     public String addNewPost(Post post, Model model) {
         postService.saveNewPost(post);
+        homeService.modelHome(model);
+        return "index.html";
+    }
+
+    @GetMapping("/nuevoUsuario")
+    public ModelAndView newUsuario(){
+        return new ModelAndView("registro.html").addObject("usuario", new Usuario());
+    }
+
+    @PostMapping("/registro")
+    public String addNewUser(Usuario usuario, Model model) {
+        usuarioService.saveNewUsuario(usuario);
         homeService.modelHome(model);
         return "index.html";
     }

@@ -14,7 +14,7 @@ public class ComentarioMapper implements RowMapper<Comentario> {
         comentario.setFecha(rs.getDate("Fecha"));
         comentario.setIdComentario(rs.getInt("IdComentario"));
         comentario.setIdPost(rs.getInt("IdPost"));
-        comentario.setIdUsuario(rs.getInt("IdUsuario"));
+        comentario.setAlias(rs.getString("Alias"));
         comentario.setRespuesta(rs.getString("Respuesta"));
         return comentario;
     }

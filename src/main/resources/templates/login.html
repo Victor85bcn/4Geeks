@@ -27,8 +27,9 @@
 		</header>
 		<section class="top-post-area pt-1">
 		<div class="container no-padding">
-		<div class="login-form" style="border: solid #000000;">
-<!--			<h4>Log in</h4>-->
+			<br><br>
+			<h3 style="margin-left: 20px">Log in</h3>
+			<div class="login-form" style="border: solid #000000; margin-top: 25px">
 			<form name="f" th:action="@{/signin}" method="post">
 				<fieldset>
 					<!-- Thymeleaf + Spring Security error display -->
@@ -37,7 +38,7 @@
 					</div>
 
 					<div th:if="${param.logout}" class="alert alert-success">
-						La sesión ha expirado.
+						Deslogueado correctamente.
 					</div>
 
 					<!-- Login Controls -->
@@ -65,6 +66,8 @@
 					</div>
 				</fieldset>
 			</form>
+
+
 		</div>
 		</div>
 			</div>

@@ -6,6 +6,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
@@ -17,7 +19,8 @@ import java.util.List;
 public class UsuarioRepository implements UsuarioRep {
 
     private Log logger = LogFactory.getLog(getClass());
-    private PasswordEncoder passwordEncoder;
+    private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+
     @Autowired
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
@@ -31,7 +34,7 @@ public class UsuarioRepository implements UsuarioRep {
     public boolean save(Usuario object) {
         try {
             String sql = String.format("insert into Usuario (Nombre, Apellido, Password, Email, IdGrupo) values ('%s', '%s', '%s', '%s', '%d')",
-                    object.getNombre(), object.getApellido(), passwordEncoder.encode(object.getPassword()), object.getEmail(), object.getIdGrupo());
+                    object.getNombre(), object.getApellido(), bCryptPasswordEncoder.encode(object.getPassword()), object.getEmail(), object.getIdGrupo());
             jdbcTemplate.execute(sql);
             return true;
         }catch(Exception e) {

@@ -29,32 +29,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-//                .antMatchers("/index.html").permitAll()
                 .antMatchers("/index.html").permitAll() // TODOS
-                .antMatchers("/categoria/tecnologia").authenticated() // TODOS LOGUEADOS
-                .antMatchers("/categoria/videojuegos").hasRole("EDITOR") // SOLO EDITORES
-                .antMatchers("/categoria/cine%20y%20series").hasAuthority("POSTSECCION_READ") // SOLO ESCRITORES Y USER
-                .antMatchers("/categoria/cultura").hasAuthority("COMENTARIO_READ") // SOLO USER
+                .antMatchers("/categoria/**").permitAll() // TODOS LOGUEADOS
                 .antMatchers("/nuevoArticulo").hasAuthority("ADMIN") // SOLO USER
-                .antMatchers("/articulo/7").permitAll()
-                //                .antMatchers("/").hasRole("ADMIN")
-//                .antMatchers("/").hasRole("CREATE_POST")
-//                .antMatchers("/profile/**").authenticated()
-//                .antMatchers("/admin/**").hasRole("ADMIN")
-//                .antMatchers("/management/**").hasAnyRole("ADMIN", "MANAGER")
-//                .antMatchers("/api/v1/test1").hasAuthority("ACCESS_TEST1")
-//                .antMatchers("/api/v1/usuario").hasAuthority("ADMIN")
-//                .antMatchers("/api/v1/**").hasRole("ADMIN")
+                .antMatchers("/articulo/**").permitAll()
                 .antMatchers("/api/v1/usuario").permitAll()
-//                .antMatchers(HttpMethod.POST, "/api/v1/usuario").permitAll()
+                .antMatchers("/api/v1/usuario").permitAll()
                 .and()
                 .formLogin()
                 .loginProcessingUrl("/signin")
                 .loginPage("/login").permitAll()
+//                .failureUrl("/404.html")
                 .usernameParameter("txtUsername")
                 .passwordParameter("txtPassword")
                 .and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
                 .and()
                 .rememberMe().tokenValiditySeconds(2592000).key("mySecret!").rememberMeParameter("checkRememberMe");
                 }
