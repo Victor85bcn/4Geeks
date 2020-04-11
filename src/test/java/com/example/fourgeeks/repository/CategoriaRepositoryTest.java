@@ -1,0 +1,62 @@
+package com.example.fourgeeks.repository;
+
+import com.example.fourgeeks.configuration.TestDatabaseConfiguration;
+import com.example.fourgeeks.model.Categoria;
+import com.example.fourgeeks.repository.impl.CategoriaRepository;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.annotation.Order;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
+
+
+@SpringBootTest
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = {TestDatabaseConfiguration.class})
+public class CategoriaRepositoryTest {
+
+    @Autowired
+    private CategoriaRepository categoriaRepository;
+
+    @Test
+    @Order(1)
+    public void testInsert(){
+        Categoria categoria = new Categoria();
+
+        categoria.setNombre("Test1");
+        categoria.setDescripcion("Este es un ejemplo de categoria superior");
+        Categoria categoriaTest = categoriaRepository.save(categoria);
+        Assert.assertNotNull(categoriaTest);
+    }
+
+    @Test()
+    @Order(2)
+    public void testUpdate(){
+        Categoria categoria = new Categoria();
+
+        categoria.setIdCategoria(1);
+        categoria.setNombre("Test2");
+        categoria.setDescripcion("Este es un ejemplo de categoria superior");
+        Categoria categoriaTest = categoriaRepository.update(categoria);
+        Assert.assertNotNull(categoriaTest);
+    }
+
+    @Test
+    @Order(3)
+    public void testFindById(){
+        Categoria categoria = categoriaRepository.findById(1);
+
+        Assert.assertTrue(categoria!=null);
+        Assert.assertTrue("Test2".equals(categoria.getNombre()));
+    }
+
+    @Test
+    @Order(4)
+    public void testFindAll(){
+        Assert.assertFalse(categoriaRepository.findAll().isEmpty());
+    }
+
+}
