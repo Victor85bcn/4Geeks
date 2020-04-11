@@ -2,7 +2,7 @@ package com.example.newspaper.controller.rest;
 
 import com.example.newspaper.model.Post;
 import com.example.newspaper.model.common.RepBase;
-import com.example.newspaper.repository.PostRepository;
+import com.example.newspaper.repository.impl.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

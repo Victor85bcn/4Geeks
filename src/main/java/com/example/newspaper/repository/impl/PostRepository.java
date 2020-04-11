@@ -1,7 +1,8 @@
-package com.example.newspaper.repository;
+package com.example.newspaper.repository.impl;
 
 import com.example.newspaper.mapper.PostMapper;
 import com.example.newspaper.model.Post;
+import com.example.newspaper.repository.PostRep;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,10 @@ import java.util.List;
 public class PostRepository implements PostRep {
 
     private Log logger = LogFactory.getLog(getClass());
+    private JdbcTemplate jdbcTemplate;
+
     @Autowired
     private DataSource dataSource;
-    private JdbcTemplate jdbcTemplate;
 
     @PostConstruct
     public void postConstruct(){
@@ -31,10 +33,10 @@ public class PostRepository implements PostRep {
             String sql = String.format("insert into Post (Titulo, Extracto, Contenido, IdUsuario, IdCategoria, Imagen, Tipo) values ('%s', '%s', '%s', %d, %d, '%s', '%s')",
                     object.getTitulo(), object.getExtracto(), object.getContenido(), object.getIdUsuario(), object.getIdCategoria(), object.getImagen(), object.getTipo());
             jdbcTemplate.execute(sql);
+            logger.info("Artículo " + object.getTitulo() + " creado.");
             return true;
         }catch(Exception e) {
             logger.error(e.getMessage());
-            e.printStackTrace();
             return false;
         }
     }
@@ -42,10 +44,16 @@ public class PostRepository implements PostRep {
     @Override
     public boolean update(Post object) {
         if(object.getIdPost()>0) {
-            String sql = String.format("update Post set Titulo='%s', Contenido='%s', Extracto='%s', IdUsuario=%d, IdCategoria=%d, Imagen='%s', Tipo='%s' where IdPost=%d",
-                    object.getTitulo(), object.getContenido(), object.getExtracto(), object.getIdUsuario(), object.getIdCategoria(), object.getImagen(), object.getTipo(), object.getIdPost());
-            jdbcTemplate.execute(sql);
-            return true;
+            try {
+                String sql = String.format("update Post set Titulo='%s', Contenido='%s', Extracto='%s', IdUsuario=%d, IdCategoria=%d, Imagen='%s', Tipo='%s' where IdPost=%d",
+                        object.getTitulo(), object.getContenido(), object.getExtracto(), object.getIdUsuario(), object.getIdCategoria(), object.getImagen(), object.getTipo(), object.getIdPost());
+                jdbcTemplate.execute(sql);
+                logger.info("Artículo " + object.getIdPost() + " modificado.");
+                return true;
+            } catch (Exception e) {
+                logger.error(e.getMessage());
+                return false;
+            }
         }
         return false;
     }
@@ -70,12 +78,14 @@ public class PostRepository implements PostRep {
         try{
             String sql = String.format("delete from post where IdPost='%d'", id);
             jdbcTemplate.execute(sql);
+            logger.info("Artículo " + id + " eliminado.");
             return true;
         }catch (Exception e){
-            logger.error(e);
+            logger.error(e.getMessage());
             return false;
         }
     }
+
 
     @Override
     public List<Post> getUltimasNoticias() {
@@ -117,14 +127,6 @@ public class PostRepository implements PostRep {
     public List<Post> getPostsByCategoria(String categoria) {
         return jdbcTemplate.query("select * from post p inner join categoria c on p.IdCategoria = c.IdCategoria where c.Nombre = '" + categoria + "' order by p.IdPost desc limit 13",
                 new PostMapper());
-    }
-
-    public JdbcTemplate getJdbcTemplate() {
-        return jdbcTemplate;
-    }
-
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
     }
 
 }

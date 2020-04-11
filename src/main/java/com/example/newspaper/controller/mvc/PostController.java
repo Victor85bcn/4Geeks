@@ -1,16 +1,12 @@
 package com.example.newspaper.controller.mvc;
 
-import com.example.newspaper.components.PostComponent;
 import com.example.newspaper.components.SectionsComponent;
-import com.example.newspaper.configuration.Pages;
 import com.example.newspaper.model.Categoria;
 import com.example.newspaper.model.Comentario;
 import com.example.newspaper.model.Post;
 import com.example.newspaper.model.Usuario;
-import com.example.newspaper.repository.CategoriaRep;
-import com.example.newspaper.repository.ComentarioRep;
-import com.example.newspaper.repository.UsuarioRep;
-import com.example.newspaper.service.PostService;
+import com.example.newspaper.service.*;
+import com.example.newspaper.util.Pages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,52 +19,48 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@RequestMapping("/articulo/{post}")
+@RequestMapping("/articulo")
 public class PostController {
 
     @Autowired
     private SectionsComponent sectionsComponent;
 
     @Autowired
-    private PostComponent postComponent;
-
-    @Autowired
     private PostService postService;
 
     @Autowired
-    private CategoriaRep categoriaRep;
+    private CategoriaService categoriaService;
 
     @Autowired
-    private UsuarioRep usuarioRep;
+    private UsuarioService usuarioService;
 
     @Autowired
-    private ComentarioRep comentarioRep;
+    private ComentarioService comentarioService;
+
+    @Autowired
+    private HomeService homeService;
 
 
-    @GetMapping(path = {"/"})
-    public String saludar(Model model){
-        model.addAttribute("ultimasNoticias", this.sectionsComponent.getUltimasNoticias());
-        model.addAttribute("portadaPrincipal", this.sectionsComponent.getPortadaPrincipal());
-        model.addAttribute("subPortadaTop", this.sectionsComponent.getSubPortadaTop());
-        model.addAttribute("subPortadaBottom", this.sectionsComponent.getSubPortadaBottom());
-        model.addAttribute("categorias", this.categoriaRep.findAll());
-        model.addAttribute("usuarios", this.usuarioRep.findAll());
-        return "gallery-post.html";
-    }
-
-    @GetMapping(path = {"/articulo/{post}"})
-    public ModelAndView getPostIndividual(@PathVariable(required = true, name ="post") int id) {
+    @GetMapping(path = {"/{post}"})
+    public ModelAndView getArticulo(@PathVariable(required = true, name ="post") int id) {
         ModelAndView modelAndView = new ModelAndView(Pages.IMAGE_POST);
-        Post post = this.postComponent.getPostById(id);
+        Post post = this.postService.getPostById(id);
+        List<Comentario> comentariosList = comentarioService.findByPostId(id);
+        List<Usuario> usuarios = usuarioService.findAll();
         modelAndView.addObject("post", post);
         modelAndView.addObject("comentario", new Comentario());
+        modelAndView.addObject("comentariosList", comentariosList);
+        modelAndView.addObject("usuarios", usuarios);
+        modelAndView.addObject("categorias", this.categoriaService.findAll());
+        modelAndView.addObject("loMasPopular", this.sectionsComponent.getLoMasPopular());
+        modelAndView.addObject("noTeLoPierdas", this.sectionsComponent.getNoTeLoPierdas());
         return modelAndView;
     }
 
     @GetMapping("/nuevoArticulo")
     public ModelAndView newPost(){
-        List<Categoria> categorias = categoriaRep.findAll();
-        List<Usuario> usuarios = usuarioRep.findAll();
+        List<Categoria> categorias = categoriaService.findAll();
+        List<Usuario> usuarios = usuarioService.findAll();
         return new ModelAndView("new-post.html").addObject("post", new Post())
                 .addObject("categorias", categorias)
                 .addObject("usuarios", usuarios);
@@ -77,13 +69,15 @@ public class PostController {
     @PostMapping("/addNuevoArticulo")
     public String addNewPost(Post post, Model model) {
         postService.saveNewPost(post);
-        return "gallery-post.html";
+        homeService.modelHome(model);
+        return "redirect:/";
     }
 
-    @PostMapping("/addNuevoComentario")
-    public String addNewComentario(Comentario comentario) {
-        comentarioRep.save(comentario);
-        return "gallery-post.html";
+    @PostMapping("/nuevoComentario")
+    public String nuevoComentario(Comentario comentario, Model model) {
+        comentarioService.save(comentario);
+        homeService.modelHome(model);
+        return "redirect:/";
     }
 
 }

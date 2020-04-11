@@ -58,7 +58,6 @@
 						<div class="col-lg-12">
 							<div class="hero-nav-area">
 								<h1 class="text-white">Gestión de artículos</h1>
-<!--								<p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span><a href="contact.html">Contact Us </a></p>-->
 							</div>
 						</div>
 					</div>
@@ -92,13 +91,14 @@
 									<td th:each="categoria : ${categorias}" th:if="${categoria.IdCategoria == post.IdCategoria}" th:text="${categoria.Nombre}"></td>
 									<td th:text="${post.getFecha()}"></td>
 									<td style="display: flex; justify-items: center; align-items: center;">
-										<form form-method="put" th:action="@{/modificar}+'/'+ ${post.IdPost}">
+										<form form-method="put" th:action="@{/admin/modificar}+'/'+ ${post.IdPost}">
 <!--											<input type="hidden" name="idPost" th:value="${post.IdPost}"/>-->
 											<button class="primary-btn primary"><a class="text-white">Editar</a></button>
 										</form>
-										<form form-method="delete" th:action="@{/eliminarPost}">
+										<form form-method="delete" th:action="@{/admin/eliminarPost}">
 											<input type="hidden" name="idPost" th:value="${post.IdPost}"/>
-											<button class="primary-btn primary"><a class="text-white">Eliminar</a></button></form>
+											<button class="primary-btn primary"><a class="text-white">Eliminar</a></button>
+										</form>
 									</td>
 								</tr>
 								</tbody>

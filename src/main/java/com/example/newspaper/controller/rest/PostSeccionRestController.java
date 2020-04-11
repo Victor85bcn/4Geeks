@@ -2,7 +2,7 @@ package com.example.newspaper.controller.rest;
 
 import com.example.newspaper.model.PostSeccion;
 import com.example.newspaper.model.common.RepBase;
-import com.example.newspaper.repository.PostSeccionRepository;
+import com.example.newspaper.repository.impl.PostSeccionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

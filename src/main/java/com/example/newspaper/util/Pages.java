@@ -1,4 +1,4 @@
-package com.example.newspaper.configuration;
+package com.example.newspaper.util;
 
 public class Pages {
 

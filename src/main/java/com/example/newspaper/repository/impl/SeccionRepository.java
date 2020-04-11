@@ -1,7 +1,8 @@
-package com.example.newspaper.repository;
+package com.example.newspaper.repository.impl;
 
 import com.example.newspaper.mapper.SeccionMapper;
 import com.example.newspaper.model.Seccion;
+import com.example.newspaper.repository.SeccionRep;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,10 @@ public class SeccionRepository implements SeccionRep {
         try {
             String sql = String.format("insert into Seccion (Nombre) values ('%s')", seccion.getNombre());
             jdbcTemplate.execute(sql);
+            logger.info("Sección " + seccion.getNombre() + " creada.");
             return true;
         } catch (Exception e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -68,15 +71,9 @@ public class SeccionRepository implements SeccionRep {
             jdbcTemplate.execute(sql);
             return true;
         }catch (Exception e){
-            logger.error(e);
+            logger.error(e.getMessage());
             return false;
         }
     }
 
-    public JdbcTemplate getJdbcTemplate() {
-        return jdbcTemplate;
-    }
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
 }

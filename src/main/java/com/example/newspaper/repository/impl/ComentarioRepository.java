@@ -1,7 +1,8 @@
-package com.example.newspaper.repository;
+package com.example.newspaper.repository.impl;
 
 import com.example.newspaper.mapper.ComentarioMapper;
 import com.example.newspaper.model.Comentario;
+import com.example.newspaper.repository.ComentarioRep;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,16 +11,16 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class ComentarioRepository implements ComentarioRep {
 
     private Log logger = LogFactory.getLog(getClass());
+    private JdbcTemplate jdbcTemplate;
+
     @Autowired
     private DataSource dataSource;
-    private JdbcTemplate jdbcTemplate;
 
     @PostConstruct
     public void postConstruct(){
@@ -34,9 +35,10 @@ public class ComentarioRepository implements ComentarioRep {
                             + "values('%s', '%d', '%s')",
                     comentario.getComentario(), comentario.getIdPost(), comentario.getAlias(), comentario.getRespuesta());
             jdbcTemplate.execute(sql);
+            logger.info("Comentario de " + comentario.getAlias() + " creado.");
             return true;
         }catch(Exception e) {
-            System.out.println("ERROR!!!!!" + e.getMessage());
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -47,6 +49,7 @@ public class ComentarioRepository implements ComentarioRep {
             String sql = String.format("update Comentario set Comentario='%s', IdPost='%d', Alias='%s', Respuesta='%s' where IdComentario='%d'",
                     comentario.getComentario(), comentario.getIdPost(), comentario.getAlias(), comentario.getRespuesta(), comentario.getIdComentario());
             jdbcTemplate.execute(sql);
+            logger.info("Comentario de " + comentario.getAlias() + " modificado.");
             return true;
         }
         return false;
@@ -67,14 +70,6 @@ public class ComentarioRepository implements ComentarioRep {
     public List<Comentario> findByPostId(int Id) {
         List<Comentario> comentarios = jdbcTemplate.query("select * from comentario where IdPost = " + Id, new ComentarioMapper());
         return comentarios;
-    }
-
-    public JdbcTemplate getJdbcTemplate() {
-        return jdbcTemplate;
-    }
-
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
     }
 
 }

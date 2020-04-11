@@ -1,4 +1,4 @@
-package com.example.newspaper.components;
+package com.example.newspaper.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

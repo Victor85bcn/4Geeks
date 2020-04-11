@@ -1,12 +1,12 @@
 package com.example.newspaper.repository;
 
-import com.example.newspaper.components.TestDatabaseConfiguration;
+import com.example.newspaper.configuration.TestDatabaseConfiguration;
 import com.example.newspaper.model.Post;
+import com.example.newspaper.repository.impl.PostRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 

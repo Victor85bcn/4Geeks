@@ -1,7 +1,8 @@
-package com.example.newspaper.repository;
+package com.example.newspaper.repository.impl;
 
 import com.example.newspaper.mapper.PostSeccionMapper;
 import com.example.newspaper.model.PostSeccion;
+import com.example.newspaper.repository.PostSeccionRep;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +14,13 @@ import javax.sql.DataSource;
 import java.util.List;
 
 @Repository
-public class PostSeccionRepository implements PostSeccionRep{
+public class PostSeccionRepository implements PostSeccionRep {
 
     private Log logger = LogFactory.getLog(getClass());
+    private JdbcTemplate jdbcTemplate;
+
     @Autowired
     private DataSource dataSource;
-    private JdbcTemplate jdbcTemplate;
 
     @PostConstruct
     public void postConstruct(){
@@ -30,8 +32,10 @@ public class PostSeccionRepository implements PostSeccionRep{
         try {
             String sql = String.format("insert into post_seccion (IdPost, IdSeccion) values ('%d', '%d')", object.getIdPost(), object.getIdSeccion());
             jdbcTemplate.execute(sql);
+            logger.info("Post " + object.getIdPost() + " añadido a la sección " + object.getIdSeccion() + ".");
             return true;
         }catch (Exception e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -81,16 +85,9 @@ public class PostSeccionRepository implements PostSeccionRep{
             jdbcTemplate.execute(sql);
             return true;
         }catch (Exception e){
-            logger.error(e);
+            logger.error(e.getMessage());
             return false;
         }
-    }
-
-    public JdbcTemplate getJdbcTemplate() {
-        return jdbcTemplate;
-    }
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
     }
 
 }

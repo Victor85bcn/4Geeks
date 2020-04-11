@@ -1,7 +1,8 @@
-package com.example.newspaper.repository;
+package com.example.newspaper.repository.impl;
 
 import com.example.newspaper.mapper.GrupoMapper;
 import com.example.newspaper.model.Grupo;
+import com.example.newspaper.repository.GrupoRep;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,10 @@ import java.util.List;
 public class GrupoRepository implements GrupoRep {
 
     private Log logger = LogFactory.getLog(getClass());
+    private JdbcTemplate jdbcTemplate;
+
     @Autowired
     private DataSource dataSource;
-    private JdbcTemplate jdbcTemplate;
 
     @PostConstruct
     public void postConstruct(){
@@ -30,8 +32,10 @@ public class GrupoRepository implements GrupoRep {
         try {
             String sql = String.format("insert into Grupo (Nombre) values ('%s')", object.getNombre());
             jdbcTemplate.execute(sql);
+            logger.info("Grupo " + object.getNombre() + " creado.");
             return true;
         }catch (Exception e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -60,16 +64,7 @@ public class GrupoRepository implements GrupoRep {
 
     @Override
     public Grupo findByUser(String email) {
-//        Object[] params = new Object[] {email};
         return jdbcTemplate.queryForObject("select p.* from grupo p inner join usuario u on p.IdGrupo = u.IdGrupo where u.Email = '" + email + "'", new GrupoMapper());
-    }
-
-    public JdbcTemplate getJdbcTemplate() {
-        return jdbcTemplate;
-    }
-
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
     }
 
 }

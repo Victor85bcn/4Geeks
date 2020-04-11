@@ -1,6 +1,6 @@
-package com.example.newspaper.components;
+package com.example.newspaper.configuration;
 
-import com.example.newspaper.repository.*;
+import com.example.newspaper.repository.impl.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
@@ -41,11 +41,6 @@ public class TestDatabaseConfiguration {
     @Bean
     public GrupoRepository grupoRepository(){
         return new GrupoRepository();
-    }
-
-    @Bean
-    public ContenidoRepository contenidoRepository(){
-        return new ContenidoRepository();
     }
 
     @Bean

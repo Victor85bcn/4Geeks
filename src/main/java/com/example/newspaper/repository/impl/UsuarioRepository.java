@@ -1,14 +1,13 @@
-package com.example.newspaper.repository;
+package com.example.newspaper.repository.impl;
 
 import com.example.newspaper.mapper.UsuarioMapper;
 import com.example.newspaper.model.Usuario;
+import com.example.newspaper.repository.UsuarioRep;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
@@ -20,10 +19,10 @@ public class UsuarioRepository implements UsuarioRep {
 
     private Log logger = LogFactory.getLog(getClass());
     private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+    private JdbcTemplate jdbcTemplate;
 
     @Autowired
     private DataSource dataSource;
-    private JdbcTemplate jdbcTemplate;
 
     @PostConstruct
     public void postConstruct(){
@@ -36,8 +35,10 @@ public class UsuarioRepository implements UsuarioRep {
             String sql = String.format("insert into Usuario (Nombre, Apellido, Password, Email, IdGrupo) values ('%s', '%s', '%s', '%s', '%d')",
                     object.getNombre(), object.getApellido(), bCryptPasswordEncoder.encode(object.getPassword()), object.getEmail(), object.getIdGrupo());
             jdbcTemplate.execute(sql);
+            logger.info("Usuario " + object.getEmail() + " creado.");
             return true;
         }catch(Exception e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -45,10 +46,16 @@ public class UsuarioRepository implements UsuarioRep {
     @Override
     public boolean update(Usuario object) {
         if(object.getIdUsuario()>0) {
-            String sql = String.format("update Usuario set Nombre='%s', Apellido='%s', Password='%s', Email='%s', IdGrupo='%d' where IdUsuario='%d'",
-                    object.getNombre(), object.getApellido(), object.getPassword(), object.getEmail(), object.getIdGrupo(), object.getIdUsuario());
-            jdbcTemplate.execute(sql);
-            return true;
+            try {
+                String sql = String.format("update Usuario set Nombre='%s', Apellido='%s', Password='%s', Email='%s', IdGrupo='%d' where IdUsuario='%d'",
+                        object.getNombre(), object.getApellido(), object.getPassword(), object.getEmail(), object.getIdGrupo(), object.getIdUsuario());
+                jdbcTemplate.execute(sql);
+                logger.info("Usuario " + object.getEmail() + " modificado.");
+                return true;
+            } catch (Exception e) {
+                logger.error(e.getMessage());
+                return false;
+            }
         }
         return false;
     }
@@ -70,14 +77,6 @@ public class UsuarioRepository implements UsuarioRep {
         Object[] params = new Object[] {email};
         return jdbcTemplate.queryForObject("select * from Usuario where Email = ?",
                 params, new UsuarioMapper());
-    }
-
-    public JdbcTemplate getJdbcTemplate() {
-        return jdbcTemplate;
-    }
-
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
     }
 
 }

@@ -31,7 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/index.html").permitAll() // TODOS
                 .antMatchers("/categoria/**").permitAll() // TODOS LOGUEADOS
-                .antMatchers("/nuevoArticulo").hasAuthority("ADMIN") // SOLO USER
+//                .antMatchers("/nuevoArticulo").hasAuthority("ADMIN") // SOLO USER
                 .antMatchers("/articulo/**").permitAll()
                 .antMatchers("/api/v1/usuario").permitAll()
                 .antMatchers("/api/v1/usuario").permitAll()
@@ -53,7 +53,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         daoAuthenticationProvider.setUserDetailsService(this.userPrincipalDetailsService);
-
         return daoAuthenticationProvider;
     }
 

@@ -2,7 +2,7 @@ package com.example.newspaper.controller.rest;
 
 import com.example.newspaper.model.Usuario;
 import com.example.newspaper.model.common.RepBase;
-import com.example.newspaper.repository.UsuarioRepository;
+import com.example.newspaper.repository.impl.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

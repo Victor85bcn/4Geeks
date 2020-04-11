@@ -1,8 +1,7 @@
 package com.example.newspaper.controller.rest;
 
 import com.example.newspaper.model.Categoria;
-import com.example.newspaper.model.common.RepBase;
-import com.example.newspaper.repository.CategoriaRepository;
+import com.example.newspaper.repository.impl.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

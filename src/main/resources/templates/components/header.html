@@ -19,7 +19,7 @@
                         <button sec:authorize="isAuthenticated()" class="login-btn" type="submit">Logout</button>
                         <button sec:authorize="isAnonymous()" th:href="@{/login}" class="login-btn" type="submit">Login</button>
                     </form></li>
-                <li><a sec:authorize="isAnonymous()" th:href="@{/nuevoUsuario}" class="login-btn" style="font-size: 14px">Registro</a></li></ul>
+                <li><a sec:authorize="isAnonymous()" th:href="@{/registro}" class="login-btn" style="font-size: 14px">Registro</a></li></ul>
             </div>
         </div>
     </div>
@@ -51,7 +51,7 @@
                 <li><a th:href="@{/categoria/comunidad}">Comunidad</a></li>
                 <li class="menu-has-children"><a>Admin</a>
                     <ul>
-                        <li><a th:href="@{/nuevoArticulo}">Escribir Artículo</a></li>
+                        <li><a th:href="@{articulo/nuevoArticulo}">Escribir Artículo</a></li>
                         <li><a th:href="@{/admin/posts}">Gestión artículos</a></li>
 <!--                        <li><a href="gallery-post.html">Gallery Post</a></li>-->
 <!--                        <li><a href="video-post.html">Video Post</a></li>-->

@@ -107,7 +107,7 @@
 							</div>
 							<div sec:authorize="isAuthenticated()" class="comment-form">
 								<h4 style="margin-bottom: 25px">Añadir comentario</h4>
-								<form th:action="@{/addNuevoComentario}" method="post" th:object="${comentario}">
+								<form th:action="@{/articulo/nuevoComentario}" method="post" th:object="${comentario}">
 									<input type="hidden" name="idPost" th:value="${post.IdPost}"/>
 									<div class="form-group col-lg-6 col-md-12 name">
 										<input th:field="*{alias}" th:value="*{alias}" class="form-control" placeholder="Alias" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Alias'">

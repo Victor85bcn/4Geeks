@@ -1,7 +1,8 @@
-package com.example.newspaper.repository;
+package com.example.newspaper.repository.impl;
 
 import com.example.newspaper.mapper.PermisoMapper;
 import com.example.newspaper.model.Permiso;
+import com.example.newspaper.repository.PermisoRep;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,10 @@ import java.util.List;
 public class PermisoRepository implements PermisoRep {
 
     private Log logger = LogFactory.getLog(getClass());
+    private JdbcTemplate jdbcTemplate;
+
     @Autowired
     private DataSource dataSource;
-    private JdbcTemplate jdbcTemplate;
 
     @PostConstruct
     public void postConstruct(){
@@ -31,8 +33,10 @@ public class PermisoRepository implements PermisoRep {
             String sql = String.format("insert into Permiso (Nombre) values ('%s')",
                     object.getNombre());
             jdbcTemplate.execute(sql);
+            logger.info("Permiso " + object.getNombre() + " creado.");
             return true;
         }catch(Exception e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -67,13 +71,5 @@ public class PermisoRepository implements PermisoRep {
                     "    inner join usuario u on gp.IdGrupo = u.IdGrupo\n" +
                     "where u.Email = '" + email + "';", new PermisoMapper());
         }
-
-
-    public JdbcTemplate getJdbcTemplate() {
-        return jdbcTemplate;
-    }
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
 
 }

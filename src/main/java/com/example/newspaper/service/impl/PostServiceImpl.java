@@ -1,7 +1,7 @@
 package com.example.newspaper.service.impl;
 
 import com.example.newspaper.model.Post;
-import com.example.newspaper.repository.PostRepository;
+import com.example.newspaper.repository.impl.PostRepository;
 import com.example.newspaper.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,4 +28,19 @@ public class PostServiceImpl implements PostService {
     public boolean saveNewPost(Post post) {
         return postRepository.save(post);
     }
+
+    @Override
+    public Post getPostById(int id) {return postRepository.findById(id);}
+
+    @Override
+    public List<Post> getAllPosts() {return postRepository.findAll();}
+
+    @Override
+    public boolean update(Post object) {return postRepository.update(object);}
+
+    @Override
+    public boolean deleteByPostId(int id) {return postRepository.deleteByPostId(id);}
+
+    @Override
+    public List<Post> findAll() {return postRepository.findAll();}
 }

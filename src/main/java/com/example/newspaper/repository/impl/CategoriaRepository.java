@@ -1,7 +1,8 @@
-package com.example.newspaper.repository;
+package com.example.newspaper.repository.impl;
 
 import com.example.newspaper.mapper.CategoriaMapper;
 import com.example.newspaper.model.Categoria;
+import com.example.newspaper.repository.CategoriaRep;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,10 @@ import java.util.List;
 public class CategoriaRepository implements CategoriaRep {
 
     private Log logger = LogFactory.getLog(getClass());
+    private JdbcTemplate jdbcTemplate;
+
     @Autowired
     private DataSource dataSource;
-    private JdbcTemplate jdbcTemplate;
 
     @PostConstruct
     public void postConstruct(){
@@ -31,8 +33,10 @@ public class CategoriaRepository implements CategoriaRep {
             String sql = String.format("insert into Categoria (Nombre, Descripcion) " +
                     "values ('%s', '%s')", categoria.getNombre(), categoria.getDescripcion());
             jdbcTemplate.execute(sql);
+            logger.info("Categoria " + categoria.getNombre() + " creada.");
             return findByNombre(categoria.getNombre());
         } catch (Exception e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -45,8 +49,10 @@ public class CategoriaRepository implements CategoriaRep {
                                 + "where IdCategoria = '%d'",
                         categoria.getNombre(), categoria.getDescripcion(), categoria.getIdCategoria());
                 jdbcTemplate.execute(sql);
+                logger.info("Categoria " + categoria.getNombre() + " modificada.");
                 return findByNombre(categoria.getNombre());
             } catch (Exception e){
+                logger.error(e.getMessage());
                 return null;
             }
         }
@@ -64,6 +70,7 @@ public class CategoriaRepository implements CategoriaRep {
             Object[] params = new Object[] {Id};
             return jdbcTemplate.queryForObject("select * from Categoria where IdCategoria = ?", params, new CategoriaMapper());
         } catch (Exception e){
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -81,20 +88,13 @@ public class CategoriaRepository implements CategoriaRep {
     public boolean deleteById(int id){
         try{
             String sql = String.format("delete from Categoria where IdCategoria='%d'", id);
+            logger.info("Categoria " + id + " eliminada.");
             jdbcTemplate.execute(sql);
             return true;
         }catch (Exception e){
-            logger.error(e);
+            logger.error(e.getMessage());
             return false;
         }
-    }
-
-    public JdbcTemplate getJdbcTemplate() {
-        return jdbcTemplate;
-    }
-
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
     }
 
 }

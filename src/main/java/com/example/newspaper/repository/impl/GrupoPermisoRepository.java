@@ -1,7 +1,8 @@
-package com.example.newspaper.repository;
+package com.example.newspaper.repository.impl;
 
 import com.example.newspaper.mapper.GrupoPermisoMapper;
 import com.example.newspaper.model.GrupoPermiso;
+import com.example.newspaper.repository.GrupoPermisoRep;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,10 @@ import java.util.List;
 public class GrupoPermisoRepository implements GrupoPermisoRep {
 
     private Log logger = LogFactory.getLog(getClass());
+    private JdbcTemplate jdbcTemplate;
+
     @Autowired
     private DataSource dataSource;
-    private JdbcTemplate jdbcTemplate;
 
     @PostConstruct
     public void postConstruct(){
@@ -31,8 +33,10 @@ public class GrupoPermisoRepository implements GrupoPermisoRep {
             String sql = String.format("insert into grupo_permiso (IdGrupo, IdPermiso) values ('%d', '%d')",
                     object.getIdGrupo(), object.getIdPermiso());
             jdbcTemplate.execute(sql);
+            logger.info("Permiso " + object.getIdPermiso() + " añadido al grupo " + object.getIdGrupo() + ".");
             return true;
         }catch (Exception e) {
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -57,14 +61,6 @@ public class GrupoPermisoRepository implements GrupoPermisoRep {
         Object[] params = new Object[] {Id};
         return jdbcTemplate.queryForObject("select * from grupo_permiso where IdGrupoPermiso = ?",
                 params, new GrupoPermisoMapper());
-    }
-
-    public JdbcTemplate getJdbcTemplate() {
-        return jdbcTemplate;
-    }
-
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
     }
 
 }
