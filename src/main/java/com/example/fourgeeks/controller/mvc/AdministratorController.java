@@ -1,12 +1,11 @@
 package com.example.fourgeeks.controller.mvc;
 
+import com.example.fourgeeks.components.SectionsComponent;
 import com.example.fourgeeks.model.Categoria;
 import com.example.fourgeeks.model.Post;
+import com.example.fourgeeks.model.Seccion;
 import com.example.fourgeeks.model.Usuario;
-import com.example.fourgeeks.service.CategoriaService;
-import com.example.fourgeeks.service.HomeService;
-import com.example.fourgeeks.service.PostService;
-import com.example.fourgeeks.service.UsuarioService;
+import com.example.fourgeeks.service.*;
 import com.example.fourgeeks.util.Pages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,7 +32,13 @@ public class AdministratorController {
     private PostService postService;
 
     @Autowired
+    private PostSeccionService postSeccionService;
+
+    @Autowired
     private HomeService homeService;
+
+    @Autowired
+    private SectionsComponent sectionsComponent;
 
 
     @GetMapping("/")
@@ -71,6 +76,23 @@ public class AdministratorController {
         postService.update(post);
         homeService.modelHome(model);
         return "redirect:/admin/posts";
+    }
+
+    @GetMapping(path = {"/secciones"})
+    public ModelAndView getSeccionesList() {
+        ModelAndView modelAndView = new ModelAndView(Pages.SECCIONES_LIST);
+        modelAndView.addObject("secciones", this.sectionsComponent.getSecciones());
+        modelAndView.addObject("postSeccionList", this.postSeccionService.findAll());
+        modelAndView.addObject("postsSinSeccion", this.postService.postsSinSeccion());
+        modelAndView.addObject("posts", this.postService.findAll());
+        modelAndView.addObject("categorias", this.categoriaService.findAll());
+        return modelAndView;
+    }
+
+    @GetMapping("/modificarSeccion")
+    public String updateSeccion(Post post, Seccion seccion) {
+        postSeccionService.updatePostSeccion(post, seccion);
+        return "redirect:/admin/secciones";
     }
 
 

@@ -13,5 +13,6 @@ public interface PostService {
     public boolean update(Post object);
     public boolean deleteByPostId(int id);
     public List<Post> findAll();
+    public List<Post> postsSinSeccion();
 
 }

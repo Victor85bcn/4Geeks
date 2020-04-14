@@ -3498,3 +3498,22 @@ div[data-role="editor-toolbar"] {
   border-color: #f6214b !important;
   color: #f6214b !important;
 }
+
+.thead-geeks {
+  background: #0b0b0b;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.625em;
+  position: relative;
+
+}
+.td-geeks {
+  color: #777777;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.625em;
+  vertical-align: middle;
+}

@@ -14,4 +14,5 @@ public interface PostRep extends BaseRep<Post> {
     public boolean deleteByPostId(int id);
     public List<Post> getNoTeLoPierdas();
     public List<Post> getPostsByCategoria(String categoria);
+    public List<Post> postsSinSeccion();
 }

@@ -1,7 +1,9 @@
 package com.example.fourgeeks.components;
 
 import com.example.fourgeeks.model.Post;
+import com.example.fourgeeks.model.Seccion;
 import com.example.fourgeeks.repository.impl.PostRepository;
+import com.example.fourgeeks.repository.impl.SeccionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +15,9 @@ public class SectionsComponent {
 
     @Autowired
     PostRepository postRepository;
+
+    @Autowired
+    SeccionRepository seccionRepository;
 
     public List<Post> getUltimasNoticias() {
         ArrayList<Post> postsUltimasNoticias = new ArrayList<>();
@@ -59,6 +64,13 @@ public class SectionsComponent {
         return postsNoteLoPierdas;
     }
 
+    public List<Seccion> getSecciones() {
+        ArrayList<Seccion> seccionesList = new ArrayList<>();
+        for(Seccion seccion : seccionRepository.findAll()) {
+            seccionesList.add(seccion);
+        }
+        return seccionesList;
+    }
 
 
 }

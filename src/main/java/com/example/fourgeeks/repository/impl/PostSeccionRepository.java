@@ -55,6 +55,7 @@ public class PostSeccionRepository implements PostSeccionRep {
         return jdbcTemplate.query("select * from post_seccion", new PostSeccionMapper());
     }
 
+
     @Override
     public PostSeccion findById(int id) {
         return null;

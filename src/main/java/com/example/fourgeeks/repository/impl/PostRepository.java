@@ -1,7 +1,9 @@
 package com.example.fourgeeks.repository.impl;
 
 import com.example.fourgeeks.mapper.PostMapper;
+import com.example.fourgeeks.mapper.PostSeccionMapper;
 import com.example.fourgeeks.model.Post;
+import com.example.fourgeeks.model.PostSeccion;
 import com.example.fourgeeks.repository.PostRep;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -68,6 +70,11 @@ public class PostRepository implements PostRep {
         Object[] params = new Object[] {Id};
         return jdbcTemplate.queryForObject("select * from post where IdPost = ?",
                 params, new PostMapper());
+    }
+
+    @Override
+    public List<Post> postsSinSeccion() {
+        return jdbcTemplate.query("select p.* from post_seccion ps right join post p on ps.IdPost = p.IdPost where ps.IdPost is null;", new PostMapper());
     }
 
     public void deleteAll(){

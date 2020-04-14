@@ -1,0 +1,113 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!DOCTYPE html>
+<html lang="zxx" class="no-js" xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<!-- Mobile Specific Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- Favicon-->
+		<link rel="shortcut icon" href="img/fav.png">
+		<!-- Author Meta -->
+		<meta name="author" content="colorlib">
+		<!-- Meta Description -->
+		<meta name="description" content="">
+		<!-- Meta Keyword -->
+		<meta name="keywords" content="">
+		<!-- meta character set -->
+		<meta charset="UTF-8">
+		<!-- Site Title -->
+		<title>Magazine</title>
+		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+		<!-- Styles -->
+		<div th:replace="components/style.html"></div>
+
+		<link rel="apple-touch-icon" href="//mindmup.s3.amazonaws.com/lib/img/apple-touch-icon.png" />
+		<link rel="shortcut icon" href="http://mindmup.s3.amazonaws.com/lib/img/favicon.ico" >
+		<link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
+		<link href="https://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+		<script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+
+
+	</head>
+	<body>
+	<header>
+		<div th:replace="components/header.html"></div>
+	</header>
+		<div class="site-main-container">
+			<!-- Start top-post Area -->
+			<section class="top-post-area pt-10">
+				<div class="container no-padding">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="hero-nav-area">
+								<h1 class="text-white">Gestión de artículos</h1>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- End top-post Area -->
+			<!-- Start contact-page Area -->
+			<section class="contact-page-area pt-50 pb-120">
+				<div class="container">
+					<div class="row contact-wrap">
+
+						<div class="col-lg-12">
+
+
+
+
+							<table class="table">
+								<thead class="thead-geeks">
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">Nombre</th>
+									<th scope="col">Categoría</th>
+									<th scope="col" >Fecha</th>
+									<th scope="col" style="text-align: center">Acción</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr th:each="post : ${posts}">
+									<th class="td-geeks" style="vertical-align: middle" scope="row" th:text="${post.getIdPost()}"></th>
+									<td class="td-geeks" style="vertical-align: middle" th:text="${post.getTitulo()}" maxlength="10" th:type="name"></td>
+									<td class="td-geeks" style="vertical-align: middle" th:each="categoria : ${categorias}" th:if="${categoria.IdCategoria == post.IdCategoria}" th:text="${categoria.Nombre}"></td>
+									<td class="td-geeks" style="vertical-align: middle" th:text="${post.getFecha()}" width="13%"></td>
+									<td class="td-geeks" style="display: flex; justify-items: center; align-items: center; vertical-align: middle">
+										<form form-method="put" th:action="@{/admin/modificar}+'/'+ ${post.IdPost}">
+<!--											<input type="hidden" name="idPost" th:value="${post.IdPost}"/>-->
+											<button class="login-btn2"><a class="text-white">Editar</a></button>
+										</form>
+										<form form-method="delete" th:action="@{/admin/eliminarPost}">
+											<ul>
+											<li><input type="hidden" name="idPost" th:value="${post.IdPost}"/></li>
+											<li><button class="login-btn2" style="margin-left: 10px"><a class="text-white">Eliminar</a></button></li>
+											</ul>
+										</form>
+									</td>
+								</tr>
+								</tbody>
+							</table>
+
+
+
+
+
+
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- End contact-page Area -->
+		</div>
+		<!-- start footer Area -->
+		<footer class="footer-area section-gap">
+			<div th:replace="components/footer.html"></div>
+		</footer>
+		<!-- End footer Area -->
+		<div th:replace="components/scripts.html"></div>
+
+	</body>
+</html>
