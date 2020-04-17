@@ -35,7 +35,7 @@ public class PostRepository implements PostRep {
             String sql = String.format("insert into Post (Titulo, Extracto, Contenido, IdUsuario, IdCategoria, Imagen, Tipo) values ('%s', '%s', '%s', %d, %d, '%s', '%s')",
                     object.getTitulo(), object.getExtracto(), object.getContenido(), object.getIdUsuario(), object.getIdCategoria(), object.getImagen(), object.getTipo());
             jdbcTemplate.execute(sql);
-            logger.info("Artículo " + object.getTitulo() + " creado.");
+            logger.info("Artículo '" + object.getTitulo() + "' creado.");
             return true;
         }catch(Exception e) {
             logger.error(e.getMessage());

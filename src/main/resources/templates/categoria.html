@@ -48,7 +48,6 @@
 								<ul class="meta">
 									<li><span class="lnr lnr-user"></span><a th:each="usuario : ${usuarios}" th:if="${usuario.IdUsuario == post.IdUsuario}" th:text="${usuario.Nombre} + ' ' +${usuario.Apellido}" href="#">Nombre de usuario</a></li>
 									<li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
-									<li><a href="#"><span class="lnr lnr-bubble"></span>06 Comments</a></li>
 								</ul>
 							</div>
 						</div>
@@ -67,8 +66,7 @@
 									</a>
 									<ul class="meta">
 										<li><span class="lnr lnr-user"></span><a th:each="usuario : ${usuarios}" th:if="${usuario.IdUsuario == post.IdUsuario}" th:text="${usuario.Nombre} + ' ' +${usuario.Apellido}" href="#">Nombre de usuario</a></li>
-										<li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
-										<li><a href="#"><span class="lnr lnr-bubble"></span>06 Comments</a></li>
+										<li><span class="lnr lnr-calendar-full"></span><a th:text="${#dates.format(post.Fecha, 'dd-MM-yyyy')}" href="#">Fecha</a></li>
 									</ul>
 								</div>
 							</div>
@@ -86,8 +84,7 @@
 									</a>
 									<ul class="meta">
 										<li><span class="lnr lnr-user"></span><a th:each="usuario : ${usuarios}" th:if="${usuario.IdUsuario == post.IdUsuario}" th:text="${usuario.Nombre} + ' ' +${usuario.Apellido}" href="#">Nombre de usuario</a></li>
-										<li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
-										<li><a href="#"><span class="lnr lnr-bubble"></span>06 Comments</a></li>
+										<li><span class="lnr lnr-calendar-full"></span><a th:text="${#dates.format(post.Fecha, 'dd-MM-yyyy')}" href="#">Fecha</a></li>
 									</ul>
 								</div>
 							</div>
@@ -125,8 +122,7 @@
 										</a>
 										<ul class="meta">
 											<li><span class="lnr lnr-user"></span><a th:each="usuario : ${usuarios}" th:if="${usuario.IdUsuario == post.IdUsuario}" th:text="${usuario.Nombre} + ' ' +${usuario.Apellido}" href="#">Nombre de usuario</a></li>
-											<li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
-											<li><a href="#"><span class="lnr lnr-bubble"></span>06 Comments</a></li>
+											<li><span class="lnr lnr-calendar-full"></span><a th:text="${#dates.format(post.Fecha, 'dd-MM-yyyy')}" href="#">Fecha</a></li>
 										</ul>
 										<p th:text="${post.extracto}" class="excert"></p>
 									</div>

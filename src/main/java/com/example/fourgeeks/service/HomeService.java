@@ -2,6 +2,7 @@ package com.example.fourgeeks.service;
 
 import com.example.fourgeeks.components.SectionsComponent;
 import com.example.fourgeeks.repository.CategoriaRep;
+import com.example.fourgeeks.repository.ComentarioRep;
 import com.example.fourgeeks.repository.UsuarioRep;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,9 @@ public class HomeService {
 
     @Autowired
     private UsuarioRep usuarioRep;
+
+    @Autowired
+    private ComentarioRep comentarioRep;
 
 
     public Model modelHome(Model model){

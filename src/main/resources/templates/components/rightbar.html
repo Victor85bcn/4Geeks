@@ -21,8 +21,7 @@
                     </a>
                     <ul class="meta">
                         <li><span class="lnr lnr-user"></span><a th:each="usuario : ${usuarios}" th:if="${usuario.IdUsuario == post.IdUsuario}" th:text="${usuario.Nombre} + ' ' +${usuario.Apellido}" href="#">Nombre de usuario</a></li>
-                        <li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
-                        <li><a href="#"><span class="lnr lnr-bubble"></span>06 </a></li>
+                        <li><span class="lnr lnr-calendar-full"></span><a th:text="${#dates.format(post.Fecha, 'dd-MM-yyyy')}" href="#">Fecha</a></li>
                     </ul>
                 </div>
             </div>
@@ -60,8 +59,7 @@
                         <h6 th:text="${post.titulo}" ></h6>
                     </a>
                     <ul class="meta">
-                        <li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
-                        <li><a href="#"><span class="lnr lnr-bubble"></span>06</a></li>
+                        <li><span class="lnr lnr-calendar-full"></span><a th:text="${#dates.format(post.Fecha, 'dd-MM-yyyy')}" href="#">Fecha</a></li>
                     </ul>
                 </div>
             </div>

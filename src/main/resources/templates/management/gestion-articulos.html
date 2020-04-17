@@ -74,7 +74,7 @@
 									<th class="td-geeks" style="vertical-align: middle" scope="row" th:text="${post.getIdPost()}"></th>
 									<td class="td-geeks" style="vertical-align: middle" th:text="${post.getTitulo()}" maxlength="10" th:type="name"></td>
 									<td class="td-geeks" style="vertical-align: middle" th:each="categoria : ${categorias}" th:if="${categoria.IdCategoria == post.IdCategoria}" th:text="${categoria.Nombre}"></td>
-									<td class="td-geeks" style="vertical-align: middle" th:text="${post.getFecha()}" width="13%"></td>
+									<td class="td-geeks" style="vertical-align: middle" th:text="${#dates.format(post.Fecha, 'dd-MM-yyyy')}" width="13%"></td>
 									<td class="td-geeks" style="display: flex; justify-items: center; align-items: center; vertical-align: middle">
 										<form form-method="put" th:action="@{/admin/modificar}+'/'+ ${post.IdPost}">
 <!--											<input type="hidden" name="idPost" th:value="${post.IdPost}"/>-->

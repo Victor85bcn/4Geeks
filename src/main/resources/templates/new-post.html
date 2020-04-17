@@ -22,8 +22,6 @@
 		<!-- Styles -->
 		<div th:replace="components/style.html"></div>
 
-
-
 		<script th:src="@{/js/bootstrap-wysiwyg.js}"></script>
 		<script th:src="@{/js/jquery.hotkeys.js}"></script>
 
@@ -42,9 +40,6 @@
 		<script th:src="@{/js/google-code-prettify/prettify.js}"></script>
 		<link th:href="@{/js/google-code-prettify/prettify.css}" rel="stylesheet" href="../static/js/google-code-prettify/prettify.css" >
 
-
-
-
 	</head>
 	<body>
 	<header>
@@ -58,7 +53,6 @@
 						<div class="col-lg-12">
 							<div class="hero-nav-area">
 								<h1 class="text-white">Nuevo atículo</h1>
-								<p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span><a href="contact.html">Contact Us </a></p>
 							</div>
 						</div>
 					</div>
@@ -74,30 +68,19 @@
 							<form th:action="@{/articulo/addNuevoArticulo}" method="post" th:object="${post}" class="form-area contact-form text-left" id="myPost">
 								<div class="row">
 									<div class="col-lg-12">
-										<label for="IdPost">Título </label>
-										<input th:field="*{titulo}" th:value="*{titulo}" name="name" placeholder="Título del artículo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Título'" class="common-input mb-20 form-control" required="" type="text">
-										<label for="IdPost">Extracto</label>
-										<input th:field="*{extracto}" th:value="*{extracto}" name="email" placeholder="Brvee resumen del contenido" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" class="common-input mb-20 form-control" required="" type="text">
-										<label for="IdPost">Categoría</label>
-										<select th:field="*{idCategoria}" name="_categoria" id="inputCategoria" class="common-input mb-20 form-control">
-											<option th:each="categoria : ${categorias}" th:value="${categoria.idCategoria}"  th:text="${categoria.getNombre()}"></option>
+										<label style="margin-left: 15px" for="IdPost">Título: </label>
+										<input style="margin-left: 15px" th:field="*{titulo}" th:value="*{titulo}" name="name" th:maxlength="75" placeholder="Título del artículo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Título'" class="common-input mb-20 form-control" required="" type="text">
+										<label style="margin-left: 15px" for="IdPost">Extracto:</label>
+										<input style="margin-left: 15px" th:field="*{extracto}" th:value="*{extracto}" name="email" th:maxlength="125" placeholder="Resumen del contenido" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" class="common-input mb-20 form-control" required="" type="text">
+										<label style="margin-left: 15px" for="IdPost">Categoría:</label>
+										<select style="margin-left: 15px" th:field="*{idCategoria}" name="_categoria" id="inputCategoria">
+											<option style="margin-left: 15px" th:each="categoria : ${categorias}" th:value="${categoria.idCategoria}"  th:text="${categoria.getNombre()}"></option>
 										</select>
-<!--										<input th:field="*{idCategoria}" th:value="*{idCategoria}" name="subject" placeholder="Categoría del artículo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter subject'" class="common-input mb-20 form-control" required="" type="number">-->
-										<label for="IdPost">Usuario</label>
-										<select th:field="*{idUsuario}" class="common-input mb-20 form-control">
-											<option th:each="usuario : ${usuarios}" th:value="${usuario.idUsuario}"  th:text="${usuario.getNombre() + ' ' + usuario.getApellido()}"></option>
-										</select>
-										<label for="IdPost">Imagen</label>
-										<input th:field="*{imagen}" th:value="*{imagen}" name="subject" placeholder="Url de la imagen destacada" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter subject'" class="common-input mb-20 form-control" required="" type="text">
-									</div>
+										</div>
 								</div>
-<!--								<div class="col-lg-12">-->
-<!--									<label for="IdPost">Contenido</label>-->
-<!--									<textarea th:field="*{contenido}" th:value="*{contenido}" class="common-textarea form-control" name="message" placeholder="Contenido del artículo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Messege'" required=""></textarea>-->
-<!--								</div>-->
+								<br>
+								<label for="IdPost">Contenido:</label>
 
-
-								<div class="content">
 									<div id="alerts"></div>
 									<div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
 										<div class="btn-group">
@@ -152,24 +135,27 @@
 										<input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
 									</div>
 
-<!--									<input type="hidden" th:value="${post.idPost}" name="meta_id">-->
-
 									<div th:text="${post.contenido}" id="editor"></div>
 
 									<textarea th:field="*{contenido}" th:value="*{contenido}" name="meta_descripcion_text_html" id="meta_descripcion_text_html" rows="2" cols="20" style="display:none; "></textarea>
 
 									<br/>
-<!--									<input id="enviar" type="submit" value="Guardar" name="B1" class="btn btn-primary btn-large"></div>-->
+									<label for="IdPost">Imagen:</label>
+									<input th:field="*{imagen}" th:value="*{imagen}" name="subject" placeholder="Url de la imagen destacada" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter subject'" class="common-input mb-20 form-control" required="" type="text">
 
-								<br>
-								<div class="col-lg-12">
+									<label for="IdPost">Usuario:</label>
+									<select th:field="*{idUsuario}">
+										<option th:each="usuario : ${usuarios}" th:value="${usuario.idUsuario}"  th:text="${usuario.getNombre() + ' ' + usuario.getApellido()}"></option>
+									</select>
+
+									<br>
+
+									<div class="col-lg-12">
 									<div class="alert-msg" style="text-align: left;"></div>
+										<br><br>
 									<button class="primary-btn primary" style="float: left;">Publicar</button>
 								</div>
-
-
 							</form>
-
 						</div>
 					</div>
 				</div>
@@ -187,8 +173,6 @@
 		<script th:src="@{/js/bootstrap-wysiwyg.js}"></script>
 		<script th:src="@{/js/google-code-prettify/prettify.js}"></script>
 		<script th:src="@{/js/publicacion.js}"></script>
-
-
 
 	</body>
 </html>
