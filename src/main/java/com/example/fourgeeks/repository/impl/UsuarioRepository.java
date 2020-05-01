@@ -30,16 +30,16 @@ public class UsuarioRepository implements UsuarioRep {
     }
 
     @Override
-    public boolean save(Usuario object) {
+    public Usuario save(Usuario object) {
         try {
             String sql = String.format("insert into Usuario (Nombre, Apellido, Password, Email, IdGrupo) values ('%s', '%s', '%s', '%s', '%d')",
                     object.getNombre(), object.getApellido(), bCryptPasswordEncoder.encode(object.getPassword()), object.getEmail(), object.getIdGrupo());
             jdbcTemplate.execute(sql);
             logger.info("Usuario " + object.getEmail() + " creado.");
-            return true;
+            return findByEmail(object.getEmail());
         }catch(Exception e) {
             logger.error(e.getMessage());
-            return false;
+            return null;
         }
     }
 
@@ -58,6 +58,18 @@ public class UsuarioRepository implements UsuarioRep {
             }
         }
         return false;
+    }
+
+    public boolean deleteByUsuarioId(int id){
+        try{
+            String sql = String.format("delete from Usuario where IdUsuario='%d'", id);
+            jdbcTemplate.execute(sql);
+            logger.info("Usuario " + id + " eliminado.");
+            return true;
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return false;
+        }
     }
 
     @Override

@@ -16,8 +16,12 @@ public class UsuarioRestController {
     private UsuarioRepository repository;
 
     @PostMapping
-    public ResponseEntity<RepBase> save(@RequestBody Usuario usuario){
-        return ResponseEntity.ok(new RepBase(repository.save(usuario)));
+    public ResponseEntity<Usuario> save(@RequestBody Usuario usuario){
+        if(repository.save(usuario) != null){
+            return ResponseEntity.ok(usuario);
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @PutMapping
@@ -34,4 +38,10 @@ public class UsuarioRestController {
     public ResponseEntity<Usuario> findById(@PathVariable int id){
         return ResponseEntity.ok(repository.findById(id));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<RepBase> delete(@PathVariable int id){
+        return ResponseEntity.ok(new RepBase(repository.deleteByUsuarioId(id)));
+    }
+
 }

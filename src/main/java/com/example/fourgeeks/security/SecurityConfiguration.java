@@ -28,6 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/index.html").permitAll() // TODOS
                 .antMatchers("/categoria/**").permitAll() // TODOS LOGUEADOS
@@ -39,7 +40,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginProcessingUrl("/signin")
                 .loginPage("/login").permitAll()
-//                .failureUrl("/error.html")
                 .usernameParameter("txtUsername")
                 .passwordParameter("txtPassword")
                 .and()

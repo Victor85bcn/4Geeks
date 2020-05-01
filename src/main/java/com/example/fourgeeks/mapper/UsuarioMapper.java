@@ -19,3 +19,6 @@ public class UsuarioMapper implements RowMapper<Usuario> {
         return usuario;
     }
 }
+
+
+

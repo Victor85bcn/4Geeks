@@ -28,7 +28,7 @@ public class UsuarioRepositoryTest {
         usuario.setIdGrupo(1);
         usuario.setNombre("Original");
 
-        Assert.assertTrue(usuarioRepository.save(usuario));
+        Assert.assertNotNull(usuarioRepository.save(usuario));
     }
 
     @Test

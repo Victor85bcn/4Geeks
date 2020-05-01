@@ -6,7 +6,7 @@ $(function(){
         }, true);
 
     function initToolbarBootstrapBindings() {
-        var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',
+        var fonts = ['Poppins', 'Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',
                 'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times',
                 'Times New Roman', 'Verdana'],
             fontTarget = $('[title=Font]').siblings('.dropdown-menu');

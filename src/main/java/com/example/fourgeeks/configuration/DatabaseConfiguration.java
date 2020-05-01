@@ -11,7 +11,6 @@ import javax.sql.DataSource;
 @Component
 public class DatabaseConfiguration {
 
-
     @Autowired
     private Environment env;
 
@@ -24,6 +23,4 @@ public class DatabaseConfiguration {
         dataSource.setPassword(env.getProperty("spring.datasource.password"));
         return dataSource;
     }
-
-
 }
