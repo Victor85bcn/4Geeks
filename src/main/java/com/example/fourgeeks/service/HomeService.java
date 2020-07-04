@@ -2,7 +2,6 @@ package com.example.fourgeeks.service;
 
 import com.example.fourgeeks.components.SectionsComponent;
 import com.example.fourgeeks.repository.CategoriaRep;
-import com.example.fourgeeks.repository.ComentarioRep;
 import com.example.fourgeeks.repository.UsuarioRep;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +19,6 @@ public class HomeService {
     @Autowired
     private UsuarioRep usuarioRep;
 
-    @Autowired
-    private ComentarioRep comentarioRep;
 
 
     public Model modelHome(Model model){
@@ -31,6 +28,8 @@ public class HomeService {
         model.addAttribute("subPortadaBottom", this.sectionsComponent.getSubPortadaBottom());
         model.addAttribute("loMasPopular", this.sectionsComponent.getLoMasPopular());
         model.addAttribute("noTeLoPierdas", this.sectionsComponent.getNoTeLoPierdas());
+        model.addAttribute("reportajes", this.sectionsComponent.getReportajes());
+        model.addAttribute("opinion", this.sectionsComponent.getOpinion());
         model.addAttribute("categorias", this.categoriaRep.findAll());
         model.addAttribute("usuarios", this.usuarioRep.findAll());
         return model;

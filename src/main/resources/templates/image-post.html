@@ -63,20 +63,14 @@
 										<li><a th:each="categoria : ${categorias}" th:if="${categoria.IdCategoria == post.IdCategoria}" th:text="${categoria.Nombre}" href="#">Food Habit</a></li>
 									</ul>
 									<a href="#">
-										<h3 th:text="${post.extracto}">A Discount Toner Cartridge Is Better Than Ever.</h3>
+										<h3 th:text="${post.extracto}"></h3>
 									</a>
 									<ul class="meta pb-20">
 										<li><span class="lnr lnr-user"></span><a th:each="usuario : ${usuarios}" th:if="${usuario.IdUsuario == post.IdUsuario}" th:text="${usuario.Nombre} + ' ' +${usuario.Apellido}" href="#">Nombre de usuario</a></li>
 										<li><span class="lnr lnr-calendar-full"></span><a th:text="${#dates.format(post.Fecha, 'dd-MM-yyyy')}" href="#">Fecha</a></li>
-<!--										<li><a href="#"><span class="lnr lnr-bubble"></span>06 </a></li>-->
 										<li><span class="lnr lnr-bubble"></span><a th:text="${#arrays.length(comentariosList)} + ' Comentarios'" href="#">Comentarios</a></li>
-
 									</ul>
-
-
 									<div th:utext="${post.contenido}"> </div>
-
-
 
 									<div class="navigation-wrap justify-content-between d-flex">
 									<a class="prev" href="#"><span class="lnr lnr-arrow-left"></span>Anterior</a>
@@ -90,13 +84,9 @@
 											<div class="comment-list">
 												<div th:each="comentario : ${comentariosList}" class="single-comment justify-content-between d-flex">
 													<div class="user justify-content-between d-flex">
-<!--														<div class="thumb">-->
-<!--															<img src="../static/img/blog/c1.jpg" alt="">-->
-<!--														</div>-->
 														<div class="desc">
-<!--															<h5><a th:each="usuario : ${usuarios}" th:if="${usuario.IdUsuario == comentario.IdUsuario}" th:text="${usuario.Nombre} + ' ' +${usuario.Apellido}" href="#">Nombre</a></h5>-->
-															<h5><a th:text="${comentario.Alias}" href="#">Alias</a></h5>
-															<p class="date" th:text="${#dates.format(comentario.Fecha, 'dd-MM-yyyy')}">December 4, 2017 at 3:12 pm </p>
+															<h5><a th:text="${comentario.Alias}" href="#"></a></h5>
+															<p class="date" th:text="${#dates.format(comentario.Fecha, 'dd-MM-yyyy')}"></p>
 															<p th:text="${comentario.comentario}" class="comment"></p>
 														</div>
 													</div>

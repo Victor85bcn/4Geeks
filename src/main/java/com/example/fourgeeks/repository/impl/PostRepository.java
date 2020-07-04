@@ -1,9 +1,7 @@
 package com.example.fourgeeks.repository.impl;
 
 import com.example.fourgeeks.mapper.PostMapper;
-import com.example.fourgeeks.mapper.PostSeccionMapper;
 import com.example.fourgeeks.model.Post;
-import com.example.fourgeeks.model.PostSeccion;
 import com.example.fourgeeks.repository.PostRep;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -121,6 +119,18 @@ public class PostRepository implements PostRep {
     @Override
     public List<Post> getLoMasPopular() {
         return jdbcTemplate.query("select * from post p inner join post_seccion ps on p.IdPost = ps.IdPost where ps.IdSeccion = 8 order by p.IdPost desc limit 4",
+                new PostMapper());
+    }
+
+    @Override
+    public List<Post> getReportajes() {
+        return jdbcTemplate.query("select * from post p inner join post_seccion ps on p.IdPost = ps.IdPost where ps.IdSeccion = 5 order by p.IdPost desc limit 6",
+                new PostMapper());
+    }
+
+    @Override
+    public List<Post> getOpinion() {
+        return jdbcTemplate.query("select * from post p inner join post_seccion ps on p.IdPost = ps.IdPost where ps.IdSeccion = 6 order by p.IdPost desc limit 4",
                 new PostMapper());
     }
 

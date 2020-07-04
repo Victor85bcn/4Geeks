@@ -4,6 +4,7 @@ import com.example.fourgeeks.configuration.TestDatabaseConfiguration;
 import com.example.fourgeeks.model.Categoria;
 import com.example.fourgeeks.repository.impl.CategoriaRepository;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

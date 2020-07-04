@@ -49,28 +49,14 @@
                 <li><a th:href="@{/categoria/cine%20y%20series}">Cine y Series</a></li>
                 <li><a th:href="@{/categoria/cultura}">Cultura</a></li>
                 <li><a th:href="@{/categoria/comunidad}">Comunidad</a></li>
-                <li class="menu-has-children"><a>Admin</a>
+                <li sec:authorize="isFullyAuthenticated()" class="menu-has-children" style="float: right; text-align: right; alignment: right;" ><a>Admin</a>
                     <ul>
                         <li><a th:href="@{articulo/nuevoArticulo}">Escribir Artículo</a></li>
                         <li><a th:href="@{/admin/posts}">Gestión artículos</a></li>
                         <li><a th:href="@{/admin/secciones}">Gestión secciones</a></li>
-<!--                        <li><a href="gallery-post.html">Gallery Post</a></li>-->
-<!--                        <li><a href="video-post.html">Video Post</a></li>-->
-<!--                        <li><a th:href="@{/nuevoArticulo}">Escribir artículo</a></li>-->
                     </ul>
                 </li>
             </ul>
         </nav><!-- #nav-menu-container -->
-        <div class="navbar-right">
-            <form class="Search">
-                <input type="text" class="form-control Search-box" name="Search-box" id="Search-box" placeholder="Search">
-                <label for="Search-box" class="Search-box-label">
-                    <span class="lnr lnr-magnifier"></span>
-                </label>
-                <span class="Search-close">
-								<span class="lnr lnr-cross"></span>
-							</span>
-            </form>
-        </div>
     </div>
 </div>

@@ -63,4 +63,15 @@ public class GrupoPermisoRepository implements GrupoPermisoRep {
                 params, new GrupoPermisoMapper());
     }
 
+    public boolean deleteById(int permiso){
+        try{
+            String sql = String.format("delete from grupo_permiso where IdPermiso='%d'", permiso);
+            jdbcTemplate.execute(sql);
+            return true;
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return false;
+        }
+    }
+
 }

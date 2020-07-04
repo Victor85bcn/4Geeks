@@ -42,12 +42,19 @@ public class GrupoRepository implements GrupoRep {
 
     @Override
     public boolean update(Grupo object) {
-        if(object.getIdgrupo()>0) {
-            String sql = String.format("update Grupo set Nombre='%s' where IdGrupo='%d'", object.getNombre(), object.getIdgrupo());
-            jdbcTemplate.execute(sql);
-            return true;
+        try {
+            if (object.getIdgrupo() > 0) {
+                String sql = String.format("update Grupo set Nombre='%s' where IdGrupo='%d'", object.getNombre(), object.getIdgrupo());
+                jdbcTemplate.execute(sql);
+                logger.info("Grupo " + object.getIdgrupo() + " modificado.");
+                return true;
+            }
+            logger.error("Grupo no encontrado.");
+            return false;
+        }catch (Exception e) {
+            logger.error(e.getMessage());
+            return false;
         }
-        return false;
     }
 
     @Override
@@ -65,6 +72,18 @@ public class GrupoRepository implements GrupoRep {
     @Override
     public Grupo findByUser(String email) {
         return jdbcTemplate.queryForObject("select p.* from grupo p inner join usuario u on p.IdGrupo = u.IdGrupo where u.Email = '" + email + "'", new GrupoMapper());
+    }
+
+    public boolean deleteById(int id){
+        try{
+            String sql = String.format("delete from Grupo where IdGrupo='%d'", id);
+            logger.info("Grupo " + id + " eliminado.");
+            jdbcTemplate.execute(sql);
+            return true;
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return false;
+        }
     }
 
 }

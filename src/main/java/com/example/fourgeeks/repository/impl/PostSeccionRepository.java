@@ -63,16 +63,28 @@ public class PostSeccionRepository implements PostSeccionRep {
 
     @Override
     public PostSeccion findByPostId(int Id) {
-        Object[] params = new Object[] {Id};
-        return jdbcTemplate.queryForObject("select * from post_seccion where IdPost = ?",
-                params, new PostSeccionMapper());
+        try {
+            Object[] params = new Object[] {Id};
+            return jdbcTemplate.queryForObject("select * from post_seccion where IdPost = ?",
+                    params, new PostSeccionMapper());
+        } catch (Exception e) {
+            logger.error("Post " + Id + " no encontrado.");
+            return null;
+        }
+
     }
 
     @Override
-    public PostSeccion findBySeccionId(int Id) {
-        Object[] params = new Object[] {Id};
-        return jdbcTemplate.queryForObject("select * from post_seccion where IdSeccion = ?",
-                params, new PostSeccionMapper());
+    public List<PostSeccion> findBySeccionId(int Id) {
+        try {
+            Object[] params = new Object[] {Id};
+            return jdbcTemplate.query("select * from post_seccion where IdSeccion = ?",
+                    params, new PostSeccionMapper());
+        } catch (Exception e) {
+            logger.error("Sección " + Id + " no encontrada.");
+            return null;
+        }
+
     }
 
 

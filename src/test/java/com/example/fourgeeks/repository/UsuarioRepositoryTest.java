@@ -27,7 +27,6 @@ public class UsuarioRepositoryTest {
         usuario.setEmail("testemail@gmail.com");
         usuario.setIdGrupo(1);
         usuario.setNombre("Original");
-
         Assert.assertNotNull(usuarioRepository.save(usuario));
     }
 

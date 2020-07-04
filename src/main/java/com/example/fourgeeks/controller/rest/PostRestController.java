@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/post")
-public class PostRestRepository {
+public class PostRestController {
 
     @Autowired
     private PostRepository repository;

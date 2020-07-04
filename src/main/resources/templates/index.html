@@ -143,26 +143,8 @@
 							<!-- Start Reportajes -->
 							<div class="popular-post-wrap">
 								<h4 class="title">Reportajes</h4>
-								<div th:each="post : ${portadaPrincipal}" class="feature-post relative">
-									<div class="feature-img relative">
-										<div class="overlay overlay-bg"></div>
-										<img th:src="${post.imagen}" class="img-fluid" src="../static/img/f1.jpg" alt="">
-									</div>
-									<div class="details">
-										<ul class="tags">
-											<li><a th:each="categoria : ${categorias}" th:if="${categoria.IdCategoria == post.IdCategoria}" th:text="${categoria.Nombre}" href="#">Lifestyle</a></li>
-										</ul>
-										<a th:href="@{/articulo/} + ${post.IdPost}" href="image-post.html">
-											<h3 th:text="${post.titulo}" >A Discount Toner Cartridge Is Better Than Ever.</h3>
-										</a>
-										<ul class="meta">
-											<li><span class="lnr lnr-user"></span><a th:each="usuario : ${usuarios}" th:if="${usuario.IdUsuario == post.IdUsuario}" th:text="${usuario.Nombre} + ' ' +${usuario.Apellido}" href="#">Nombre de usuario</a></li>
-											<li><span class="lnr lnr-calendar-full"></span><a th:text="${#dates.format(post.Fecha, 'dd-MM-yyyy')}" href="#">Fecha</a></li>
-										</ul>
-									</div>
-								</div>
 								<div  class="row mt-20 medium-gutters">
-									<div th:each="post : ${ultimasNoticias}" class="col-lg-6 single-popular-post">
+									<div th:each="post : ${reportajes}" class="col-lg-6 single-popular-post">
 										<div class="feature-img-wrap relative">
 											<div class="feature-img relative">
 												<div class="overlay overlay-bg"></div>
@@ -190,7 +172,7 @@
 							<!-- Start Opinión -->
 							<div class="relavent-story-post-wrap mt-30">
 								<h4 class="title">Opinión</h4>
-								<div th:each="post : ${ultimasNoticias}" class="relavent-story-list-wrap">
+								<div th:each="post : ${opinion}" class="relavent-story-list-wrap">
 									<div class="single-relavent-post row align-items-center">
 										<div class="col-lg-5 post-left">
 											<div class="feature-img relative">

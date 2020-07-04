@@ -57,8 +57,12 @@ public class SeccionRepository implements SeccionRep {
 
     @Override
     public Seccion findById(int Id) {
-        Object[] params = new Object[] {Id};
-        return jdbcTemplate.queryForObject("select * from Seccion where IdSeccion = ?", params, new SeccionMapper());
+        try {
+            Object[] params = new Object[]{Id};
+            return jdbcTemplate.queryForObject("select * from Seccion where IdSeccion = ?", params, new SeccionMapper());
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public void deleteAll(){

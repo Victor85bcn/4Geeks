@@ -32,6 +32,24 @@ public class ComentarioRestController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Comentario> findById(@PathVariable int id){
-        return ResponseEntity.ok(repository.findById(id));
+        if(repository.findById(id) != null){
+            return ResponseEntity.ok(repository.findById(id));
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+    }
+
+    @GetMapping("/post/{id}")
+    public ResponseEntity<List<Comentario>> findByPostId(@PathVariable int id){
+        if(repository.findByPostId(id) != null){
+            return ResponseEntity.ok(repository.findByPostId(id));
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<RepBase> delete(@PathVariable int id){
+        return ResponseEntity.ok(new RepBase(repository.deleteById(id)));
     }
 }

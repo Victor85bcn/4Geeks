@@ -34,4 +34,13 @@ public class GrupoRestController {
     public ResponseEntity<Grupo> findById(@PathVariable int id){
         return ResponseEntity.ok(repository.findById(id));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Grupo> delete(@PathVariable int id){
+        if (repository.deleteById(id)){
+            return ResponseEntity.ok(null);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

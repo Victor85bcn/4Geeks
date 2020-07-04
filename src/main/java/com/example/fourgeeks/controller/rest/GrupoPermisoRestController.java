@@ -20,11 +20,6 @@ public class GrupoPermisoRestController {
         return ResponseEntity.ok(new RepBase(repository.save(grupoPermiso)));
     }
 
-    @PutMapping
-    public ResponseEntity<RepBase> update(@RequestBody GrupoPermiso grupoPermiso){
-        return ResponseEntity.ok(new RepBase(repository.update(grupoPermiso)));
-    }
-
     @GetMapping
     public ResponseEntity<List<GrupoPermiso>> findAll(){
         return ResponseEntity.ok(repository.findAll());
@@ -33,5 +28,10 @@ public class GrupoPermisoRestController {
     @GetMapping("/{id}")
     public ResponseEntity<GrupoPermiso> findById(@PathVariable int id){
         return ResponseEntity.ok(repository.findById(id));
+    }
+
+    @DeleteMapping("/permiso/{permiso}")
+    public ResponseEntity<RepBase> delete(@PathVariable int permiso){
+        return ResponseEntity.ok(new RepBase(repository.deleteById(permiso)));
     }
 }

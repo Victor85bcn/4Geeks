@@ -56,6 +56,22 @@ public class SectionsComponent {
         return postsLoMasPopular;
     }
 
+    public List<Post> getReportajes() {
+        ArrayList<Post> postsReportajes = new ArrayList<>();
+        for(Post post : postRepository.getReportajes()) {
+            postsReportajes.add(post);
+        }
+        return postsReportajes;
+    }
+
+    public List<Post> getOpinion() {
+        ArrayList<Post> postsOpinion = new ArrayList<>();
+        for(Post post : postRepository.getOpinion()) {
+            postsOpinion.add(post);
+        }
+        return postsOpinion;
+    }
+
     public List<Post> getNoTeLoPierdas() {
         ArrayList<Post> postsNoteLoPierdas = new ArrayList<>();
         for(Post post : postRepository.getNoTeLoPierdas()) {

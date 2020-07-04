@@ -35,5 +35,14 @@ public class PermisoRestController {
     public ResponseEntity<Permiso> findById(@PathVariable int id){
         return ResponseEntity.ok(repository.findById(id));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Permiso> delete(@PathVariable int id){
+        if (repository.deleteById(id)){
+            return ResponseEntity.ok(null);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
 

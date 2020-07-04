@@ -43,6 +43,14 @@ public class UsuarioRepository implements UsuarioRep {
         }
     }
 
+
+
+
+
+
+
+
+
     @Override
     public boolean update(Usuario object) {
         if(object.getIdUsuario()>0) {

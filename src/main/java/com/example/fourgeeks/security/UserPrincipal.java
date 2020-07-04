@@ -28,13 +28,13 @@ public class UserPrincipal implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
 
-        // Extract list of permissions (name)
+        // Extrae la lista de permisos (name)
         this.permisos.forEach(p -> {
             GrantedAuthority authority = new SimpleGrantedAuthority(p.getNombre());
             authorities.add(authority);
         });
 
-        // Extract list of roles (ROLE_name)
+        // Extrae la lista de grupos o roles (ROLE_name)
             GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + this.grupo.getNombre());
             authorities.add(authority);
             return authorities;

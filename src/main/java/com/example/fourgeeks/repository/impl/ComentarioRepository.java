@@ -63,13 +63,36 @@ public class ComentarioRepository implements ComentarioRep {
     @Override
     public Comentario findById(int Id) {
         Object[] params = new Object[] {Id};
-        return jdbcTemplate.queryForObject("select * from comentario where IdComentario = ?",
-                params, new ComentarioMapper());
+        try {
+            return jdbcTemplate.queryForObject("select * from comentario where IdComentario = ?",
+                    params, new ComentarioMapper());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return null;
+        }
+
     }
     @Override
     public List<Comentario> findByPostId(int Id) {
         List<Comentario> comentarios = jdbcTemplate.query("select * from comentario where IdPost = " + Id, new ComentarioMapper());
-        return comentarios;
+        if(!comentarios.isEmpty()){
+            return comentarios;
+        } else {
+            return comentarios;
+        }
+
+    }
+
+    public boolean deleteById(int id){
+        try{
+            String sql = String.format("delete from comentario where IdComentario='%d'", id);
+            jdbcTemplate.execute(sql);
+            logger.info("Comentario " + id + " eliminado.");
+            return true;
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return false;
+        }
     }
 
 }

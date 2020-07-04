@@ -72,4 +72,17 @@ public class PermisoRepository implements PermisoRep {
                     "where u.Email = '" + email + "';", new PermisoMapper());
         }
 
+    @Override
+    public boolean deleteById(int id){
+        try{
+            String sql = String.format("delete from permiso where IdPermiso='%d'", id);
+            logger.info("Permiso " + id + " eliminado.");
+            jdbcTemplate.execute(sql);
+            return true;
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return false;
+        }
+    }
+
 }

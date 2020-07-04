@@ -25,13 +25,13 @@ public class FourGeeksApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        //jdbcTemplate.execute("insert into permiso (Nombre) values ('Ejemplo');");
     }
 
     // Implementación SSL/HTTPS
     @Bean
     public ServletWebServerFactory servletContainer() {
-        // Enable SSL Trafic
+
+        // Habilita el tráfico SSL
         TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory() {
             @Override
             protected void postProcessContext(Context context) {
@@ -43,17 +43,11 @@ public class FourGeeksApplication implements CommandLineRunner {
                 context.addConstraint(securityConstraint);
             }
         };
-
-        // Add HTTP to HTTPS redirect
         tomcat.addAdditionalTomcatConnectors(httpToHttpsRedirectConnector());
         return tomcat;
     }
 
-    /*
-    We need to redirect from HTTP to HTTPS. Without SSL, this application used
-    port 8082. With SSL it will use port 8443. So, any request for 8082 needs to be
-    redirected to HTTPS on 8443.
-     */
+    // Redirección al puerto 8443 SSL
     private Connector httpToHttpsRedirectConnector() {
         Connector connector = new Connector(TomcatServletWebServerFactory.DEFAULT_PROTOCOL);
         connector.setScheme("http");

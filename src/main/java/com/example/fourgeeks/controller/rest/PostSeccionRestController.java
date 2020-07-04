@@ -3,6 +3,7 @@ package com.example.fourgeeks.controller.rest;
 import com.example.fourgeeks.model.PostSeccion;
 import com.example.fourgeeks.model.common.RepBase;
 import com.example.fourgeeks.repository.impl.PostSeccionRepository;
+import com.example.fourgeeks.service.PostSeccionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,14 +16,17 @@ public class PostSeccionRestController {
     @Autowired
     private PostSeccionRepository repository;
 
+    @Autowired
+    private PostSeccionService service;
+
     @PostMapping
     public ResponseEntity<RepBase> save(@RequestBody PostSeccion postSeccion){
-        return ResponseEntity.ok(new RepBase(repository.save(postSeccion)));
+        return ResponseEntity.ok(new RepBase(service.updatePostSeccion(postSeccion)));
     }
 
     @PutMapping
     public ResponseEntity<RepBase> update(@RequestBody PostSeccion postSeccion){
-        return ResponseEntity.ok(new RepBase(repository.update(postSeccion)));
+        return ResponseEntity.ok(new RepBase(service.updatePostSeccion(postSeccion)));
     }
 
     @DeleteMapping("/post/{id}")
@@ -41,7 +45,7 @@ public class PostSeccionRestController {
     }
 
     @GetMapping("/seccion/{id}")
-    public ResponseEntity<PostSeccion> findBySeccionId(@PathVariable int id){
+    public ResponseEntity<List<PostSeccion>> findBySeccionId(@PathVariable int id){
         return ResponseEntity.ok(repository.findBySeccionId(id));
     }
 }
