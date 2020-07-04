@@ -27,6 +27,7 @@ public class FourGeeksApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
     }
 
+
     // Implementación SSL/HTTPS
     @Bean
     public ServletWebServerFactory servletContainer() {
