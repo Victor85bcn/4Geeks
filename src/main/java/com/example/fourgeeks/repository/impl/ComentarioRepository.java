@@ -1,6 +1,8 @@
 package com.example.fourgeeks.repository.impl;
 
+import com.example.fourgeeks.mapper.CategoriaMapper;
 import com.example.fourgeeks.mapper.ComentarioMapper;
+import com.example.fourgeeks.model.Categoria;
 import com.example.fourgeeks.model.Comentario;
 import com.example.fourgeeks.repository.ComentarioRep;
 import org.apache.commons.logging.Log;
@@ -33,7 +35,7 @@ public class ComentarioRepository implements ComentarioRep {
             String sql = String.format(
                     "insert into Comentario (Comentario,IdPost,Alias) "
                             + "values('%s', '%d', '%s')",
-                    comentario.getComentario(), comentario.getIdPost(), comentario.getAlias(), comentario.getRespuesta());
+                    comentario.getComentario(), comentario.getIdPost(), comentario.getAlias());
             jdbcTemplate.execute(sql);
             logger.info("Comentario de " + comentario.getAlias() + " creado.");
             return true;
@@ -46,8 +48,8 @@ public class ComentarioRepository implements ComentarioRep {
     @Override
     public boolean update(Comentario comentario) {
         if(comentario.getIdComentario()>0) {
-            String sql = String.format("update Comentario set Comentario='%s', IdPost='%d', Alias='%s', Respuesta='%s' where IdComentario='%d'",
-                    comentario.getComentario(), comentario.getIdPost(), comentario.getAlias(), comentario.getRespuesta(), comentario.getIdComentario());
+            String sql = String.format("update Comentario set Comentario='%s', IdPost='%d', Alias='%s' where IdComentario='%d'",
+                    comentario.getComentario(), comentario.getIdPost(), comentario.getAlias(), comentario.getIdComentario());
             jdbcTemplate.execute(sql);
             logger.info("Comentario de " + comentario.getAlias() + " modificado.");
             return true;
@@ -70,8 +72,14 @@ public class ComentarioRepository implements ComentarioRep {
             logger.error(e.getMessage());
             return null;
         }
-
     }
+
+    @Override
+    public Comentario findByComentario(String comentario) {
+        Object[] params = new Object[] {comentario};
+        return jdbcTemplate.queryForObject("select * from Comentario where Comentario = '" + comentario + "'", new ComentarioMapper());
+    }
+
     @Override
     public List<Comentario> findByPostId(int Id) {
         List<Comentario> comentarios = jdbcTemplate.query("select * from comentario where IdPost = " + Id, new ComentarioMapper());

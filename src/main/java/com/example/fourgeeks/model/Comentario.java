@@ -11,7 +11,6 @@ public class Comentario {
     private long IdPost;
     private String Alias;
     private Date Fecha;
-    private String Respuesta;
 
 
     //Getters & Setters
@@ -49,12 +48,5 @@ public class Comentario {
     }
     public void setFecha(Date fecha) {
         Fecha = fecha;
-    }
-
-    public String getRespuesta() {
-        return Respuesta;
-    }
-    public void setRespuesta(String respuesta) {
-        Respuesta = respuesta;
     }
 }
