@@ -23,41 +23,46 @@ public class CategoriaRepositoryTest {
     private CategoriaRepository categoriaRepository;
 
     @Test
-    @Order(1)
-    public void testInsert(){
+    public void testInsertCategoria() {
         Categoria categoria = new Categoria();
-
-        categoria.setNombre("Test1");
-        categoria.setDescripcion("Este es un ejemplo de categoria superior");
+        categoria.setNombre("Test insert");
+        categoria.setDescripcion("Este es un insert de categoria");
         Categoria categoriaTest = categoriaRepository.save(categoria);
         Assert.assertNotNull(categoriaTest);
-    }
-
-    @Test()
-    @Order(2)
-    public void testUpdate(){
-        Categoria categoria = new Categoria();
-
-        categoria.setIdCategoria(1);
-        categoria.setNombre("Test2");
-        categoria.setDescripcion("Este es un ejemplo de categoria superior");
-        Categoria categoriaTest = categoriaRepository.update(categoria);
-        Assert.assertNotNull(categoriaTest);
+        categoriaRepository.deleteById(((int) categoriaTest.getIdCategoria()));
     }
 
     @Test
-    @Order(3)
-    public void testFindById(){
+    public void testUpdateCategoria() {
         Categoria categoria = categoriaRepository.findById(1);
-
-        Assert.assertTrue(categoria!=null);
-        Assert.assertTrue("Test2".equals(categoria.getNombre()));
+        categoria.setNombre("Test update");
+        categoria.setDescripcion("Este es un update de categoria");
+        categoriaRepository.update(categoria);
+        Assert.assertNotNull(categoriaRepository.findByNombre("Test update"));
+        categoria.setNombre("Test inicial");
+        categoria.setDescripcion("Esta es la categoria inicial");
+        categoriaRepository.update(categoria);
+        Assert.assertNotNull(categoriaRepository.findByNombre("Test inicial"));
     }
 
     @Test
-    @Order(4)
-    public void testFindAll(){
+    public void testFindByIdCategoria() {
+        Categoria categoria = categoriaRepository.findById(1);
+        Assert.assertTrue(categoria.getIdCategoria() == 1);
+        Assert.assertTrue("Test inicial".equals(categoria.getNombre()));
+    }
+
+    @Test
+    public void testFindAllCategoria() {
         Assert.assertFalse(categoriaRepository.findAll().isEmpty());
     }
 
+    @Test
+    public void testDeleteByIdCategoria() {
+        Categoria categoria = new Categoria();
+        categoria.setNombre("Test delete");
+        categoria.setDescripcion("Esta es la categoria a eliminar");
+        categoriaRepository.save(categoria);
+        Assert.assertTrue(categoriaRepository.deleteById(((int) categoriaRepository.findByNombre("Test delete").getIdCategoria())));
+    }
 }

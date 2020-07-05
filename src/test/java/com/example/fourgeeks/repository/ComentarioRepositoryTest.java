@@ -1,6 +1,7 @@
 package com.example.fourgeeks.repository;
 
 import com.example.fourgeeks.configuration.TestDatabaseConfiguration;
+import com.example.fourgeeks.model.Categoria;
 import com.example.fourgeeks.model.Comentario;
 import com.example.fourgeeks.repository.impl.ComentarioRepository;
 import org.junit.Assert;
@@ -9,47 +10,45 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+@SpringBootTest
 @RunWith(SpringRunner.class)
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @ContextConfiguration(classes = {TestDatabaseConfiguration.class})
 public class ComentarioRepositoryTest {
     @Autowired
-    private ComentarioRepository repository;
+    private ComentarioRepository comentarioRepository;
 
     @Test
-    public void testA(){
+    public void testInsertComentario(){
         Comentario comentario = new Comentario();
-        comentario.setComentario("ComentarioA");
-        comentario.setIdComentario(1);
-        comentario.setIdPost(3);
-        comentario.setAlias("Alias1");
-        comentario.setRespuesta(null);
-
-        Assert.assertTrue(repository.save(comentario));
+        comentario.setComentario("Test insert");
+        comentario.setIdPost(1);
+        comentario.setAlias("Test Alias");
+        Assert.assertTrue(comentarioRepository.save(comentario));
+        comentarioRepository.deleteById(((int) (comentarioRepository.findByComentario("Test insert")).getIdComentario()));
     }
 
     @Test
-    public void testB(){
-        Comentario comentario = new Comentario();
-        comentario.setComentario("ComentarioB");
-        comentario.setIdComentario(1);
-        comentario.setIdPost(3);
-        comentario.setAlias("Alias2");
-        comentario.setRespuesta(null);
-
-        Assert.assertTrue(repository.update(comentario));
+    public void testUpdateComentario(){
+        Comentario comentario = comentarioRepository.findById(1);
+        comentario.setComentario("Test comentario update");
+        comentario.setAlias("Test Alias update");
+        Assert.assertTrue(comentarioRepository.update(comentario));
+        comentario.setComentario("Test inicial");
+        comentario.setAlias("Test Alias");
+        Assert.assertTrue(comentarioRepository.update(comentario));
     }
 
     @Test
-    public void testC(){
-        Assert.assertFalse(repository.findAll().isEmpty());
+    public void testFindAllComentario(){
+        Assert.assertFalse(comentarioRepository.findAll().isEmpty());
     }
 
     @Test
-    public void testD(){
-        Assert.assertTrue(repository.findById(1).getComentario().equalsIgnoreCase("ComentarioB"));
+    public void testFindByIdComentario(){
+        Assert.assertTrue(comentarioRepository.findById(1).getComentario().equalsIgnoreCase("Test inicial"));
     }
 }
