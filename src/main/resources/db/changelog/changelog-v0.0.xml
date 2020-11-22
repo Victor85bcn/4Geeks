@@ -1,0 +1,189 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="Notz Gaming (generated)" id="1605985235058-1">
+        <createTable tableName="categoria">
+            <column autoIncrement="true" name="IdCategoria" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="Nombre" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Descripcion" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="current_timestamp()" name="Fecha" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Notz Gaming (generated)" id="1605985235058-2">
+        <createTable tableName="comentario">
+            <column autoIncrement="true" name="IdComentario" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="Comentario" type="VARCHAR(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IdPost" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Alias" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="current_timestamp()" name="Fecha" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Notz Gaming (generated)" id="1605985235058-3">
+        <createTable tableName="grupo">
+            <column autoIncrement="true" name="IdGrupo" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="Nombre" type="VARCHAR(20)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Notz Gaming (generated)" id="1605985235058-4">
+        <createTable tableName="grupo_permiso">
+            <column name="IdGrupo" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="idPermiso" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Notz Gaming (generated)" id="1605985235058-5">
+        <createTable tableName="permiso">
+            <column autoIncrement="true" name="IdPermiso" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="Nombre" type="VARCHAR(20)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Notz Gaming (generated)" id="1605985235058-6">
+        <createTable tableName="post">
+            <column autoIncrement="true" name="IdPost" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="Titulo" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Extracto" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Contenido" type="VARCHAR(5000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IdUsuario" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Imagen" type="VARCHAR(500)"/>
+            <column name="IdCategoria" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="current_timestamp()" name="Fecha" type="datetime"/>
+            <column name="Tipo" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Notz Gaming (generated)" id="1605985235058-7">
+        <createTable tableName="post_seccion">
+            <column name="IdPost" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IdSeccion" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Notz Gaming (generated)" id="1605985235058-8">
+        <createTable tableName="seccion">
+            <column autoIncrement="true" name="IdSeccion" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="Nombre" type="VARCHAR(40)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Notz Gaming (generated)" id="1605985235058-9">
+        <createTable tableName="usuario">
+            <column autoIncrement="true" name="IdUsuario" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="Nombre" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Apellido" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Password" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Email" type="VARCHAR(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="IdGrupo" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="current_timestamp()" name="Fecha" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Notz Gaming (generated)" id="1605985235058-10">
+        <createIndex indexName="IdCategoria" tableName="post">
+            <column name="IdCategoria"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Notz Gaming (generated)" id="1605985235058-11">
+        <createIndex indexName="IdGrupo" tableName="usuario">
+            <column name="IdGrupo"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Notz Gaming (generated)" id="1605985235058-12">
+        <createIndex indexName="IdPost" tableName="comentario">
+            <column name="IdPost"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Notz Gaming (generated)" id="1605985235058-13">
+        <createIndex indexName="IdSeccion" tableName="post_seccion">
+            <column name="IdSeccion"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Notz Gaming (generated)" id="1605985235058-14">
+        <createIndex indexName="IdUsuario" tableName="post">
+            <column name="IdUsuario"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Notz Gaming (generated)" id="1605985235058-15">
+        <createIndex indexName="grupo_permiso_ibfk_1" tableName="grupo_permiso">
+            <column name="IdGrupo"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Notz Gaming (generated)" id="1605985235058-16">
+        <createIndex indexName="grupo_permiso_ibfk_2" tableName="grupo_permiso">
+            <column name="idPermiso"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Notz Gaming (generated)" id="1605985235058-17">
+        <createIndex indexName="post_seccion_ibfk_1" tableName="post_seccion">
+            <column name="IdPost"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Notz Gaming (generated)" id="1605985235058-18">
+        <addForeignKeyConstraint baseColumnNames="IdPost" baseTableName="comentario" constraintName="comentario_ibfk_1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="IdPost" referencedTableName="post" validate="true"/>
+    </changeSet>
+    <changeSet author="Notz Gaming (generated)" id="1605985235058-19">
+        <addForeignKeyConstraint baseColumnNames="IdGrupo" baseTableName="grupo_permiso" constraintName="grupo_permiso_ibfk_1" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="IdGrupo" referencedTableName="grupo" validate="true"/>
+    </changeSet>
+    <changeSet author="Notz Gaming (generated)" id="1605985235058-20">
+        <addForeignKeyConstraint baseColumnNames="idPermiso" baseTableName="grupo_permiso" constraintName="grupo_permiso_ibfk_2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="IdPermiso" referencedTableName="permiso" validate="true"/>
+    </changeSet>
+    <changeSet author="Notz Gaming (generated)" id="1605985235058-21">
+        <addForeignKeyConstraint baseColumnNames="IdCategoria" baseTableName="post" constraintName="post_ibfk_1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="IdCategoria" referencedTableName="categoria" validate="true"/>
+    </changeSet>
+    <changeSet author="Notz Gaming (generated)" id="1605985235058-22">
+        <addForeignKeyConstraint baseColumnNames="IdUsuario" baseTableName="post" constraintName="post_ibfk_2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="IdUsuario" referencedTableName="usuario" validate="true"/>
+    </changeSet>
+    <changeSet author="Notz Gaming (generated)" id="1605985235058-23">
+        <addForeignKeyConstraint baseColumnNames="IdPost" baseTableName="post_seccion" constraintName="post_seccion_ibfk_1" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="IdPost" referencedTableName="post" validate="true"/>
+    </changeSet>
+    <changeSet author="Notz Gaming (generated)" id="1605985235058-24">
+        <addForeignKeyConstraint baseColumnNames="IdGrupo" baseTableName="usuario" constraintName="usuario_ibfk_1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="IdGrupo" referencedTableName="grupo" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
